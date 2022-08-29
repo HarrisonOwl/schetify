@@ -128,7 +128,7 @@ packages:
     source: hosted
     version: "4.2.0"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       url: "https://pub.dartlang.org"
@@ -305,6 +305,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.3.1"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   lints:
     dependency: transitive
     description:
@@ -389,6 +396,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+<<<<<<< HEAD
   shelf:
     dependency: transitive
     description:
@@ -403,6 +411,21 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  scrollable_positioned_list:
+    dependency: "direct main"
+    description:
+      name: scrollable_positioned_list
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
+  simple_gesture_detector:
+    dependency: transitive
+    description:
+      name: simple_gesture_detector
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
+>>>>>>> e8c4f30 (日程の画面作成)
   sky_engine:
     dependency: transitive
     description: flutter
@@ -464,6 +487,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  table_calendar:
+    dependency: "direct main"
+    description:
+      name: table_calendar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.6"
   term_glyph:
     dependency: transitive
     description:
