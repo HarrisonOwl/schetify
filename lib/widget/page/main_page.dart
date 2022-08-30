@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/provider/main_showing_provider.dart';
 import 'package:schetify/widget/page/chat_page.dart';
 import 'package:schetify/widget/page/schedule_page.dart';
-import 'package:schetify/widget/page/settings_page.dart';
+import 'package:schetify/widget/page/setting/settings_page.dart';
 
 class MainPage extends HookConsumerWidget {
   MainPage({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class MainPage extends HookConsumerWidget {
   final titles = [
     "予定一覧",
     "チャット",
-    "設定一覧"
+    "設定"
   ];
 
   @override
