@@ -85,7 +85,7 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
               startTime: startTime,
               endTime: endTime
           );
-          notifier.addPeriodList(newPeriod);
+          notifier.addPeriod(newPeriod);
           if(provider.periodList.length > 1) {
             // TODO 非同期関数でもスクロール処理が動くようにする
             // await scrollTo(newPeriod);
@@ -113,7 +113,7 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
           startTime: startTime,
           endTime: endTime
       );
-      notifier.addPeriodList(newPeriod);
+      notifier.addPeriod(newPeriod);
       if(provider.periodList.length > 1) {
         scrollTo(newPeriod);
       }

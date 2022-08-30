@@ -23,7 +23,7 @@ class ScheduleDayListView extends StatelessWidget {
         return Dismissible(
           key: UniqueKey(),
           onDismissed: (direction) => ref.read(scheduleDayProvider.notifier)
-              .removePeriodList(periodList.elementAt(index)),
+              .removePeriod(periodList.elementAt(index)),
           background: Container(
             color: Colors.red,
             child: const Icon(Icons.delete, color: Colors.white),

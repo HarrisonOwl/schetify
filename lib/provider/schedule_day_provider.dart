@@ -17,12 +17,12 @@ class ScheduleDayNotifier extends StateNotifier<ScheduleDaysState> {
     state = state.copyWith(isSetPeriodCollectively: status);
   }
 
-  void addPeriodList(SchedulePeriod period) {
+  void addPeriod(SchedulePeriod period) {
     state.periodList.add(period);
     state = state.copyWith(periodList: state.periodList);
   }
 
-  void removePeriodList(SchedulePeriod period) {
+  void removePeriod(SchedulePeriod period) {
     state.periodList.remove(period);
     state = state.copyWith(periodList: state.periodList);
   }
