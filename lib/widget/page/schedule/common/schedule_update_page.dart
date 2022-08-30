@@ -3,9 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/provider/schedule_list_provider.dart';
 
 import '../../../../model/entity/schedule.dart';
-
-List<Schedule> scheduleList = [];
-
 import '../../../../model/entity/schedule_update_page_util.dart';
 import '../../../components/schedule/sub_list_item.dart';
 
