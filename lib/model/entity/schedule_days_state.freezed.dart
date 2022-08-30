@@ -21,7 +21,9 @@ ScheduleDaysState _$ScheduleDaysStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ScheduleDaysState {
   bool get isSetPeriodCollectively => throw _privateConstructorUsedError;
-  List<SchedulePeriod> get periodList => throw _privateConstructorUsedError;
+  @SplayTreeSetConverter()
+  SplayTreeSet<SchedulePeriod> get periodList =>
+      throw _privateConstructorUsedError;
   @TimeOfDayConverter()
   TimeOfDay get defaultStartTimeOfDay => throw _privateConstructorUsedError;
   @TimeOfDayConverter()
@@ -40,7 +42,7 @@ abstract class $ScheduleDaysStateCopyWith<$Res> {
       _$ScheduleDaysStateCopyWithImpl<$Res>;
   $Res call(
       {bool isSetPeriodCollectively,
-      List<SchedulePeriod> periodList,
+      @SplayTreeSetConverter() SplayTreeSet<SchedulePeriod> periodList,
       @TimeOfDayConverter() TimeOfDay defaultStartTimeOfDay,
       @TimeOfDayConverter() TimeOfDay defaultEndTimeOfDay});
 }
@@ -69,7 +71,7 @@ class _$ScheduleDaysStateCopyWithImpl<$Res>
       periodList: periodList == freezed
           ? _value.periodList
           : periodList // ignore: cast_nullable_to_non_nullable
-              as List<SchedulePeriod>,
+              as SplayTreeSet<SchedulePeriod>,
       defaultStartTimeOfDay: defaultStartTimeOfDay == freezed
           ? _value.defaultStartTimeOfDay
           : defaultStartTimeOfDay // ignore: cast_nullable_to_non_nullable
@@ -91,7 +93,7 @@ abstract class _$$_ScheduleDaysStateCopyWith<$Res>
   @override
   $Res call(
       {bool isSetPeriodCollectively,
-      List<SchedulePeriod> periodList,
+      @SplayTreeSetConverter() SplayTreeSet<SchedulePeriod> periodList,
       @TimeOfDayConverter() TimeOfDay defaultStartTimeOfDay,
       @TimeOfDayConverter() TimeOfDay defaultEndTimeOfDay});
 }
@@ -120,9 +122,9 @@ class __$$_ScheduleDaysStateCopyWithImpl<$Res>
           : isSetPeriodCollectively // ignore: cast_nullable_to_non_nullable
               as bool,
       periodList: periodList == freezed
-          ? _value._periodList
+          ? _value.periodList
           : periodList // ignore: cast_nullable_to_non_nullable
-              as List<SchedulePeriod>,
+              as SplayTreeSet<SchedulePeriod>,
       defaultStartTimeOfDay: defaultStartTimeOfDay == freezed
           ? _value.defaultStartTimeOfDay
           : defaultStartTimeOfDay // ignore: cast_nullable_to_non_nullable
@@ -140,24 +142,19 @@ class __$$_ScheduleDaysStateCopyWithImpl<$Res>
 class _$_ScheduleDaysState extends _ScheduleDaysState {
   const _$_ScheduleDaysState(
       {required this.isSetPeriodCollectively,
-      required final List<SchedulePeriod> periodList,
+      @SplayTreeSetConverter() required this.periodList,
       @TimeOfDayConverter() required this.defaultStartTimeOfDay,
       @TimeOfDayConverter() required this.defaultEndTimeOfDay})
-      : _periodList = periodList,
-        super._();
+      : super._();
 
   factory _$_ScheduleDaysState.fromJson(Map<String, dynamic> json) =>
       _$$_ScheduleDaysStateFromJson(json);
 
   @override
   final bool isSetPeriodCollectively;
-  final List<SchedulePeriod> _periodList;
   @override
-  List<SchedulePeriod> get periodList {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_periodList);
-  }
-
+  @SplayTreeSetConverter()
+  final SplayTreeSet<SchedulePeriod> periodList;
   @override
   @TimeOfDayConverter()
   final TimeOfDay defaultStartTimeOfDay;
@@ -178,7 +175,7 @@ class _$_ScheduleDaysState extends _ScheduleDaysState {
             const DeepCollectionEquality().equals(
                 other.isSetPeriodCollectively, isSetPeriodCollectively) &&
             const DeepCollectionEquality()
-                .equals(other._periodList, _periodList) &&
+                .equals(other.periodList, periodList) &&
             const DeepCollectionEquality()
                 .equals(other.defaultStartTimeOfDay, defaultStartTimeOfDay) &&
             const DeepCollectionEquality()
@@ -190,7 +187,7 @@ class _$_ScheduleDaysState extends _ScheduleDaysState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isSetPeriodCollectively),
-      const DeepCollectionEquality().hash(_periodList),
+      const DeepCollectionEquality().hash(periodList),
       const DeepCollectionEquality().hash(defaultStartTimeOfDay),
       const DeepCollectionEquality().hash(defaultEndTimeOfDay));
 
@@ -210,11 +207,13 @@ class _$_ScheduleDaysState extends _ScheduleDaysState {
 
 abstract class _ScheduleDaysState extends ScheduleDaysState {
   const factory _ScheduleDaysState(
-          {required final bool isSetPeriodCollectively,
-          required final List<SchedulePeriod> periodList,
-          @TimeOfDayConverter() required final TimeOfDay defaultStartTimeOfDay,
-          @TimeOfDayConverter() required final TimeOfDay defaultEndTimeOfDay}) =
-      _$_ScheduleDaysState;
+      {required final bool isSetPeriodCollectively,
+      @SplayTreeSetConverter()
+          required final SplayTreeSet<SchedulePeriod> periodList,
+      @TimeOfDayConverter()
+          required final TimeOfDay defaultStartTimeOfDay,
+      @TimeOfDayConverter()
+          required final TimeOfDay defaultEndTimeOfDay}) = _$_ScheduleDaysState;
   const _ScheduleDaysState._() : super._();
 
   factory _ScheduleDaysState.fromJson(Map<String, dynamic> json) =
@@ -223,7 +222,8 @@ abstract class _ScheduleDaysState extends ScheduleDaysState {
   @override
   bool get isSetPeriodCollectively;
   @override
-  List<SchedulePeriod> get periodList;
+  @SplayTreeSetConverter()
+  SplayTreeSet<SchedulePeriod> get periodList;
   @override
   @TimeOfDayConverter()
   TimeOfDay get defaultStartTimeOfDay;

@@ -86,7 +86,7 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
               startTime: startTime,
               endTime: endTime
           );
-          notifier.changeDayList([...provider.periodList, newPeriod]);
+          notifier.addPeriodList(newPeriod);
           if(provider.periodList.length > 1) {
             await scrollTo(newPeriod);
           }
@@ -113,7 +113,7 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
           startTime: startTime,
           endTime: endTime
       );
-      notifier.changeDayList([...provider.periodList, newPeriod]);
+      notifier.addPeriodList(newPeriod);
       if(provider.periodList.length > 1) {
         await scrollTo(newPeriod);
       }
