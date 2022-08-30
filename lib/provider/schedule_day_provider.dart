@@ -22,6 +22,11 @@ class ScheduleDayNotifier extends StateNotifier<ScheduleDaysState> {
     state = state.copyWith(periodList: state.periodList);
   }
 
+  void removePeriodList(SchedulePeriod period) {
+    state.periodList.remove(period);
+    state = state.copyWith(periodList: state.periodList);
+  }
+
   void changeDefaultStartTimeOfDate(TimeOfDay tod) {
     state = state.copyWith(defaultStartTimeOfDay: tod);
   }

@@ -153,7 +153,7 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
               ),
               Expanded(
                 flex: provider.isSetPeriodCollectively ? 48 : 56, // 割合
-                child: ScheduleDayListView(periodList: provider.periodList, scrollController: scrollController,),
+                child: ScheduleDayListView(periodList: provider.periodList, scrollController: scrollController, ref: ref),
               ),
             ]
         )
