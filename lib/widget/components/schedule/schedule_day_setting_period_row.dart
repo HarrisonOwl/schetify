@@ -17,52 +17,48 @@ class ScheduleDaySettingPeriodRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              const Text('開始時間:'),
-              OutlinedButton(
-                  onPressed: () => _pickStartTime(context),
-                  child: Text(provider.defaultStartTimeOfDay.format(context))
-              )
-            ]
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Text('開始時間:'),
+            OutlinedButton(
+              onPressed: () async {
+                final newTime = await showTimePicker(
+                  context: context,
+                  initialTime: provider.defaultStartTimeOfDay,
+                  helpText: "開始時間を入力してください"
+                );
+
+                if(newTime != null){
+                  ref.read(scheduleDayProvider.notifier)
+                    .changeDefaultStartTimeOfDate(newTime);
+                }
+              },
+              child: Text(provider.defaultStartTimeOfDay.format(context))
+            )
+          ]
         ),
         Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              const Text('終了時間:'),
-              OutlinedButton(
-                  onPressed: () => _pickEndTime(context),
-                  child: Text(provider.defaultEndTimeOfDay.format(context))
-              )
-            ]
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Text('終了時間:'),
+            OutlinedButton(
+              onPressed: () async {
+                final newTime = await showTimePicker(
+                  context: context,
+                  initialTime: provider.defaultEndTimeOfDay,
+                  helpText: "終了時間を入力してください"
+                );
+
+                if(newTime != null){
+                ref.read(scheduleDayProvider.notifier)
+                  .changeDefaultEndTimeOfDate(newTime);
+                }
+              },
+              child: Text(provider.defaultEndTimeOfDay.format(context))
+            )
+          ]
         )
       ],
     );
-  }
-
-  Future _pickStartTime(BuildContext context) async {
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: provider.defaultStartTimeOfDay,
-        helpText: "開始時間を入力してください"
-    );
-
-    if(newTime != null){
-      ref.read(scheduleDayProvider.notifier)
-          .changeDefaultStartTimeOfDate(newTime);
-    }
-  }
-
-  Future _pickEndTime(BuildContext context) async {
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: provider.defaultEndTimeOfDay,
-        helpText: "終了時間を入力してください"
-    );
-
-    if(newTime != null){
-      ref.read(scheduleDayProvider.notifier)
-          .changeDefaultEndTimeOfDate(newTime);
-    }
   }
 }
