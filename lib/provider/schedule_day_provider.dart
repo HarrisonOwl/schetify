@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/model/entity/schedule_days_state.dart';
+import 'package:schetify/model/entity/schedule_period.dart';
 
-class ScheduleDayStatus{
-  final bool isSetStartTime;
+class ScheduleDayNotifier extends StateNotifier<ScheduleDaysState> {
+  ScheduleDayNotifier() : super(const ScheduleDaysState(
+      isSetPeriodCollectively: false,
+      periodList: [],
+      defaultStartTimeOfDay: TimeOfDay(hour: 19, minute: 0),
+      defaultEndTimeOfDay: TimeOfDay(hour: 20, minute: 0),
+  ));
 
-  const ScheduleDayStatus({
-    required this.isSetStartTime,
-  });
-
-  ScheduleDayStatus copyWith({bool? isSetStartTime}) {
-    return ScheduleDayStatus(
-      isSetStartTime: isSetStartTime ?? this.isSetStartTime,
-    );
+  void changeIsSetPeriodCollectively(bool status) {
+    state = state.copyWith(isSetPeriodCollectively: status);
   }
-}
 
-class ScheduleDayNotifier extends StateNotifier<ScheduleDayStatus> {
-  ScheduleDayNotifier() : super(const ScheduleDayStatus(
-      isSetStartTime: false));
+  void changeDayList(List<SchedulePeriod> periodList) {
+    state = state.copyWith(periodList: periodList);
+  }
 
-  void changeIsSetStartTime(bool status) {
-    state = state.copyWith(isSetStartTime: status);
+  void changeDefaultStartTimeOfDate(TimeOfDay tod) {
+    state = state.copyWith(defaultStartTimeOfDay: tod);
+  }
+
+  void changeDefaultEndTimeOfDate(TimeOfDay tod) {
+    state = state.copyWith(defaultEndTimeOfDay: tod);
   }
 }
 
 final scheduleDayProvider = StateNotifierProvider<ScheduleDayNotifier
-,ScheduleDayStatus>((ref) {
+,ScheduleDaysState>((ref) {
   return ScheduleDayNotifier();
 });

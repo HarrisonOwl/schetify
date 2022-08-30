@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/model/entity/schedule_days_state.dart';
+import 'package:schetify/provider/schedule_day_provider.dart';
+
+@immutable
+class ScheduleDaySettingPeriodRow extends StatelessWidget {
+  const ScheduleDaySettingPeriodRow({Key? key, required this.provider, required this.ref}) : super(key: key);
+
+  final ScheduleDaysState provider;
+  final WidgetRef ref;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              const Text('開始時間:'),
+              OutlinedButton(
+                  onPressed: () => _pickStartTime(context),
+                  child: Text(provider.defaultStartTimeOfDay?.format(context) ?? "未設定")
+              )
+            ]
+        ),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              const Text('終了時間:'),
+              OutlinedButton(
+                  onPressed: () => _pickEndTime(context),
+                  child: Text(provider.defaultEndTimeOfDay?.format(context) ?? "未設定")
+              )
+            ]
+        )
+      ],
+    );
+  }
+
+  Future _pickStartTime(BuildContext context) async {
+    final initialTime = provider.defaultStartTimeOfDay ?? const TimeOfDay(hour: 19, minute: 0);
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: initialTime,
+        helpText: "開始時間を入力してください"
+    );
+
+    if(newTime != null){
+      ref.read(scheduleDayProvider.notifier)
+          .changeDefaultStartTimeOfDate(newTime);
+    }
+  }
+
+  Future _pickEndTime(BuildContext context) async {
+    final initialTime = provider.defaultEndTimeOfDay ?? const TimeOfDay(hour: 20, minute: 0);
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: initialTime,
+        helpText: "終了時間を入力してください"
+    );
+
+    if(newTime != null){
+      ref.read(scheduleDayProvider.notifier)
+          .changeDefaultEndTimeOfDate(newTime);
+    }
+  }
+}
