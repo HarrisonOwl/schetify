@@ -30,4 +30,19 @@ class SchedulePeriod with _$SchedulePeriod {
         .format(endTime);
     return str1 + str2;
   }
+
+  @override // <- Added
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (
+            other.runtimeType == runtimeType && other is _SchedulePeriod &&
+                const DeepCollectionEquality().equals(other.getText(), getText())
+        );
+  }
+
+  @override // <- Added
+  int get hashCode => Object.hash(
+    runtimeType,
+    const DeepCollectionEquality().hash(getText()),
+  );
 }

@@ -122,22 +122,6 @@ class _$_SchedulePeriod extends _SchedulePeriod {
     return 'SchedulePeriod(startTime: $startTime, endTime: $endTime)';
   }
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SchedulePeriod &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.endTime, endTime));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(endTime));
-
   @JsonKey(ignore: true)
   @override
   _$$_SchedulePeriodCopyWith<_$_SchedulePeriod> get copyWith =>
