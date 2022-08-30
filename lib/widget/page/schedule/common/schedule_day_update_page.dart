@@ -43,14 +43,13 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
       return getEvents()[day] ?? [];
     }
 
-    Future<void> scrollTo(SchedulePeriod newPeriod) async {
-      // TODO 非同期関数でもスクロール処理が動くようにする
-      // var index = provider.periodList.indexOf(newPeriod);
-      // scrollController.scrollTo(
-      //     index: index,
-      //     duration: const Duration(milliseconds: 50),
-      //     curve: Curves.easeInOutCubic
-      // );
+    void scrollTo(SchedulePeriod newPeriod) {
+      var index = provider.periodList.toList().indexOf(newPeriod);
+      scrollController.scrollTo(
+          index: index,
+          duration: const Duration(milliseconds: 50),
+          curve: Curves.easeInOutCubic
+      );
     }
 
     Future<void> setPeriod(DateTime selectedDay) async {
@@ -88,13 +87,14 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
           );
           notifier.addPeriodList(newPeriod);
           if(provider.periodList.length > 1) {
-            await scrollTo(newPeriod);
+            // TODO 非同期関数でもスクロール処理が動くようにする
+            // await scrollTo(newPeriod);
           }
         }
       }
     }
 
-    Future<void> setPeriodCollectively(DateTime selectedDay) async {
+    void setPeriodCollectively(DateTime selectedDay) {
       final startTime = DateTime(
           selectedDay.year,
           selectedDay.month,
@@ -115,7 +115,7 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
       );
       notifier.addPeriodList(newPeriod);
       if(provider.periodList.length > 1) {
-        await scrollTo(newPeriod);
+        scrollTo(newPeriod);
       }
     }
 
@@ -136,7 +136,7 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
                   focusedDay: focusedDay.value,
                   onDaySelected: (selectedDay, newFocusedDay) async {
                     focusedDay.value = newFocusedDay;
-                    provider.isSetPeriodCollectively ? await setPeriodCollectively(selectedDay) : await setPeriod(selectedDay);
+                    provider.isSetPeriodCollectively ? setPeriodCollectively(selectedDay) : await setPeriod(selectedDay);
                   },
                   calendarFormat: CalendarFormat.twoWeeks,
                   headerStyle: const HeaderStyle(
