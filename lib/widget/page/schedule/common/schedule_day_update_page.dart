@@ -99,15 +99,15 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
           selectedDay.year,
           selectedDay.month,
           selectedDay.day,
-          provider.defaultStartTimeOfDay?.hour ?? 19,
-          provider.defaultStartTimeOfDay?.minute ?? 0
+          provider.defaultStartTimeOfDay.hour,
+          provider.defaultStartTimeOfDay.minute
       );
       final endTime = DateTime(
           selectedDay.year,
           selectedDay.month,
           selectedDay.day,
-          provider.defaultEndTimeOfDay?.hour ?? 20,
-          provider.defaultEndTimeOfDay?.minute ?? 0
+          provider.defaultEndTimeOfDay.hour,
+          provider.defaultEndTimeOfDay.minute
       );
       final newPeriod = SchedulePeriod(
           startTime: startTime,

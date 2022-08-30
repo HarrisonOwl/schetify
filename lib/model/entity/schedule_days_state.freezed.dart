@@ -23,9 +23,9 @@ mixin _$ScheduleDaysState {
   bool get isSetPeriodCollectively => throw _privateConstructorUsedError;
   List<SchedulePeriod> get periodList => throw _privateConstructorUsedError;
   @TimeOfDayConverter()
-  TimeOfDay? get defaultStartTimeOfDay => throw _privateConstructorUsedError;
+  TimeOfDay get defaultStartTimeOfDay => throw _privateConstructorUsedError;
   @TimeOfDayConverter()
-  TimeOfDay? get defaultEndTimeOfDay => throw _privateConstructorUsedError;
+  TimeOfDay get defaultEndTimeOfDay => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,8 +41,8 @@ abstract class $ScheduleDaysStateCopyWith<$Res> {
   $Res call(
       {bool isSetPeriodCollectively,
       List<SchedulePeriod> periodList,
-      @TimeOfDayConverter() TimeOfDay? defaultStartTimeOfDay,
-      @TimeOfDayConverter() TimeOfDay? defaultEndTimeOfDay});
+      @TimeOfDayConverter() TimeOfDay defaultStartTimeOfDay,
+      @TimeOfDayConverter() TimeOfDay defaultEndTimeOfDay});
 }
 
 /// @nodoc
@@ -73,11 +73,11 @@ class _$ScheduleDaysStateCopyWithImpl<$Res>
       defaultStartTimeOfDay: defaultStartTimeOfDay == freezed
           ? _value.defaultStartTimeOfDay
           : defaultStartTimeOfDay // ignore: cast_nullable_to_non_nullable
-              as TimeOfDay?,
+              as TimeOfDay,
       defaultEndTimeOfDay: defaultEndTimeOfDay == freezed
           ? _value.defaultEndTimeOfDay
           : defaultEndTimeOfDay // ignore: cast_nullable_to_non_nullable
-              as TimeOfDay?,
+              as TimeOfDay,
     ));
   }
 }
@@ -92,8 +92,8 @@ abstract class _$$_ScheduleDaysStateCopyWith<$Res>
   $Res call(
       {bool isSetPeriodCollectively,
       List<SchedulePeriod> periodList,
-      @TimeOfDayConverter() TimeOfDay? defaultStartTimeOfDay,
-      @TimeOfDayConverter() TimeOfDay? defaultEndTimeOfDay});
+      @TimeOfDayConverter() TimeOfDay defaultStartTimeOfDay,
+      @TimeOfDayConverter() TimeOfDay defaultEndTimeOfDay});
 }
 
 /// @nodoc
@@ -126,11 +126,11 @@ class __$$_ScheduleDaysStateCopyWithImpl<$Res>
       defaultStartTimeOfDay: defaultStartTimeOfDay == freezed
           ? _value.defaultStartTimeOfDay
           : defaultStartTimeOfDay // ignore: cast_nullable_to_non_nullable
-              as TimeOfDay?,
+              as TimeOfDay,
       defaultEndTimeOfDay: defaultEndTimeOfDay == freezed
           ? _value.defaultEndTimeOfDay
           : defaultEndTimeOfDay // ignore: cast_nullable_to_non_nullable
-              as TimeOfDay?,
+              as TimeOfDay,
     ));
   }
 }
@@ -160,10 +160,10 @@ class _$_ScheduleDaysState extends _ScheduleDaysState {
 
   @override
   @TimeOfDayConverter()
-  final TimeOfDay? defaultStartTimeOfDay;
+  final TimeOfDay defaultStartTimeOfDay;
   @override
   @TimeOfDayConverter()
-  final TimeOfDay? defaultEndTimeOfDay;
+  final TimeOfDay defaultEndTimeOfDay;
 
   @override
   String toString() {
@@ -212,10 +212,8 @@ abstract class _ScheduleDaysState extends ScheduleDaysState {
   const factory _ScheduleDaysState(
           {required final bool isSetPeriodCollectively,
           required final List<SchedulePeriod> periodList,
-          @TimeOfDayConverter()
-              required final TimeOfDay? defaultStartTimeOfDay,
-          @TimeOfDayConverter()
-              required final TimeOfDay? defaultEndTimeOfDay}) =
+          @TimeOfDayConverter() required final TimeOfDay defaultStartTimeOfDay,
+          @TimeOfDayConverter() required final TimeOfDay defaultEndTimeOfDay}) =
       _$_ScheduleDaysState;
   const _ScheduleDaysState._() : super._();
 
@@ -228,10 +226,10 @@ abstract class _ScheduleDaysState extends ScheduleDaysState {
   List<SchedulePeriod> get periodList;
   @override
   @TimeOfDayConverter()
-  TimeOfDay? get defaultStartTimeOfDay;
+  TimeOfDay get defaultStartTimeOfDay;
   @override
   @TimeOfDayConverter()
-  TimeOfDay? get defaultEndTimeOfDay;
+  TimeOfDay get defaultEndTimeOfDay;
   @override
   @JsonKey(ignore: true)
   _$$_ScheduleDaysStateCopyWith<_$_ScheduleDaysState> get copyWith =>

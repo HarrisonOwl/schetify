@@ -13,9 +13,9 @@ _$_ScheduleDaysState _$$_ScheduleDaysStateFromJson(Map<String, dynamic> json) =>
           .map((e) => SchedulePeriod.fromJson(e as Map<String, dynamic>))
           .toList(),
       defaultStartTimeOfDay: const TimeOfDayConverter()
-          .fromJson(json['defaultStartTimeOfDay'] as String?),
+          .fromJson(json['defaultStartTimeOfDay'] as String),
       defaultEndTimeOfDay: const TimeOfDayConverter()
-          .fromJson(json['defaultEndTimeOfDay'] as String?),
+          .fromJson(json['defaultEndTimeOfDay'] as String),
     );
 
 Map<String, dynamic> _$$_ScheduleDaysStateToJson(

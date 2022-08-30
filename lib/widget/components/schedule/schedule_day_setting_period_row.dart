@@ -22,7 +22,7 @@ class ScheduleDaySettingPeriodRow extends StatelessWidget {
               const Text('開始時間:'),
               OutlinedButton(
                   onPressed: () => _pickStartTime(context),
-                  child: Text(provider.defaultStartTimeOfDay?.format(context) ?? "未設定")
+                  child: Text(provider.defaultStartTimeOfDay.format(context))
               )
             ]
         ),
@@ -32,7 +32,7 @@ class ScheduleDaySettingPeriodRow extends StatelessWidget {
               const Text('終了時間:'),
               OutlinedButton(
                   onPressed: () => _pickEndTime(context),
-                  child: Text(provider.defaultEndTimeOfDay?.format(context) ?? "未設定")
+                  child: Text(provider.defaultEndTimeOfDay.format(context))
               )
             ]
         )
@@ -41,11 +41,9 @@ class ScheduleDaySettingPeriodRow extends StatelessWidget {
   }
 
   Future _pickStartTime(BuildContext context) async {
-    final initialTime = provider.defaultStartTimeOfDay ?? const TimeOfDay(hour: 19, minute: 0);
-
     final newTime = await showTimePicker(
         context: context,
-        initialTime: initialTime,
+        initialTime: provider.defaultStartTimeOfDay,
         helpText: "開始時間を入力してください"
     );
 
@@ -56,11 +54,9 @@ class ScheduleDaySettingPeriodRow extends StatelessWidget {
   }
 
   Future _pickEndTime(BuildContext context) async {
-    final initialTime = provider.defaultEndTimeOfDay ?? const TimeOfDay(hour: 20, minute: 0);
-
     final newTime = await showTimePicker(
         context: context,
-        initialTime: initialTime,
+        initialTime: provider.defaultEndTimeOfDay,
         helpText: "終了時間を入力してください"
     );
 
