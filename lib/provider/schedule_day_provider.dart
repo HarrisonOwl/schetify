@@ -7,7 +7,7 @@ import 'package:schetify/model/entity/schedule_period.dart';
 
 class ScheduleDayNotifier extends StateNotifier<ScheduleDaysState> {
   ScheduleDayNotifier() : super(ScheduleDaysState(
-      isSetPeriodCollectively: false,
+      isSetPeriodCollectively: true,
       periodList: SplayTreeSet<SchedulePeriod>((a, b) => a.getText().compareTo(b.getText())),
       defaultStartTimeOfDay: const TimeOfDay(hour: 19, minute: 0),
       defaultEndTimeOfDay: const TimeOfDay(hour: 20, minute: 0),
