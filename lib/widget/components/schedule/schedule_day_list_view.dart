@@ -22,6 +22,12 @@ class ScheduleDayListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return Dismissible(
           key: UniqueKey(),
+          onDismissed: (direction) => ref.read(scheduleDayProvider.notifier)
+              .removePeriodList(periodList.elementAt(index)),
+          background: Container(
+            color: Colors.red,
+            child: const Icon(Icons.delete, color: Colors.white),
+          ),
           child: Column(
             children: [
               Container( // SizedBoxにした方がいいというWarningが出るが、パッケージの挙動がおかしくなるのでContainerのままにした
@@ -31,8 +37,6 @@ class ScheduleDayListView extends StatelessWidget {
               const Divider()
             ],
           ),
-          onDismissed: (direction) => ref.read(scheduleDayProvider.notifier)
-              .removePeriodList(periodList.elementAt(index)),
         );
       },
       itemScrollController: scrollController,
