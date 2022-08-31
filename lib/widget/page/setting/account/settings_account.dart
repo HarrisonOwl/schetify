@@ -40,37 +40,22 @@ class SettingsAccount extends HookConsumerWidget {
                 email.value = text;
               },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
-                minimumSize: const Size.fromHeight(50), // NEW
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamed("/settings/account/enterPassword");
-              },
-              child: const Text('パスワード変更'),
+            ListTile(
+              title: const Text('パスワード変更'),
+              onTap: () { Navigator.of(context).pushNamed("/settings/account/enterPassword"); },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
-                minimumSize: const Size.fromHeight(50), // NEW
-              ),
-              onPressed: () {
-              },
-              child: const Text('連携'),
+            const ListTile(
+              title: Text('google account'),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
-                minimumSize: const Size.fromHeight(50), // NEW
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('保存'),
+            const ListTile(
+              title: Text('facebook account'),
+            ),
+            const ListTile(
+              title: Text('twitter account'),
+            ),
+            ListTile(
+              title: const Text('保存'),
+              onTap: () { Navigator.of(context).pop(); },
             ),
           ],
         ),

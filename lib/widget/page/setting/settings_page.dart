@@ -30,25 +30,13 @@ class SettingsPage extends HookConsumerWidget {
                 onChanged: (value){
                   noticeFlag.value = value;
                 }
-            ),ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
-                minimumSize: const Size.fromHeight(50), // NEW
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamed("/settings/account");
-              },
-              child: const Text('アカウント設定'),
-            ),ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
-                minimumSize: const Size.fromHeight(50), // NEW
-              ),
-              onPressed: () {
-              },
-              child: const Text('ログアウト'),
+            ),
+            ListTile(
+              title: const Text('アカウント設定'),
+              onTap: () { Navigator.of(context).pushNamed("/settings/account"); },
+            ),
+            const ListTile(
+                title: Text('ログアウト'),
             ),
           ],
         ),

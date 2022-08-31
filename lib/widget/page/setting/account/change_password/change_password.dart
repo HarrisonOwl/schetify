@@ -42,17 +42,12 @@ class ChangePassword extends HookConsumerWidget {
                 passwordAgain.value = text;
               },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
-                minimumSize: const Size.fromHeight(50), // NEW
-              ),
-              onPressed: () {
+            ListTile(
+              title: const Text('パスワード変更'),
+              onTap: () {
                 int count = 0;
                 Navigator.popUntil(context, (_) => count++ >= 2);
               },
-              child: const Text('パスワード変更'),
             ),
           ],
         ),

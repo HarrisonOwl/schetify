@@ -28,16 +28,9 @@ class EnterPassword extends HookConsumerWidget {
                 password.value = text;
               },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
-                minimumSize: const Size.fromHeight(50), // NEW
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamed("/settings/account/changePassword");
-              },
-              child: const Text('次へ'),
+            ListTile(
+              title: const Text('次へ'),
+              onTap: () { Navigator.of(context).pushNamed("/settings/account/changePassword");},
             ),
           ],
         ),
