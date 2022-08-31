@@ -4,6 +4,7 @@ import 'package:schetify/widget/page/init/login_page.dart';
 import 'package:schetify/widget/page/init/user_registration_page.dart';
 import 'package:schetify/widget/page/main_page.dart';
 import 'package:schetify/widget/page/schedule/common/cost/splitting_the_cost.dart';
+import 'package:schetify/widget/page/schedule/common/schedule_update_destination_page.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_update_page.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_day_update_page.dart';
 
@@ -27,6 +28,8 @@ class AppRouter extends StatelessWidget {
       routes: <String, WidgetBuilder> {
         '/': (BuildContext context) => MainPage(),
         '/schedule/new': (BuildContext context) => ScheduleUpdatePage(),
+        '/schedule/new/day': (BuildContext context) => const ScheduleDayUpdatePage(),
+        '/schedule/new/destination': (BuildContext context) => const ScheduleUpdateDestinationPage(),
         '/init': (BuildContext context) => InitPage(),
         '/init/register': (BuildContext context) => UserRegistrationPage(),
         '/init/login': (BuildContext context) => LoginPage(),
