@@ -10,7 +10,6 @@ class SettingsAccount extends HookConsumerWidget {
 
     var name = useState("hoge");
     var email = useState("hoge@hoge");
-    var password = useState("password");
 
     return Scaffold(
       body: Center(
@@ -19,8 +18,11 @@ class SettingsAccount extends HookConsumerWidget {
           children: [
             TextFormField(
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                labelText: 'ユーザー名',
+                prefixText: 'ユーザー名',
+                floatingLabelBehavior: FloatingLabelBehavior.never,
               ),
+              textAlign: TextAlign.end,
               initialValue: name.value,
               onChanged: (text){
                 name.value = text;
@@ -28,27 +30,43 @@ class SettingsAccount extends HookConsumerWidget {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                labelText: 'メールアドレス',
+                prefixText: 'メールアドレス',
+                floatingLabelBehavior: FloatingLabelBehavior.never,
               ),
+              textAlign: TextAlign.end,
               initialValue: email.value,
               onChanged: (text){
                 email.value = text;
               },
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                onPrimary: Colors.black,
+                minimumSize: const Size.fromHeight(50), // NEW
               ),
-              initialValue: password.value,
-              onChanged: (text){
-                password.value = text;
+              onPressed: () {
+                Navigator.of(context).pushNamed("/settings/account/enterPassword");
               },
-            ),ElevatedButton(
+              child: const Text('パスワード変更'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                onPrimary: Colors.black,
+                minimumSize: const Size.fromHeight(50), // NEW
+              ),
               onPressed: () {
               },
               child: const Text('連携'),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                onPrimary: Colors.black,
+                minimumSize: const Size.fromHeight(50), // NEW
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },

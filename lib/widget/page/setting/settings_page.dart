@@ -31,15 +31,25 @@ class SettingsPage extends HookConsumerWidget {
                   noticeFlag.value = value;
                 }
             ),ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                onPrimary: Colors.black,
+                minimumSize: const Size.fromHeight(50), // NEW
+              ),
               onPressed: () {
                 Navigator.of(context).pushNamed("/settings/account");
               },
               child: const Text('アカウント設定'),
             ),ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                onPrimary: Colors.black,
+                minimumSize: const Size.fromHeight(50), // NEW
+              ),
               onPressed: () {
               },
               child: const Text('ログアウト'),
-            )
+            ),
           ],
         ),
       ),
