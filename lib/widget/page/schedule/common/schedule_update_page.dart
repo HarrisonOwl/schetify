@@ -7,7 +7,7 @@ import '../../../../model/entity/schedule.dart';
 class ScheduleUpdatePage extends HookConsumerWidget {
   ScheduleUpdatePage({Key? key}) : super(key: key);
 
-  List<Schedule> scheduleList = [Schedule(scheduleTitle: "a", scheduleDescription: "b")];
+  List<Schedule> scheduleList = [];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,12 +21,12 @@ class ScheduleUpdatePage extends HookConsumerWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                var a = const Schedule(scheduleTitle: "a", scheduleDescription: "b");
+                scheduleList.add(const Schedule(scheduleTitle: "b", scheduleDescription: "c"));
                 ref.read(scheduleListProvider.notifier)
-                    .changeScheduleList(scheduleList.add(a));
+                    .changeScheduleList(scheduleList);
                 Navigator.of(context).pop();
               },
-              child: Text(
+              child: const Text(
                 "作成",
               ),
             ),
