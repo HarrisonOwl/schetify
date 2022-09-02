@@ -158,7 +158,9 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
               mapType: MapType.hybrid,
               initialCameraPosition: initialPosition.value,
               onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
+                if(_controller.isCompleted) {
+                  _controller.complete(controller);
+                }
               },
               markers: markers.value,
               zoomControlsEnabled: false,
@@ -172,7 +174,9 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
               mapType: MapType.hybrid,
               initialCameraPosition: initialPosition.value,
               onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
+                if(_controller.isCompleted) {
+                  _controller.complete(controller);
+                }
               },
               markers: markers.value,
               zoomControlsEnabled: false,
