@@ -12,4 +12,5 @@ class ScheduleList with _$ScheduleList{
     required bool error,
     required List<Schedule> scheduleList,
   }) = _ScheduleList;
+
 }

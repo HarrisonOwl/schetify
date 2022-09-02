@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/provider/schedules_dart_provider.dart';
+import '../../provider/schedule_list_provider.dart';
 
 class SchedulePage extends HookConsumerWidget {
   const SchedulePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(schedulesDataProvider);
+    final data = ref.watch(scheduleListProvider);
 
     return Scaffold(
         body: ListView.separated(
-          itemCount: data.schedules.length,
+          itemCount: data.scheduleList.length,
           itemBuilder: (BuildContext context, int index) {
-            final schedule = data.schedules[index];
+            final schedule = data.scheduleList[index];
             return SubListItem(
-              title: schedule.name,
-              subTitle: '¥${schedule.date}\n${schedule.type}\n${schedule.name}',
+              title: schedule.scheduleTitle,
+              subTitle: schedule.scheduleDescription,
               leading: ConstrainedBox(
                   constraints: const BoxConstraints(
                       minHeight: 44,
