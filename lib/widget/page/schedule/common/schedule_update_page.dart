@@ -6,41 +6,21 @@ import '../../../../model/entity/schedule.dart';
 
 List<Schedule> scheduleList = [];
 
+import '../../../../model/entity/schedule_update_page_util.dart';
 import '../../../components/schedule/sub_list_item.dart';
 
 class ScheduleUpdatePage extends HookConsumerWidget {
   ScheduleUpdatePage({Key? key}) : super(key: key);
-  List<String> tileName = <String>[
-    "日にち設定",
-    "席分け設定",
-    "ラベル設定",
-    "割り勘設定",
-    "目的地:",
-    "アンケート設定",
-    "出席",
-    "シェア(URL)",
-  ];
 
-  final List<String> routeName = <String>[
-    "/schedule/new/day",
-    "/schedule/new/seat",
-    "/schedule/new/label",
-    "/schedule/new/cost",
-    "/schedule/new/destination",
-    "/schedule/new/questionnaire",
-    "/schedule/new/questionnaire",
-    "/schedule/new/questionnaire",
-  ];
-
-  final List<Icon?> iconName = <Icon?>[
-    const Icon(Icons.calendar_today),
-    const Icon(Icons.table_bar),
-    const Icon(Icons.label),
-    const Icon(Icons.money),
-    const Icon(Icons.room),
-    const Icon(Icons.feed),
-    null,
-    null,
+  final List<ScheduleUpdatePageUtil> util = <ScheduleUpdatePageUtil>[
+    ScheduleUpdatePageUtil("日にち設定", "/schedule/new/day", const Icon(Icons.calendar_today)),
+    ScheduleUpdatePageUtil("席分け設定", "/schedule/new/seat", const Icon(Icons.table_bar)),
+    ScheduleUpdatePageUtil("ラベル設定", "/schedule/new/label", const Icon(Icons.label)),
+    ScheduleUpdatePageUtil("割り勘設定", "/schedule/new/cost", const Icon(Icons.money)),
+    ScheduleUpdatePageUtil("目的地:", "/schedule/new/destination", const Icon(Icons.room),),
+    ScheduleUpdatePageUtil("アンケート設定", "/schedule/new/questionnaire", const Icon(Icons.feed)),
+    ScheduleUpdatePageUtil("出席", "/schedule/new/questionnaire", null),
+    ScheduleUpdatePageUtil("シェア(URL)", "/schedule/new/questionnaire", null),
   ];
 
   // tentative variable
@@ -83,21 +63,21 @@ class ScheduleUpdatePage extends HookConsumerWidget {
             ),
           ),
           Expanded(child: ListView.separated(
-            itemCount: tileName.length,
+            itemCount: util.length,
             itemBuilder: (BuildContext context, int index) {
               return SubListItem(
-                title: tileName[index],
+                title: util[index].tileName,
                 leading: ConstrainedBox(
                   constraints: const BoxConstraints(
                     minHeight: 44,
                     minWidth: 34,
                     maxHeight: 64,
                     maxWidth: 54),
-                  child: iconName[index],
+                  child: util[index].iconName,
                 ),
-                route: routeName[index],
-                toggle: tileName[index] == '出席' ? toggleState : '',
-                address: tileName[index] == '目的地:' ? address : '',
+                route: util[index].routeName,
+                toggle: util[index].tileName == '出席' ? toggleState : '',
+                address: util[index].tileName == '目的地:' ? address : '',
               );
             },
             separatorBuilder: (BuildContext context, int index) => const Divider(),

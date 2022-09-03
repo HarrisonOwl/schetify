@@ -19,7 +19,12 @@ class SubListItem extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(address),
+          Flexible(
+            child: Text(
+              address,
+              overflow: TextOverflow.ellipsis,
+            ),
+          )
         ],
       ),
       leading: leading,
