@@ -3,7 +3,7 @@ import 'package:schetify/model/entity/schedule.dart';
 import 'test_weather.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 // {ファイル名}.freezed.dart　と書く
-part 'schedule_list.freezed.dart';
+part 'generated/schedule_list.freezed.dart';
 
 @freezed
 class ScheduleList with _$ScheduleList{

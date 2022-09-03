@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 // {ファイル名}.freezed.dart　と書く
-part 'schedule.freezed.dart';
-part 'schedule.g.dart';
+part 'generated/schedule.freezed.dart';
+part 'generated/schedule.g.dart';
 
 //Freezed特有の書き方なので、スニペットを用意するのが良い
 @freezed
