@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'splitting_the_cost_status.freezed.dart';
+part 'generated/splitting_the_cost_status.freezed.dart';
 
 @freezed
 class SplittingTheCostStatus with _$SplittingTheCostStatus{

@@ -4,8 +4,8 @@ import 'package:schetify/model/entity/schedule_period.dart';
 import "package:intl/intl.dart";
 import 'dart:collection';
 // {ファイル名}.freezed.dart　と書く
-part 'schedule_days_state.freezed.dart';
-part 'schedule_days_state.g.dart';
+part 'generated/schedule_days_state.freezed.dart';
+part 'generated/schedule_days_state.g.dart';
 
 //Freezed特有の書き方なので、スニペットを用意するのが良い
 @freezed
