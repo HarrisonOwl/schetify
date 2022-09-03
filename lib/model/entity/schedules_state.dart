@@ -2,7 +2,7 @@
 import 'test_weather.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 // {ファイル名}.freezed.dart　と書く
-part 'schedules_state.freezed.dart';
+part 'generated/schedules_state.freezed.dart';
 
 @freezed
 class SchedulesState with _$SchedulesState{

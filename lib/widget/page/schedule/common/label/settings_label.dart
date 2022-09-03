@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/provider/settings_label_provider.dart';
-import 'package:schetify/widget/components/settingsLabel/settings_user_dialog.dart';
+import 'package:schetify/widget/dialog/settings_user_dialog.dart';
 
 class SettingsLabel extends HookConsumerWidget {
 

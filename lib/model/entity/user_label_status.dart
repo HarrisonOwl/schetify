@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'user_label_status.freezed.dart';
+part 'generated/user_label_status.freezed.dart';
 
 @freezed
 class UserLabelStatus with _$UserLabelStatus{

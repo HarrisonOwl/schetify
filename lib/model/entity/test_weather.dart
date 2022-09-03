@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 // {ファイル名}.freezed.dart　と書く
-part 'test_weather.freezed.dart';
-part 'test_weather.g.dart';
+part 'generated/test_weather.freezed.dart';
+part 'generated/test_weather.g.dart';
 
 //Freezed特有の書き方なので、スニペットを用意するのが良い
 @freezed
