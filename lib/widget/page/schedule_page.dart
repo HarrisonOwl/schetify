@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../provider/schedule_list_provider.dart';
+import '../components/schedule/schedule_list_item.dart';
 
 class SchedulePage extends HookConsumerWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class SchedulePage extends HookConsumerWidget {
           itemCount: data.scheduleList.length,
           itemBuilder: (BuildContext context, int index) {
             final schedule = data.scheduleList[index];
-            return SubListItem(
+            return ScheduleListItemComponent(
               title: schedule.scheduleTitle,
               subTitle: schedule.scheduleDescription,
               leading: ConstrainedBox(
@@ -39,23 +40,3 @@ class SchedulePage extends HookConsumerWidget {
   }
 }
 
-class SubListItem extends StatelessWidget {
-  final String title;
-  final String subTitle;
-  final Widget leading;
-  // final Color tileColor;
-
-  SubListItem({required this.title, required this.subTitle, required this.leading});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(title),
-      subtitle: Text(subTitle),
-      leading: leading,
-      onTap: () => {},
-      onLongPress: () => {},
-      trailing: Icon(Icons.more_vert),
-    );
-  }
-}

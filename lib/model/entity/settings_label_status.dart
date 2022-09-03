@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:schetify/model/entity/user_label_status.dart';
-part 'settings_label_status.freezed.dart';
+part 'generated/settings_label_status.freezed.dart';
 
 
 
