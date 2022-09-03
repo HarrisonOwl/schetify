@@ -14,7 +14,7 @@ class SettingsLabel extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("割り勘設定"),
+        title: const Text("ラベル設定"),
       ),
       body: Center(
         child: Column(
