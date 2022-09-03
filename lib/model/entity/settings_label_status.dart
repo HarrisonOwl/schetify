@@ -8,8 +8,6 @@ part 'settings_label_status.freezed.dart';
 class SettingsLabelStatus with _$SettingsLabelStatus{
   const factory SettingsLabelStatus({
     required bool flag,
-    required int  index,
-    required String roll,
     required List<UserLabelStatus> userList,
   }) = _SettingsLabelStatus;
 }

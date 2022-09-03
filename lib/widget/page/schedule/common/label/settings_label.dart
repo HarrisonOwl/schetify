@@ -33,20 +33,18 @@ class SettingsLabel extends HookConsumerWidget {
               child: ListView.builder(
                 itemCount: settingsLabel.userList.length,
                 itemBuilder: (context, index) {
-                  return Container(
+                  return SizedBox(
                     height: 50,
                     child: ListTile(
                       enabled: settingsLabel.flag,
                       title: Text(settingsLabel.userList[index].name),
                       onTap: () {
-                        ref.read(settingsLabelProvider.notifier)
-                          .changeIndex(index);
                         showDialog(
                             context: context,
-                            builder: (_) => const SimpleDialog(
-                              title: Text("ラベル設定"),
+                            builder: (_) => SimpleDialog(
+                              title: const Text("ラベル設定"),
                               children: <Widget>[
-                                SettingsUserDialog()
+                                SettingsUserDialog(index: index)
                               ],
                             )
                         );

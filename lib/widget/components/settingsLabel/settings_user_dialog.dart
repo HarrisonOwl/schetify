@@ -5,14 +5,14 @@ import 'package:schetify/provider/settings_label_provider.dart';
 
 class SettingsUserDialog extends HookConsumerWidget {
 
-  const SettingsUserDialog({Key? key}) : super(key: key);
+  const SettingsUserDialog({Key? key, required this.index}) : super(key: key);
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
     final settingsLabel = ref.watch(settingsLabelProvider);
-    final whichUser = useState(settingsLabel.index);
-    final roll = useState(settingsLabel.userList[whichUser.value].label);
+    final roll = useState(settingsLabel.userList[index].label);
 
     return Center(
       child: Column(
@@ -22,7 +22,7 @@ class SettingsUserDialog extends HookConsumerWidget {
             width: 80,
             child: FittedBox(
               fit: BoxFit.fitWidth,
-              child: Text(settingsLabel.userList[whichUser.value].name)
+              child: Text(settingsLabel.userList[index].name)
             ),
           ),
           DropdownButton(
@@ -44,7 +44,7 @@ class SettingsUserDialog extends HookConsumerWidget {
             title: Text('確定'),
             onTap: () {
               ref.read(settingsLabelProvider.notifier)
-                .changeUserLabel(whichUser.value, roll.value);
+                .changeUserLabel(index, roll.value);
               Navigator.of(context).pop();
               },
           ),

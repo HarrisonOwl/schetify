@@ -17,8 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SettingsLabelStatus {
   bool get flag => throw _privateConstructorUsedError;
-  int get index => throw _privateConstructorUsedError;
-  String get roll => throw _privateConstructorUsedError;
   List<UserLabelStatus> get userList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,8 +29,7 @@ abstract class $SettingsLabelStatusCopyWith<$Res> {
   factory $SettingsLabelStatusCopyWith(
           SettingsLabelStatus value, $Res Function(SettingsLabelStatus) then) =
       _$SettingsLabelStatusCopyWithImpl<$Res>;
-  $Res call(
-      {bool flag, int index, String roll, List<UserLabelStatus> userList});
+  $Res call({bool flag, List<UserLabelStatus> userList});
 }
 
 /// @nodoc
@@ -47,8 +44,6 @@ class _$SettingsLabelStatusCopyWithImpl<$Res>
   @override
   $Res call({
     Object? flag = freezed,
-    Object? index = freezed,
-    Object? roll = freezed,
     Object? userList = freezed,
   }) {
     return _then(_value.copyWith(
@@ -56,14 +51,6 @@ class _$SettingsLabelStatusCopyWithImpl<$Res>
           ? _value.flag
           : flag // ignore: cast_nullable_to_non_nullable
               as bool,
-      index: index == freezed
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-      roll: roll == freezed
-          ? _value.roll
-          : roll // ignore: cast_nullable_to_non_nullable
-              as String,
       userList: userList == freezed
           ? _value.userList
           : userList // ignore: cast_nullable_to_non_nullable
@@ -79,8 +66,7 @@ abstract class _$$_SettingsLabelStatusCopyWith<$Res>
           $Res Function(_$_SettingsLabelStatus) then) =
       __$$_SettingsLabelStatusCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {bool flag, int index, String roll, List<UserLabelStatus> userList});
+  $Res call({bool flag, List<UserLabelStatus> userList});
 }
 
 /// @nodoc
@@ -97,8 +83,6 @@ class __$$_SettingsLabelStatusCopyWithImpl<$Res>
   @override
   $Res call({
     Object? flag = freezed,
-    Object? index = freezed,
-    Object? roll = freezed,
     Object? userList = freezed,
   }) {
     return _then(_$_SettingsLabelStatus(
@@ -106,14 +90,6 @@ class __$$_SettingsLabelStatusCopyWithImpl<$Res>
           ? _value.flag
           : flag // ignore: cast_nullable_to_non_nullable
               as bool,
-      index: index == freezed
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-      roll: roll == freezed
-          ? _value.roll
-          : roll // ignore: cast_nullable_to_non_nullable
-              as String,
       userList: userList == freezed
           ? _value._userList
           : userList // ignore: cast_nullable_to_non_nullable
@@ -126,18 +102,11 @@ class __$$_SettingsLabelStatusCopyWithImpl<$Res>
 
 class _$_SettingsLabelStatus implements _SettingsLabelStatus {
   const _$_SettingsLabelStatus(
-      {required this.flag,
-      required this.index,
-      required this.roll,
-      required final List<UserLabelStatus> userList})
+      {required this.flag, required final List<UserLabelStatus> userList})
       : _userList = userList;
 
   @override
   final bool flag;
-  @override
-  final int index;
-  @override
-  final String roll;
   final List<UserLabelStatus> _userList;
   @override
   List<UserLabelStatus> get userList {
@@ -147,7 +116,7 @@ class _$_SettingsLabelStatus implements _SettingsLabelStatus {
 
   @override
   String toString() {
-    return 'SettingsLabelStatus(flag: $flag, index: $index, roll: $roll, userList: $userList)';
+    return 'SettingsLabelStatus(flag: $flag, userList: $userList)';
   }
 
   @override
@@ -156,8 +125,6 @@ class _$_SettingsLabelStatus implements _SettingsLabelStatus {
         (other.runtimeType == runtimeType &&
             other is _$_SettingsLabelStatus &&
             const DeepCollectionEquality().equals(other.flag, flag) &&
-            const DeepCollectionEquality().equals(other.index, index) &&
-            const DeepCollectionEquality().equals(other.roll, roll) &&
             const DeepCollectionEquality().equals(other._userList, _userList));
   }
 
@@ -165,8 +132,6 @@ class _$_SettingsLabelStatus implements _SettingsLabelStatus {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(flag),
-      const DeepCollectionEquality().hash(index),
-      const DeepCollectionEquality().hash(roll),
       const DeepCollectionEquality().hash(_userList));
 
   @JsonKey(ignore: true)
@@ -179,16 +144,10 @@ class _$_SettingsLabelStatus implements _SettingsLabelStatus {
 abstract class _SettingsLabelStatus implements SettingsLabelStatus {
   const factory _SettingsLabelStatus(
       {required final bool flag,
-      required final int index,
-      required final String roll,
       required final List<UserLabelStatus> userList}) = _$_SettingsLabelStatus;
 
   @override
   bool get flag;
-  @override
-  int get index;
-  @override
-  String get roll;
   @override
   List<UserLabelStatus> get userList;
   @override
