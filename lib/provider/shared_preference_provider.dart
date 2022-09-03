@@ -8,17 +8,20 @@ final sharedPreferencesProvider = StateNotifierProvider<SharedPreferencesNotifie
 });
 
 class SharedPreferencesNotifier extends StateNotifier<SharedPreferencesState> {
-  SharedPreferencesNotifier(): super(const SharedPreferencesState(pref: null)) {
+  SharedPreferencesNotifier(): super(const SharedPreferencesState(pref: null, isOpenedScheduleCandidatesPage: false)) {
     init();
   }
 
   Future<void> init() async {
     final pref = await SharedPreferences.getInstance();
-    state = state.copyWith(pref: pref);
+    final isOpenedScheduleCandidatesPage = pref.getBool("isOpenedScheduleCandidatesPage") ?? false;
+    state = state.copyWith(pref: pref, isOpenedScheduleCandidatesPage: isOpenedScheduleCandidatesPage);
   }
 
   void changeIsOpenedScheduleCandidatesPage(bool isOpenedScheduleCandidatesPage) {
     state.pref?.setBool('isOpenedScheduleCandidatesPage', isOpenedScheduleCandidatesPage);
     state = state.copyWith(pref: state.pref);
   }
+
+
 }

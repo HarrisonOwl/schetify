@@ -8,5 +8,6 @@ part 'shared_preferences_state.freezed.dart';
 class SharedPreferencesState with _$SharedPreferencesState {
   const factory SharedPreferencesState({
     required SharedPreferences? pref,
+    required bool isOpenedScheduleCandidatesPage,
   }) = _SharedPreferencesState;
 }

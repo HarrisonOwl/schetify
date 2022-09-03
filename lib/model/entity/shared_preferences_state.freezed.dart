@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SharedPreferencesState {
   SharedPreferences? get pref => throw _privateConstructorUsedError;
+  bool get isOpenedScheduleCandidatesPage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SharedPreferencesStateCopyWith<SharedPreferencesState> get copyWith =>
@@ -28,7 +29,7 @@ abstract class $SharedPreferencesStateCopyWith<$Res> {
   factory $SharedPreferencesStateCopyWith(SharedPreferencesState value,
           $Res Function(SharedPreferencesState) then) =
       _$SharedPreferencesStateCopyWithImpl<$Res>;
-  $Res call({SharedPreferences? pref});
+  $Res call({SharedPreferences? pref, bool isOpenedScheduleCandidatesPage});
 }
 
 /// @nodoc
@@ -43,12 +44,17 @@ class _$SharedPreferencesStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pref = freezed,
+    Object? isOpenedScheduleCandidatesPage = freezed,
   }) {
     return _then(_value.copyWith(
       pref: pref == freezed
           ? _value.pref
           : pref // ignore: cast_nullable_to_non_nullable
               as SharedPreferences?,
+      isOpenedScheduleCandidatesPage: isOpenedScheduleCandidatesPage == freezed
+          ? _value.isOpenedScheduleCandidatesPage
+          : isOpenedScheduleCandidatesPage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -60,7 +66,7 @@ abstract class _$$_SharedPreferencesStateCopyWith<$Res>
           $Res Function(_$_SharedPreferencesState) then) =
       __$$_SharedPreferencesStateCopyWithImpl<$Res>;
   @override
-  $Res call({SharedPreferences? pref});
+  $Res call({SharedPreferences? pref, bool isOpenedScheduleCandidatesPage});
 }
 
 /// @nodoc
@@ -78,12 +84,17 @@ class __$$_SharedPreferencesStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pref = freezed,
+    Object? isOpenedScheduleCandidatesPage = freezed,
   }) {
     return _then(_$_SharedPreferencesState(
       pref: pref == freezed
           ? _value.pref
           : pref // ignore: cast_nullable_to_non_nullable
               as SharedPreferences?,
+      isOpenedScheduleCandidatesPage: isOpenedScheduleCandidatesPage == freezed
+          ? _value.isOpenedScheduleCandidatesPage
+          : isOpenedScheduleCandidatesPage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -91,14 +102,17 @@ class __$$_SharedPreferencesStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SharedPreferencesState implements _SharedPreferencesState {
-  const _$_SharedPreferencesState({required this.pref});
+  const _$_SharedPreferencesState(
+      {required this.pref, required this.isOpenedScheduleCandidatesPage});
 
   @override
   final SharedPreferences? pref;
+  @override
+  final bool isOpenedScheduleCandidatesPage;
 
   @override
   String toString() {
-    return 'SharedPreferencesState(pref: $pref)';
+    return 'SharedPreferencesState(pref: $pref, isOpenedScheduleCandidatesPage: $isOpenedScheduleCandidatesPage)';
   }
 
   @override
@@ -106,12 +120,17 @@ class _$_SharedPreferencesState implements _SharedPreferencesState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SharedPreferencesState &&
-            const DeepCollectionEquality().equals(other.pref, pref));
+            const DeepCollectionEquality().equals(other.pref, pref) &&
+            const DeepCollectionEquality().equals(
+                other.isOpenedScheduleCandidatesPage,
+                isOpenedScheduleCandidatesPage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(pref));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(pref),
+      const DeepCollectionEquality().hash(isOpenedScheduleCandidatesPage));
 
   @JsonKey(ignore: true)
   @override
@@ -122,10 +141,14 @@ class _$_SharedPreferencesState implements _SharedPreferencesState {
 
 abstract class _SharedPreferencesState implements SharedPreferencesState {
   const factory _SharedPreferencesState(
-      {required final SharedPreferences? pref}) = _$_SharedPreferencesState;
+          {required final SharedPreferences? pref,
+          required final bool isOpenedScheduleCandidatesPage}) =
+      _$_SharedPreferencesState;
 
   @override
   SharedPreferences? get pref;
+  @override
+  bool get isOpenedScheduleCandidatesPage;
   @override
   @JsonKey(ignore: true)
   _$$_SharedPreferencesStateCopyWith<_$_SharedPreferencesState> get copyWith =>
