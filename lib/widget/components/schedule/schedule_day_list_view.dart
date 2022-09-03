@@ -7,16 +7,15 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:schetify/model/entity/schedule_period.dart';
 import 'package:schetify/provider/schedule_day_provider.dart';
 
-class ScheduleDayListView extends StatelessWidget {
-  ScheduleDayListView({Key? key, required this.periodList, required this.scrollController, required this.ref}) : super(key: key);
+class ScheduleDayListView extends HookConsumerWidget {
+  ScheduleDayListView({Key? key, required this.periodList, required this.scrollController}) : super(key: key);
 
   final SplayTreeSet<SchedulePeriod> periodList;
   final ItemScrollController scrollController;
   final ItemPositionsListener positionsListener = ItemPositionsListener.create();
-  final WidgetRef ref;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ScrollablePositionedList.builder(
       padding: const EdgeInsets.symmetric(vertical: 8),
       itemBuilder: (context, index) {
@@ -32,7 +31,7 @@ class ScheduleDayListView extends StatelessWidget {
             children: [
               Container( // SizedBoxにした方がいいというWarningが出るが、パッケージの挙動がおかしくなるのでContainerのままにした
                 height: 30,
-                child: ScheduleDayListTile(periodList: periodList, index: index, ref: ref),
+                child: ScheduleDayListTile(periodList: periodList, index: index,),
               ),
               const Divider()
             ],
