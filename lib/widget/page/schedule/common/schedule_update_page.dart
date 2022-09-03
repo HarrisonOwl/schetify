@@ -4,10 +4,10 @@ import 'package:schetify/provider/schedule_list_provider.dart';
 
 import '../../../../model/entity/schedule.dart';
 
+List<Schedule> scheduleList = [];
+
 class ScheduleUpdatePage extends HookConsumerWidget {
   ScheduleUpdatePage({Key? key}) : super(key: key);
-
-  List<Schedule> scheduleList = [];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
