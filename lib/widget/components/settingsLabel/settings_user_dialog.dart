@@ -11,8 +11,8 @@ class SettingsUserDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final settingsLabel = ref.watch(settingsLabelProvider);
-    final roll = useState(settingsLabel.roll);
     final whichUser = useState(settingsLabel.index);
+    final roll = useState(settingsLabel.userList[whichUser.value].label);
 
     return Center(
       child: Column(
@@ -26,7 +26,7 @@ class SettingsUserDialog extends HookConsumerWidget {
             ),
           ),
           DropdownButton(
-            value: settingsLabel.roll,
+            value: roll.value,
             items: const [
               DropdownMenuItem(
                 value: 'readOnly',
@@ -38,8 +38,7 @@ class SettingsUserDialog extends HookConsumerWidget {
               ),
             ],
             onChanged: (String? value) {
-              ref.read(settingsLabelProvider.notifier)
-                  .changeRoll(value);
+              roll.value = value!;
             },
           ),ListTile(
             title: Text('確定'),
