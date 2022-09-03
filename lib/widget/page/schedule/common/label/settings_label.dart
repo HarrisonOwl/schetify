@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/provider/settings_label_provider.dart';
-
-import '../../../../../provider/user_label_provider.dart';
+import 'package:schetify/widget/components/settingsLabel/settings_user_dialog.dart';
 
 class SettingsLabel extends HookConsumerWidget {
 
@@ -13,8 +11,6 @@ class SettingsLabel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final settingsLabel = ref.watch(settingsLabelProvider);
-    final roll = useState("readOnly");
-    final whichUser = useState(1);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,32 +27,6 @@ class SettingsLabel extends HookConsumerWidget {
                   .changeFlag(value),
               secondary: const Icon(Icons.lightbulb_outline),
             ),
-            ListTile(
-              title: Text(settingsLabel.userList[whichUser.value].name),
-              onTap: () => {
-
-              },
-            ),
-            DropdownButton(
-              value: roll.value,
-              items: const [
-                DropdownMenuItem(
-                  value: 'readOnly',
-                  child: Text('readOnly'),
-                ),
-                DropdownMenuItem(
-                  value: 'edit',
-                  child: Text('edit'),
-                ),
-              ],
-              onChanged: (String? value) {
-                roll.value = value!;
-              },
-            ),ListTile(
-              title: Text('確定'),
-              onTap: () { ref.read(settingsLabelProvider.notifier)
-                  .changeUserLabel(whichUser.value, roll.value);},
-            ),
             Container(
               height: 400,
               padding: EdgeInsets.all(4),
@@ -69,7 +39,17 @@ class SettingsLabel extends HookConsumerWidget {
                       enabled: settingsLabel.flag,
                       title: Text(settingsLabel.userList[index].name),
                       onTap: () {
-                        whichUser.value = index;
+                        ref.read(settingsLabelProvider.notifier)
+                          .changeIndex(index);
+                        showDialog(
+                            context: context,
+                            builder: (_) => const SimpleDialog(
+                              title: Text("ラベル設定"),
+                              children: <Widget>[
+                                SettingsUserDialog()
+                              ],
+                            )
+                        );
                       },
                       subtitle: Text(
                         settingsLabel.userList[index].label,
