@@ -216,7 +216,7 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
                 ),
                 Expanded(
                   flex: provider.isSetPeriodCollectively ? 48 : 56, // 割合
-                  child: ScheduleDayListView(periodList: provider.periodList, scrollController: scrollController, ref: ref),
+                  child: ScheduleDayListView(periodList: provider.periodList, scrollController: scrollController),
                 ),
               ]
           )

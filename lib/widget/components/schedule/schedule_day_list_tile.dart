@@ -6,16 +6,15 @@ import 'package:schetify/model/entity/schedule_period.dart';
 import 'package:schetify/provider/schedule_day_provider.dart';
 
 @immutable
-class ScheduleDayListTile extends StatelessWidget {
-  const ScheduleDayListTile({Key? key, required this.periodList, required this.index, required this.ref}) : super(key: key);
+class ScheduleDayListTile extends HookConsumerWidget {
+  const ScheduleDayListTile({Key? key, required this.periodList, required this.index}) : super(key: key);
 
   final SplayTreeSet<SchedulePeriod> periodList;
   final int index;
-  final WidgetRef ref;
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
       dense: true,
       title: Text(periodList.elementAt(index).getText()),
