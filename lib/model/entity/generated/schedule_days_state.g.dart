@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'schedule_days_state.dart';
+part of '../schedule_days_state.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

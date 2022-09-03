@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'schedule_period.dart';
+part of '../schedule_period.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
