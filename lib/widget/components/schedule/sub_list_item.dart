@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/widget/dialog/event_detail_dialog.dart';
 
-class SubListItem extends StatelessWidget {
+import '../../../provider/attend_provider.dart';
+
+class SubListItem extends HookConsumerWidget {
   final String title;
   final Widget leading;
   final String route;
@@ -11,7 +14,8 @@ class SubListItem extends StatelessWidget {
   SubListItem({required this.title, required this.leading, required this.route, required this.toggle, required this.address});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
     return ListTile(
       title: Row(
         mainAxisSize: MainAxisSize.min,
@@ -40,6 +44,14 @@ class SubListItem extends StatelessWidget {
                 ],
               )
             )
+        }else if(route == "changeToggle"){
+          if(toggle == 'OFF'){
+            ref.read(attendProvider.notifier)
+                .changeAttend('ON'),
+          }else{
+            ref.read(attendProvider.notifier)
+                .changeAttend('OFF'),
+          }
         }else{
           Navigator.of(context).pushNamed(route)
         }
