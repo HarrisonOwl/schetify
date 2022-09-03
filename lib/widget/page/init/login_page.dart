@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/provider/firebase_auth_provider.dart';
 
 class LoginPage extends HookConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final email = useState("");
+    final password = useState("");
+    final firebase = ref.read(firebaseAuthProvider.notifier);
     return Scaffold(
-      body: Center(
+      appBar: AppBar(title: const Text("ログイン"),),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const TextField(
+            TextFormField(
               enabled: true,
-              maxLength: 10,
               // maxLengthEnforced: false,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
-                fontSize: 30.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.w500
               ),
-              obscureText: true,
               maxLines:1 ,
-              // onChanged: _handleText,
-              decoration: InputDecoration(
-                hintText: "MAIL ADDRESS",
+              onChanged: (value) => email.value = value,
+              decoration: const InputDecoration(
+                hintText: "メールアドレス",
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.black,
@@ -32,20 +37,20 @@ class LoginPage extends HookConsumerWidget {
                 ),
               ),
             ),
-            const TextField(
+            TextFormField(
               enabled: true,
-              maxLength: 10,
               // maxLengthEnforced: false,
-              style: TextStyle(
+              obscureText: true,
+              style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 30.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.w500
               ),
-              obscureText: true,
+              onChanged: (value) => password.value = value,
               maxLines:1 ,
               // onChanged: _handleText,
-              decoration: InputDecoration(
-                hintText: "PASSWORD",
+              decoration: const InputDecoration(
+                hintText: "パスワード",
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.black,
@@ -53,11 +58,22 @@ class LoginPage extends HookConsumerWidget {
                 ),
               ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil("/", (route) => false);
-                },
-                child: Text('Twitter Login')
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: (){
+                      try{
+                        firebase.signInWithEmailAndPassword(email.value, password.value).then((_) => {
+                          Navigator.of(context).pushNamedAndRemoveUntil("/main", (route) => false)
+                        });
+                      }catch(e){
+                        debugPrint("Login Error!");
+                      }
+                    },
+                    child: const Text('ログイン')
+                )
             ),
           ],
         ),
