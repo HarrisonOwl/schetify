@@ -6,18 +6,25 @@ import 'package:schetify/widget/components/schedule/schedule_day_list_view.dart'
 import 'package:schetify/widget/components/schedule/schedule_day_setting_view.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:schetify/provider/schedule_day_provider.dart';
+import 'package:schetify/provider/shared_preference_provider.dart';
 import 'package:schetify/model/entity/schedule_period.dart';
 import 'dart:collection';
-
-class ScheduleDayUpdatePage extends HookConsumerWidget {
+class ScheduleDayUpdatePage extends StatefulHookConsumerWidget {
   const ScheduleDayUpdatePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => ScheduleDayUpdatePageState();
+}
+
+class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
+  @override
+  Widget build(BuildContext context) {
     final provider = ref.watch(scheduleDayProvider);
     final scrollController = ItemScrollController();
     final focusedDay = useState(DateTime.now().add(const Duration(days: 1)));
     final notifier = ref.read(scheduleDayProvider.notifier);
+    final isOpenedScheduleCandidatesPage = useState(ref.watch(sharedPreferencesProvider)
+        .pref?.getBool("isOpenedScheduleCandidatesPage") ?? false);
 
     int getHashCode(DateTime key) {
       return key.day * 1000000 + key.month * 10000 + key.year;
@@ -123,7 +130,44 @@ class ScheduleDayUpdatePage extends HookConsumerWidget {
         appBar: AppBar(
           title: const Text("日程編集"),
         ),
-        body: Column(
+        body: !isOpenedScheduleCandidatesPage.value ? Column(
+          children: <Widget>[
+            AlertDialog(
+              title: const Text("日程候補編集方法"),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Column(
+                      children: const <Widget>[
+                        Text("・画面上部のカレンダーをタップすることで日程候補の追加\n"
+                            "・追加したリストを画面下部のリストで確認\n"
+                            "・リストの右側の編集アイコンを選択することで日程候補の日時を変更\n"
+                            "・リスト要素をスワイプすることで削除したい日程候補を削除\n")
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    primary: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    side: const BorderSide(),
+                  ),
+                  onPressed: () {
+                    ref.read(sharedPreferencesProvider.notifier)
+                        .changeIsOpenedScheduleCandidatesPage(true);
+                    isOpenedScheduleCandidatesPage.value = true;
+                  },
+                  child: const Text('編集を開始する'),
+                )
+              ],
+            ),
+          ],
+        ) : Column(
             children: <Widget>[
               Expanded(
                 flex: 35, // 割合
