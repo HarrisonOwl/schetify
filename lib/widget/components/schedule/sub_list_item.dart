@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schetify/widget/dialog/event_detail_dialog.dart';
 
 class SubListItem extends StatelessWidget {
   final String title;
@@ -29,7 +30,19 @@ class SubListItem extends StatelessWidget {
       ),
       leading: leading,
       onTap: () => {
-        Navigator.of(context).pushNamed(route)
+        if(route == "detail"){
+          showDialog(
+            context: context,
+            builder: (_) => const SimpleDialog(
+              title: Text("イベント詳細"),
+                children: <Widget>[
+                  EventDetailDialog()
+                ],
+              )
+            )
+        }else{
+          Navigator.of(context).pushNamed(route)
+        }
       },
       // onLongPress: () => {},
       trailing: Row(
