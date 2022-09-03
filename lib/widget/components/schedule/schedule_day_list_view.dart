@@ -32,7 +32,7 @@ class ScheduleDayListView extends StatelessWidget {
             children: [
               Container( // SizedBoxにした方がいいというWarningが出るが、パッケージの挙動がおかしくなるのでContainerのままにした
                 height: 30,
-                child: ScheduleDayListTile(period: periodList.elementAt(index)),
+                child: ScheduleDayListTile(periodList: periodList, index: index, ref: ref),
               ),
               const Divider()
             ],
