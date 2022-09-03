@@ -8,23 +8,17 @@ class EventDetailDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("予定詳細"),
-      ),
-      body: Center(
+
+    return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children:const [
-            TextField(
-              decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(30),
-                  border: OutlineInputBorder(),
-              ),
-            )
+          children: [
+            TextFormField(
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+            ),
           ],
         ),
-      ),
     );
   }
 }
