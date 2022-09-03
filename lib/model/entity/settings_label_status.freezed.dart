@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SettingsLabelStatus {
   bool get flag => throw _privateConstructorUsedError;
-  String? get label => throw _privateConstructorUsedError;
+  List<UserLabelStatus> get userList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsLabelStatusCopyWith<SettingsLabelStatus> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $SettingsLabelStatusCopyWith<$Res> {
   factory $SettingsLabelStatusCopyWith(
           SettingsLabelStatus value, $Res Function(SettingsLabelStatus) then) =
       _$SettingsLabelStatusCopyWithImpl<$Res>;
-  $Res call({bool flag, String? label});
+  $Res call({bool flag, List<UserLabelStatus> userList});
 }
 
 /// @nodoc
@@ -44,17 +44,17 @@ class _$SettingsLabelStatusCopyWithImpl<$Res>
   @override
   $Res call({
     Object? flag = freezed,
-    Object? label = freezed,
+    Object? userList = freezed,
   }) {
     return _then(_value.copyWith(
       flag: flag == freezed
           ? _value.flag
           : flag // ignore: cast_nullable_to_non_nullable
               as bool,
-      label: label == freezed
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String?,
+      userList: userList == freezed
+          ? _value.userList
+          : userList // ignore: cast_nullable_to_non_nullable
+              as List<UserLabelStatus>,
     ));
   }
 }
@@ -66,7 +66,7 @@ abstract class _$$_SettingsLabelStatusCopyWith<$Res>
           $Res Function(_$_SettingsLabelStatus) then) =
       __$$_SettingsLabelStatusCopyWithImpl<$Res>;
   @override
-  $Res call({bool flag, String? label});
+  $Res call({bool flag, List<UserLabelStatus> userList});
 }
 
 /// @nodoc
@@ -83,17 +83,17 @@ class __$$_SettingsLabelStatusCopyWithImpl<$Res>
   @override
   $Res call({
     Object? flag = freezed,
-    Object? label = freezed,
+    Object? userList = freezed,
   }) {
     return _then(_$_SettingsLabelStatus(
       flag: flag == freezed
           ? _value.flag
           : flag // ignore: cast_nullable_to_non_nullable
               as bool,
-      label: label == freezed
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String?,
+      userList: userList == freezed
+          ? _value._userList
+          : userList // ignore: cast_nullable_to_non_nullable
+              as List<UserLabelStatus>,
     ));
   }
 }
@@ -101,16 +101,22 @@ class __$$_SettingsLabelStatusCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SettingsLabelStatus implements _SettingsLabelStatus {
-  const _$_SettingsLabelStatus({required this.flag, required this.label});
+  const _$_SettingsLabelStatus(
+      {required this.flag, required final List<UserLabelStatus> userList})
+      : _userList = userList;
 
   @override
   final bool flag;
+  final List<UserLabelStatus> _userList;
   @override
-  final String? label;
+  List<UserLabelStatus> get userList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userList);
+  }
 
   @override
   String toString() {
-    return 'SettingsLabelStatus(flag: $flag, label: $label)';
+    return 'SettingsLabelStatus(flag: $flag, userList: $userList)';
   }
 
   @override
@@ -119,14 +125,14 @@ class _$_SettingsLabelStatus implements _SettingsLabelStatus {
         (other.runtimeType == runtimeType &&
             other is _$_SettingsLabelStatus &&
             const DeepCollectionEquality().equals(other.flag, flag) &&
-            const DeepCollectionEquality().equals(other.label, label));
+            const DeepCollectionEquality().equals(other._userList, _userList));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(flag),
-      const DeepCollectionEquality().hash(label));
+      const DeepCollectionEquality().hash(_userList));
 
   @JsonKey(ignore: true)
   @override
@@ -138,12 +144,12 @@ class _$_SettingsLabelStatus implements _SettingsLabelStatus {
 abstract class _SettingsLabelStatus implements SettingsLabelStatus {
   const factory _SettingsLabelStatus(
       {required final bool flag,
-      required final String? label}) = _$_SettingsLabelStatus;
+      required final List<UserLabelStatus> userList}) = _$_SettingsLabelStatus;
 
   @override
   bool get flag;
   @override
-  String? get label;
+  List<UserLabelStatus> get userList;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsLabelStatusCopyWith<_$_SettingsLabelStatus> get copyWith =>

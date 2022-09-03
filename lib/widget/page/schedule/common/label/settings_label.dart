@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/provider/settings_label_provider.dart';
 
+import '../../../../../provider/user_label_provider.dart';
+
 class SettingsLabel extends HookConsumerWidget {
 
   const SettingsLabel({Key? key}) : super(key: key);
@@ -10,48 +12,9 @@ class SettingsLabel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final provider = ref.watch(settingsLabelProvider);
-    final List<Map<String, dynamic>> userList = [
-      {
-        'name': 'test 1',
-        'label': 'readOnly',
-      },
-      {
-        'name': 'test 2',
-        'label': 'readOnly',
-      },
-      {
-        'name': 'test 3',
-        'label': 'readOnly',
-      },
-      {
-        'name': 'test 4',
-        'label': 'readOnly',
-      },
-      {
-        'name': 'test 5',
-        'label': 'readOnly',
-      },
-      {
-        'name': 'test 6',
-        'label': 'readOnly',
-      },
-      {
-        'name': 'test 7',
-        'label': 'readOnly',
-      },
-      {
-        'name': 'test 8',
-        'label': 'readOnly',
-      },
-      {
-        'name': 'test 9',
-        'label': 'readOnly',
-      }
-    ];
-    var userName = useState("hoge");
-    var whichUser = useState(1);
-    var roll = useState(provider.label);
+    final settingsLabel = ref.watch(settingsLabelProvider);
+    final roll = useState("readOnly");
+    final whichUser = useState(1);
 
     return Scaffold(
       appBar: AppBar(
@@ -63,13 +26,16 @@ class SettingsLabel extends HookConsumerWidget {
           children:[
             SwitchListTile(
               title: const Text('ラベル設定'),
-              value: provider.flag,
+              value: settingsLabel.flag,
               onChanged: (value) => ref.read(settingsLabelProvider.notifier)
                   .changeFlag(value),
               secondary: const Icon(Icons.lightbulb_outline),
             ),
             ListTile(
-              title: Text(userName.value)
+              title: Text(settingsLabel.userList[whichUser.value].name),
+              onTap: () => {
+
+              },
             ),
             DropdownButton(
               value: roll.value,
@@ -84,29 +50,29 @@ class SettingsLabel extends HookConsumerWidget {
                 ),
               ],
               onChanged: (String? value) {
-                roll.value = value;
+                roll.value = value!;
               },
             ),ListTile(
               title: Text('確定'),
-              onTap: () { userList[whichUser.value]['label'] = roll.value; },
+              onTap: () { ref.read(settingsLabelProvider.notifier)
+                  .changeUserLabel(whichUser.value, roll.value);},
             ),
             Container(
               height: 400,
               padding: EdgeInsets.all(4),
               child: ListView.builder(
-                itemCount: userList.length,
+                itemCount: settingsLabel.userList.length,
                 itemBuilder: (context, index) {
                   return Container(
                     height: 50,
                     child: ListTile(
-                      enabled: provider.flag,
-                      title: Text(userList[index]['name']),
+                      enabled: settingsLabel.flag,
+                      title: Text(settingsLabel.userList[index].name),
                       onTap: () {
-                        userName.value = userList[index]['name'];
                         whichUser.value = index;
                       },
                       subtitle: Text(
-                        userList[index]['label'],
+                        settingsLabel.userList[index].label,
                         textAlign: TextAlign.right),
                     ),
                   );
