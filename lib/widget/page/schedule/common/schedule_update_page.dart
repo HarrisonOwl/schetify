@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/provider/attend_provider.dart';
+import 'package:schetify/provider/settings_label_provider.dart';
+import 'package:schetify/provider/splitting_the_cost_provider.dart';
 import '../../../../model/entity/schedule_update_page_util.dart';
 import '../../../components/schedule/sub_list_item.dart';
 
@@ -8,15 +10,57 @@ class ScheduleUpdatePage extends HookConsumerWidget {
   ScheduleUpdatePage({Key? key}) : super(key: key);
 
   final List<ScheduleUpdatePageUtil> util = <ScheduleUpdatePageUtil>[
-    ScheduleUpdatePageUtil("予定詳細", "detail", const Icon(Icons.details)),
-    ScheduleUpdatePageUtil("日にち設定", "/schedule/new/day", const Icon(Icons.calendar_today)),
-    ScheduleUpdatePageUtil("席分け設定", "/schedule/new/seat", const Icon(Icons.table_bar)),
-    ScheduleUpdatePageUtil("ラベル設定", "/schedule/new/label", const Icon(Icons.label)),
-    ScheduleUpdatePageUtil("割り勘設定", "/schedule/new/cost", const Icon(Icons.money)),
-    ScheduleUpdatePageUtil("目的地:", "/schedule/new/destination", const Icon(Icons.room),),
-    ScheduleUpdatePageUtil("アンケート設定", "/schedule/new/questionnaire", const Icon(Icons.feed)),
-    ScheduleUpdatePageUtil("出席", "changeToggle", const Icon(Icons.confirmation_num)),
-    ScheduleUpdatePageUtil("シェア(URL)", "", const Icon(Icons.add_link)),
+    ScheduleUpdatePageUtil("予定詳細", "", const Icon(Icons.details),
+        Consumer(builder: (context, ref, _) {
+          return const Text("");
+        })),
+    ScheduleUpdatePageUtil("日にち設定", "/schedule/new/day", const Icon(Icons.calendar_today),
+        Consumer(builder: (context, ref, _) {
+          return const Text("");
+        })),
+    ScheduleUpdatePageUtil("席分け設定", "/schedule/new/seat", const Icon(Icons.table_bar),
+        Consumer(builder: (context, ref, _) {
+          return const Text("");
+        })),
+    ScheduleUpdatePageUtil("ラベル設定", "/schedule/new/label", const Icon(Icons.label),
+        Consumer(builder: (context, ref, _) {
+          var flag = ref.read(settingsLabelProvider);
+          if(flag.flag){
+            return const Text("ON");
+          }else{
+            return const Text("OFF");
+          }
+        })),
+    ScheduleUpdatePageUtil("割り勘設定", "/schedule/new/cost", const Icon(Icons.money),
+        Consumer(builder: (context, ref, _) {
+          var flag = ref.read(splittingTheCostProvider);
+          if(flag.flag){
+            return const Text("ON");
+          }else{
+            return const Text("OFF");
+          }
+        })),
+    ScheduleUpdatePageUtil("目的地:", "/schedule/new/destination", const Icon(Icons.room),
+        Consumer(builder: (context, ref, _) {
+          return const Text("");
+        })),
+    ScheduleUpdatePageUtil("アンケート設定", "/schedule/new/questionnaire", const Icon(Icons.feed),
+        Consumer(builder: (context, ref, _) {
+          return const Text("");
+        })),
+    ScheduleUpdatePageUtil("出席", "", const Icon(Icons.confirmation_num),
+      Consumer(builder: (context, ref, _) {
+        var flag = ref.read(attendProvider);
+        if(flag.attend){
+          return const Text("ON");
+        }else{
+          return const Text("OFF");
+        }
+      })),
+    ScheduleUpdatePageUtil("シェア(URL)", "", const Icon(Icons.add_link),
+        Consumer(builder: (context, ref, _) {
+          return const Text("");
+        })),
   ];
 
   // tentative variable
@@ -24,8 +68,6 @@ class ScheduleUpdatePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    final attend = ref.watch(attendProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +116,7 @@ class ScheduleUpdatePage extends HookConsumerWidget {
                   child: util[index].iconName,
                 ),
                 route: util[index].routeName,
-                toggle: util[index].tileName == '出席' ? attend.attend : '',
+                toggleConsumer: util[index].toggleConsumer,
                 address: util[index].tileName == '目的地:' ? address : '',
               );
             },

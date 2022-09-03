@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AttendStatus {
-  String get attend => throw _privateConstructorUsedError;
+  bool get attend => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AttendStatusCopyWith<AttendStatus> get copyWith =>
@@ -28,7 +28,7 @@ abstract class $AttendStatusCopyWith<$Res> {
   factory $AttendStatusCopyWith(
           AttendStatus value, $Res Function(AttendStatus) then) =
       _$AttendStatusCopyWithImpl<$Res>;
-  $Res call({String attend});
+  $Res call({bool attend});
 }
 
 /// @nodoc
@@ -47,7 +47,7 @@ class _$AttendStatusCopyWithImpl<$Res> implements $AttendStatusCopyWith<$Res> {
       attend: attend == freezed
           ? _value.attend
           : attend // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
     ));
   }
 }
@@ -59,7 +59,7 @@ abstract class _$$_AttendStatusCopyWith<$Res>
           _$_AttendStatus value, $Res Function(_$_AttendStatus) then) =
       __$$_AttendStatusCopyWithImpl<$Res>;
   @override
-  $Res call({String attend});
+  $Res call({bool attend});
 }
 
 /// @nodoc
@@ -81,7 +81,7 @@ class __$$_AttendStatusCopyWithImpl<$Res>
       attend: attend == freezed
           ? _value.attend
           : attend // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
     ));
   }
 }
@@ -92,7 +92,7 @@ class _$_AttendStatus implements _AttendStatus {
   const _$_AttendStatus({required this.attend});
 
   @override
-  final String attend;
+  final bool attend;
 
   @override
   String toString() {
@@ -118,10 +118,10 @@ class _$_AttendStatus implements _AttendStatus {
 }
 
 abstract class _AttendStatus implements AttendStatus {
-  const factory _AttendStatus({required final String attend}) = _$_AttendStatus;
+  const factory _AttendStatus({required final bool attend}) = _$_AttendStatus;
 
   @override
-  String get attend;
+  bool get attend;
   @override
   @JsonKey(ignore: true)
   _$$_AttendStatusCopyWith<_$_AttendStatus> get copyWith =>

@@ -6,6 +6,6 @@ part 'generated/attend_status.freezed.dart';
 @freezed
 class AttendStatus with _$AttendStatus {
   const factory AttendStatus({
-    required String attend,
+    required bool attend,
   }) = _AttendStatus;
 }

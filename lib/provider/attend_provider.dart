@@ -4,11 +4,10 @@ import '../model/entity/attend_status.dart';
 
 
 class AttendNotifier extends StateNotifier<AttendStatus> {
-  AttendNotifier() : super(const AttendStatus(
-      attend: 'NO'));
+  AttendNotifier() : super(const AttendStatus(attend: false));
 
-  changeAttend(String attend){
-    state = state.copyWith(attend: attend);
+  changeAttend(bool flag){
+    state = state.copyWith(attend: flag);
   }
 }
 

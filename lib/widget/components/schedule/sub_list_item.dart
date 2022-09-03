@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/widget/dialog/event_detail_dialog.dart';
 
-import '../../../provider/attend_provider.dart';
-
 class SubListItem extends HookConsumerWidget {
   final String title;
   final Widget leading;
   final String route;
-  final String toggle;
+  final Consumer toggleConsumer;
   final String address;
 
-  SubListItem({required this.title, required this.leading, required this.route, required this.toggle, required this.address});
+  SubListItem({required this.title, required this.leading, required this.route,
+    required this.toggleConsumer, required this.address});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return ListTile(
       title: Row(
         mainAxisSize: MainAxisSize.min,
@@ -44,28 +42,14 @@ class SubListItem extends HookConsumerWidget {
                 ],
               )
             )
-        }else if(route == "changeToggle"){
-          if(toggle == 'OFF'){
-            ref.read(attendProvider.notifier)
-                .changeAttend('ON'),
-          }else{
-            ref.read(attendProvider.notifier)
-                .changeAttend('OFF'),
-          }
         }else{
-          Navigator.of(context).pushNamed(route)
+          Navigator.pushNamed(context,route)
         }
       },
-      // onLongPress: () => {},
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(
-            toggle,
-            style: const TextStyle(
-              fontSize: 20,
-            ),
-          ),
+          toggleConsumer,
           const SizedBox(
             width: 50,
           ),
