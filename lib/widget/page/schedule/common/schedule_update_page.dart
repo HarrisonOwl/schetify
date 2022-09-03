@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/provider/schedule_list_provider.dart';
-
-import '../../../../model/entity/schedule.dart';
 import '../../../../model/entity/schedule_update_page_util.dart';
 import '../../../components/schedule/sub_list_item.dart';
 
@@ -10,14 +7,15 @@ class ScheduleUpdatePage extends HookConsumerWidget {
   ScheduleUpdatePage({Key? key}) : super(key: key);
 
   final List<ScheduleUpdatePageUtil> util = <ScheduleUpdatePageUtil>[
+    ScheduleUpdatePageUtil("予定詳細", "detail", const Icon(Icons.details)),
     ScheduleUpdatePageUtil("日にち設定", "/schedule/new/day", const Icon(Icons.calendar_today)),
     ScheduleUpdatePageUtil("席分け設定", "/schedule/new/seat", const Icon(Icons.table_bar)),
     ScheduleUpdatePageUtil("ラベル設定", "/schedule/new/label", const Icon(Icons.label)),
     ScheduleUpdatePageUtil("割り勘設定", "/schedule/new/cost", const Icon(Icons.money)),
     ScheduleUpdatePageUtil("目的地:", "/schedule/new/destination", const Icon(Icons.room),),
     ScheduleUpdatePageUtil("アンケート設定", "/schedule/new/questionnaire", const Icon(Icons.feed)),
-    ScheduleUpdatePageUtil("出席", "/schedule/new/questionnaire", null),
-    ScheduleUpdatePageUtil("シェア(URL)", "/schedule/new/questionnaire", null),
+    ScheduleUpdatePageUtil("出席", "", const Icon(Icons.confirmation_num)),
+    ScheduleUpdatePageUtil("シェア(URL)", "", const Icon(Icons.add_link)),
   ];
 
   // tentative variable
