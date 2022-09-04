@@ -32,11 +32,13 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   hooks_riverpod: ^1.0.4
   dio: ^4.0.6
+  google_fonts: ^3.0.1
 
   table_calendar: ^3.0.6
   intl: ^0.17.0
   collection: ^1.16.0
   scrollable_positioned_list: ^0.3.2
+  shared_preferences: ^2.0.15
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -49,6 +51,8 @@ dependencies:
   flutter_google_places: ^0.3.0
   google_maps_webservice: ^0.0.20-nullsafety.5
   flutter_svg: ^1.1.4
+  firebase_auth: ^3.7.0
+  firebase_core: ^1.21.1
 
 dev_dependencies:
   flutter_test:
