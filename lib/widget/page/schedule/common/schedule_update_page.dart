@@ -11,7 +11,7 @@ class ScheduleUpdatePage extends HookConsumerWidget {
     ScheduleUpdatePageUtil("日にち設定", "/schedule/new/day", const Icon(Icons.calendar_today)),
     ScheduleUpdatePageUtil("席分け設定", "/schedule/new/seat", const Icon(Icons.table_bar)),
     ScheduleUpdatePageUtil("ラベル設定", "/schedule/new/label", const Icon(Icons.label)),
-    ScheduleUpdatePageUtil("割り勘設定", "/schedule/new/cost", const Icon(Icons.money)),
+    ScheduleUpdatePageUtil("割り勘設定", "splitting_the_cost", const Icon(Icons.money)),
     ScheduleUpdatePageUtil("目的地:", "/schedule/new/destination", const Icon(Icons.room),),
     ScheduleUpdatePageUtil("アンケート設定", "/schedule/new/questionnaire", const Icon(Icons.feed)),
     ScheduleUpdatePageUtil("出席", "", const Icon(Icons.confirmation_num)),
