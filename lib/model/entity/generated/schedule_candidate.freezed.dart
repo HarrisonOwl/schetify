@@ -20,7 +20,7 @@ ScheduleCandidate _$ScheduleCandidateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ScheduleCandidate {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   DateTime get start_at => throw _privateConstructorUsedError;
   DateTime get end_at => throw _privateConstructorUsedError;
   @VoterListConverter()
@@ -38,7 +38,7 @@ abstract class $ScheduleCandidateCopyWith<$Res> {
           ScheduleCandidate value, $Res Function(ScheduleCandidate) then) =
       _$ScheduleCandidateCopyWithImpl<$Res>;
   $Res call(
-      {int id,
+      {int? id,
       DateTime start_at,
       DateTime end_at,
       @VoterListConverter() List<Voter> voters});
@@ -64,7 +64,7 @@ class _$ScheduleCandidateCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       start_at: start_at == freezed
           ? _value.start_at
           : start_at // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,7 @@ abstract class _$$_ScheduleCandidateCopyWith<$Res>
       __$$_ScheduleCandidateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
+      {int? id,
       DateTime start_at,
       DateTime end_at,
       @VoterListConverter() List<Voter> voters});
@@ -117,7 +117,7 @@ class __$$_ScheduleCandidateCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       start_at: start_at == freezed
           ? _value.start_at
           : start_at // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ class _$_ScheduleCandidate extends _ScheduleCandidate {
       _$$_ScheduleCandidateFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final DateTime start_at;
   @override
@@ -183,7 +183,7 @@ class _$_ScheduleCandidate extends _ScheduleCandidate {
 
 abstract class _ScheduleCandidate extends ScheduleCandidate {
   const factory _ScheduleCandidate(
-          {required final int id,
+          {required final int? id,
           required final DateTime start_at,
           required final DateTime end_at,
           @VoterListConverter() required final List<Voter> voters}) =
@@ -194,7 +194,7 @@ abstract class _ScheduleCandidate extends ScheduleCandidate {
       _$_ScheduleCandidate.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   DateTime get start_at;
   @override
