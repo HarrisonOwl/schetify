@@ -27,7 +27,7 @@ class EventDetailDialog extends HookConsumerWidget {
             ),ListTile(
               title: const Text('保存'),
               onTap: () {
-              ref.read(eventDescriptionProvider.notifier).changeDetail(detailText.value);
+              ref.read(eventDescriptionProvider.notifier).changeDescription(detailText.value);
               Navigator.of(context).pop();},
             ),
           ],
