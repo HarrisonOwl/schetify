@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../provider/splitting_the_cost_provider.dart';
+import '../../provider/splitting_the_cost_provider.dart';
 
-class SplittingTheCost extends HookConsumerWidget {
+class SplittingTheCostDialog extends HookConsumerWidget {
 
-  const SplittingTheCost({Key? key}) : super(key: key);
+  const SplittingTheCostDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,11 +15,7 @@ class SplittingTheCost extends HookConsumerWidget {
     var money = useState(provider.money);
     var number = useState(provider.number);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("割り勘設定"),
-      ),
-      body: Center(
+    return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
@@ -65,9 +61,9 @@ class SplittingTheCost extends HookConsumerWidget {
               ),
               enabled: provider.flag,
               readOnly:true,
-            ),
-            ElevatedButton(
-              onPressed: () {
+            ),ListTile(
+              title: Text('確定'),
+              onTap: () {
                 ref.read(splittingTheCostProvider.notifier)
                     .changeMoney(money.value);
                 ref.read(splittingTheCostProvider.notifier)
@@ -76,11 +72,9 @@ class SplittingTheCost extends HookConsumerWidget {
                     .changeAverage(money.value/number.value);
                 Navigator.of(context).pop();
               },
-              child: const Text('確定'),
-            )
+            ),
           ],
         ),
-      ),
-    );
+      );
+    }
   }
-}

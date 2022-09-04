@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schetify/widget/dialog/event_detail_dialog.dart';
+import 'package:schetify/widget/dialog/splitting_the_cost_dialog.dart';
 
 class SubListItem extends StatelessWidget {
   final String title;
@@ -40,6 +41,16 @@ class SubListItem extends StatelessWidget {
                 ],
               )
             )
+        }else if(route == "cost"){
+          showDialog(
+              context: context,
+              builder: (_) => const SimpleDialog(
+                title: Text("割り勘設定"),
+                children: <Widget>[
+                  SplittingTheCostDialog()
+                ],
+              )
+          )
         }else{
           Navigator.of(context).pushNamed(route)
         }
