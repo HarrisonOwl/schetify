@@ -10,7 +10,7 @@ part 'generated/schedule_candidate.g.dart';
 class ScheduleCandidate with _$ScheduleCandidate {
   const ScheduleCandidate._();
   const factory ScheduleCandidate({
-    required int id,
+    required int? id,
     required DateTime start_at,
     required DateTime end_at,
     @VoterListConverter() required List<Voter> voters,

@@ -70,7 +70,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                           else {
                                             final newStatusList = List.of(statusList.value);
                                             newStatusList.remove(status);
-                                            newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id, status: 2));
+                                            newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id ?? -1, status: 2));
                                             statusList.value = newStatusList;
                                           }
                                         },
@@ -97,7 +97,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                         else {
                                           final newStatusList = List.of(statusList.value);
                                           newStatusList.remove(status);
-                                          newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id, status: 1));
+                                          newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id ?? -1, status: 1));
                                           statusList.value = newStatusList;
                                         }
                                       },
@@ -124,7 +124,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                         else {
                                           final newStatusList = List.of(statusList.value);
                                           newStatusList.remove(status);
-                                          newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id, status: 0));
+                                          newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id ?? -1, status: 0));
                                           statusList.value = newStatusList;
                                         }
                                       },

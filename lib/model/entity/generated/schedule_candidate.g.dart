@@ -8,7 +8,7 @@ part of '../schedule_candidate.dart';
 
 _$_ScheduleCandidate _$$_ScheduleCandidateFromJson(Map<String, dynamic> json) =>
     _$_ScheduleCandidate(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       start_at: DateTime.parse(json['start_at'] as String),
       end_at: DateTime.parse(json['end_at'] as String),
       voters: const VoterListConverter()
