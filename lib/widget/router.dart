@@ -36,7 +36,7 @@ class AppRouter extends StatelessWidget {
         '/settings/account/enterPassword': (BuildContext context) => const EnterPassword(),
         '/settings/account/changePassword': (BuildContext context) => const ChangePassword(),
         '/schedule/new': (BuildContext context) => ScheduleUpdatePage(),
-        '/schedule/new/questionnaire': (BuildContext context) => Question(),
+        '/schedule/new/questionnaire': (BuildContext context) => Questionnaire(),
         '/schedule/new/day': (BuildContext context) => const ScheduleDayUpdatePage(),
         '/schedule/new/destination': (BuildContext context) => const ScheduleUpdateDestinationPage(),
         '/init': (BuildContext context) => const InitPage(),

@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class Question extends HookWidget {
+class Questionnaire extends HookConsumerWidget {
+
+  Questionnaire({Key? key}) : super(key: key);
+
   final Completer _controller = Completer();
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return WebView(
+  Widget build(BuildContext context, WidgetRef ref)  {
+    return WebView(
             initialUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScbjWzefv3f642PQkPc9VnX1d05WhEhXXczX8cvlV5fjXPjmw/viewform',
             javascriptMode: JavascriptMode.unrestricted, // JavaScriptを有効化
             onWebViewCreated:
@@ -18,6 +19,5 @@ class Question extends HookWidget {
               _controller.complete(webViewController);
               },
             );
-          });
         }
       }
