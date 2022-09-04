@@ -8,7 +8,7 @@ part 'generated/participants.g.dart';
 @freezed
 class Participants with _$Participants {
   const factory Participants({
-    @ParticipantListConverter() required List<Participant> candidates,
+    @ParticipantListConverter() required List<Participant> participants,
   }) = _Participants;
 
   factory Participants.fromJson(Map<String, Object?> json)

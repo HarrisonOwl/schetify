@@ -21,11 +21,9 @@ EventDetailState _$EventDetailStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EventDetailState {
   Event get event => throw _privateConstructorUsedError;
-  @ScheduleCandidateListConverter()
-  List<ScheduleCandidate> get scheduleCandidateList =>
+  ScheduleCandidates get scheduleCandidates =>
       throw _privateConstructorUsedError;
-  @ParticipantListConverter()
-  List<Participant> get participantList => throw _privateConstructorUsedError;
+  Participants get participants => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,12 +38,12 @@ abstract class $EventDetailStateCopyWith<$Res> {
       _$EventDetailStateCopyWithImpl<$Res>;
   $Res call(
       {Event event,
-      @ScheduleCandidateListConverter()
-          List<ScheduleCandidate> scheduleCandidateList,
-      @ParticipantListConverter()
-          List<Participant> participantList});
+      ScheduleCandidates scheduleCandidates,
+      Participants participants});
 
   $EventCopyWith<$Res> get event;
+  $ScheduleCandidatesCopyWith<$Res> get scheduleCandidates;
+  $ParticipantsCopyWith<$Res> get participants;
 }
 
 /// @nodoc
@@ -60,22 +58,22 @@ class _$EventDetailStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? event = freezed,
-    Object? scheduleCandidateList = freezed,
-    Object? participantList = freezed,
+    Object? scheduleCandidates = freezed,
+    Object? participants = freezed,
   }) {
     return _then(_value.copyWith(
       event: event == freezed
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
               as Event,
-      scheduleCandidateList: scheduleCandidateList == freezed
-          ? _value.scheduleCandidateList
-          : scheduleCandidateList // ignore: cast_nullable_to_non_nullable
-              as List<ScheduleCandidate>,
-      participantList: participantList == freezed
-          ? _value.participantList
-          : participantList // ignore: cast_nullable_to_non_nullable
-              as List<Participant>,
+      scheduleCandidates: scheduleCandidates == freezed
+          ? _value.scheduleCandidates
+          : scheduleCandidates // ignore: cast_nullable_to_non_nullable
+              as ScheduleCandidates,
+      participants: participants == freezed
+          ? _value.participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as Participants,
     ));
   }
 
@@ -83,6 +81,21 @@ class _$EventDetailStateCopyWithImpl<$Res>
   $EventCopyWith<$Res> get event {
     return $EventCopyWith<$Res>(_value.event, (value) {
       return _then(_value.copyWith(event: value));
+    });
+  }
+
+  @override
+  $ScheduleCandidatesCopyWith<$Res> get scheduleCandidates {
+    return $ScheduleCandidatesCopyWith<$Res>(_value.scheduleCandidates,
+        (value) {
+      return _then(_value.copyWith(scheduleCandidates: value));
+    });
+  }
+
+  @override
+  $ParticipantsCopyWith<$Res> get participants {
+    return $ParticipantsCopyWith<$Res>(_value.participants, (value) {
+      return _then(_value.copyWith(participants: value));
     });
   }
 }
@@ -96,13 +109,15 @@ abstract class _$$_EventDetailStateCopyWith<$Res>
   @override
   $Res call(
       {Event event,
-      @ScheduleCandidateListConverter()
-          List<ScheduleCandidate> scheduleCandidateList,
-      @ParticipantListConverter()
-          List<Participant> participantList});
+      ScheduleCandidates scheduleCandidates,
+      Participants participants});
 
   @override
   $EventCopyWith<$Res> get event;
+  @override
+  $ScheduleCandidatesCopyWith<$Res> get scheduleCandidates;
+  @override
+  $ParticipantsCopyWith<$Res> get participants;
 }
 
 /// @nodoc
@@ -119,22 +134,22 @@ class __$$_EventDetailStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? event = freezed,
-    Object? scheduleCandidateList = freezed,
-    Object? participantList = freezed,
+    Object? scheduleCandidates = freezed,
+    Object? participants = freezed,
   }) {
     return _then(_$_EventDetailState(
       event: event == freezed
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
               as Event,
-      scheduleCandidateList: scheduleCandidateList == freezed
-          ? _value._scheduleCandidateList
-          : scheduleCandidateList // ignore: cast_nullable_to_non_nullable
-              as List<ScheduleCandidate>,
-      participantList: participantList == freezed
-          ? _value._participantList
-          : participantList // ignore: cast_nullable_to_non_nullable
-              as List<Participant>,
+      scheduleCandidates: scheduleCandidates == freezed
+          ? _value.scheduleCandidates
+          : scheduleCandidates // ignore: cast_nullable_to_non_nullable
+              as ScheduleCandidates,
+      participants: participants == freezed
+          ? _value.participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as Participants,
     ));
   }
 }
@@ -144,37 +159,22 @@ class __$$_EventDetailStateCopyWithImpl<$Res>
 class _$_EventDetailState implements _EventDetailState {
   const _$_EventDetailState(
       {required this.event,
-      @ScheduleCandidateListConverter()
-          required final List<ScheduleCandidate> scheduleCandidateList,
-      @ParticipantListConverter()
-          required final List<Participant> participantList})
-      : _scheduleCandidateList = scheduleCandidateList,
-        _participantList = participantList;
+      required this.scheduleCandidates,
+      required this.participants});
 
   factory _$_EventDetailState.fromJson(Map<String, dynamic> json) =>
       _$$_EventDetailStateFromJson(json);
 
   @override
   final Event event;
-  final List<ScheduleCandidate> _scheduleCandidateList;
   @override
-  @ScheduleCandidateListConverter()
-  List<ScheduleCandidate> get scheduleCandidateList {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_scheduleCandidateList);
-  }
-
-  final List<Participant> _participantList;
+  final ScheduleCandidates scheduleCandidates;
   @override
-  @ParticipantListConverter()
-  List<Participant> get participantList {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_participantList);
-  }
+  final Participants participants;
 
   @override
   String toString() {
-    return 'EventDetailState(event: $event, scheduleCandidateList: $scheduleCandidateList, participantList: $participantList)';
+    return 'EventDetailState(event: $event, scheduleCandidates: $scheduleCandidates, participants: $participants)';
   }
 
   @override
@@ -184,9 +184,9 @@ class _$_EventDetailState implements _EventDetailState {
             other is _$_EventDetailState &&
             const DeepCollectionEquality().equals(other.event, event) &&
             const DeepCollectionEquality()
-                .equals(other._scheduleCandidateList, _scheduleCandidateList) &&
+                .equals(other.scheduleCandidates, scheduleCandidates) &&
             const DeepCollectionEquality()
-                .equals(other._participantList, _participantList));
+                .equals(other.participants, participants));
   }
 
   @JsonKey(ignore: true)
@@ -194,8 +194,8 @@ class _$_EventDetailState implements _EventDetailState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(event),
-      const DeepCollectionEquality().hash(_scheduleCandidateList),
-      const DeepCollectionEquality().hash(_participantList));
+      const DeepCollectionEquality().hash(scheduleCandidates),
+      const DeepCollectionEquality().hash(participants));
 
   @JsonKey(ignore: true)
   @override
@@ -212,12 +212,9 @@ class _$_EventDetailState implements _EventDetailState {
 
 abstract class _EventDetailState implements EventDetailState {
   const factory _EventDetailState(
-          {required final Event event,
-          @ScheduleCandidateListConverter()
-              required final List<ScheduleCandidate> scheduleCandidateList,
-          @ParticipantListConverter()
-              required final List<Participant> participantList}) =
-      _$_EventDetailState;
+      {required final Event event,
+      required final ScheduleCandidates scheduleCandidates,
+      required final Participants participants}) = _$_EventDetailState;
 
   factory _EventDetailState.fromJson(Map<String, dynamic> json) =
       _$_EventDetailState.fromJson;
@@ -225,11 +222,9 @@ abstract class _EventDetailState implements EventDetailState {
   @override
   Event get event;
   @override
-  @ScheduleCandidateListConverter()
-  List<ScheduleCandidate> get scheduleCandidateList;
+  ScheduleCandidates get scheduleCandidates;
   @override
-  @ParticipantListConverter()
-  List<Participant> get participantList;
+  Participants get participants;
   @override
   @JsonKey(ignore: true)
   _$$_EventDetailStateCopyWith<_$_EventDetailState> get copyWith =>

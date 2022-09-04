@@ -9,13 +9,12 @@ part of '../schedule_candidates.dart';
 _$_ScheduleCandidates _$$_ScheduleCandidatesFromJson(
         Map<String, dynamic> json) =>
     _$_ScheduleCandidates(
-      candidates: const ScheduleCandidateListConverter()
+      candidates: const SplayTreeSetConverter()
           .fromJson(json['candidates'] as List<Map<String, dynamic>>),
     );
 
 Map<String, dynamic> _$$_ScheduleCandidatesToJson(
         _$_ScheduleCandidates instance) =>
     <String, dynamic>{
-      'candidates':
-          const ScheduleCandidateListConverter().toJson(instance.candidates),
+      'candidates': const SplayTreeSetConverter().toJson(instance.candidates),
     };

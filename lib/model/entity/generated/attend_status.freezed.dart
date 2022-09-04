@@ -21,8 +21,6 @@ AttendStatus _$AttendStatusFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AttendStatus {
   int get schedule_candidate_id => throw _privateConstructorUsedError;
-  DateTime get start_at => throw _privateConstructorUsedError;
-  DateTime get end_at => throw _privateConstructorUsedError;
   int get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,11 +34,7 @@ abstract class $AttendStatusCopyWith<$Res> {
   factory $AttendStatusCopyWith(
           AttendStatus value, $Res Function(AttendStatus) then) =
       _$AttendStatusCopyWithImpl<$Res>;
-  $Res call(
-      {int schedule_candidate_id,
-      DateTime start_at,
-      DateTime end_at,
-      int status});
+  $Res call({int schedule_candidate_id, int status});
 }
 
 /// @nodoc
@@ -54,8 +48,6 @@ class _$AttendStatusCopyWithImpl<$Res> implements $AttendStatusCopyWith<$Res> {
   @override
   $Res call({
     Object? schedule_candidate_id = freezed,
-    Object? start_at = freezed,
-    Object? end_at = freezed,
     Object? status = freezed,
   }) {
     return _then(_value.copyWith(
@@ -63,14 +55,6 @@ class _$AttendStatusCopyWithImpl<$Res> implements $AttendStatusCopyWith<$Res> {
           ? _value.schedule_candidate_id
           : schedule_candidate_id // ignore: cast_nullable_to_non_nullable
               as int,
-      start_at: start_at == freezed
-          ? _value.start_at
-          : start_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      end_at: end_at == freezed
-          ? _value.end_at
-          : end_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -86,11 +70,7 @@ abstract class _$$_AttendStatusCopyWith<$Res>
           _$_AttendStatus value, $Res Function(_$_AttendStatus) then) =
       __$$_AttendStatusCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int schedule_candidate_id,
-      DateTime start_at,
-      DateTime end_at,
-      int status});
+  $Res call({int schedule_candidate_id, int status});
 }
 
 /// @nodoc
@@ -107,8 +87,6 @@ class __$$_AttendStatusCopyWithImpl<$Res>
   @override
   $Res call({
     Object? schedule_candidate_id = freezed,
-    Object? start_at = freezed,
-    Object? end_at = freezed,
     Object? status = freezed,
   }) {
     return _then(_$_AttendStatus(
@@ -116,14 +94,6 @@ class __$$_AttendStatusCopyWithImpl<$Res>
           ? _value.schedule_candidate_id
           : schedule_candidate_id // ignore: cast_nullable_to_non_nullable
               as int,
-      start_at: start_at == freezed
-          ? _value.start_at
-          : start_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      end_at: end_at == freezed
-          ? _value.end_at
-          : end_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -134,12 +104,10 @@ class __$$_AttendStatusCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AttendStatus implements _AttendStatus {
+class _$_AttendStatus extends _AttendStatus {
   const _$_AttendStatus(
-      {required this.schedule_candidate_id,
-      required this.start_at,
-      required this.end_at,
-      required this.status});
+      {required this.schedule_candidate_id, required this.status})
+      : super._();
 
   factory _$_AttendStatus.fromJson(Map<String, dynamic> json) =>
       _$$_AttendStatusFromJson(json);
@@ -147,15 +115,11 @@ class _$_AttendStatus implements _AttendStatus {
   @override
   final int schedule_candidate_id;
   @override
-  final DateTime start_at;
-  @override
-  final DateTime end_at;
-  @override
   final int status;
 
   @override
   String toString() {
-    return 'AttendStatus(schedule_candidate_id: $schedule_candidate_id, start_at: $start_at, end_at: $end_at, status: $status)';
+    return 'AttendStatus(schedule_candidate_id: $schedule_candidate_id, status: $status)';
   }
 
   @override
@@ -165,8 +129,6 @@ class _$_AttendStatus implements _AttendStatus {
             other is _$_AttendStatus &&
             const DeepCollectionEquality()
                 .equals(other.schedule_candidate_id, schedule_candidate_id) &&
-            const DeepCollectionEquality().equals(other.start_at, start_at) &&
-            const DeepCollectionEquality().equals(other.end_at, end_at) &&
             const DeepCollectionEquality().equals(other.status, status));
   }
 
@@ -175,8 +137,6 @@ class _$_AttendStatus implements _AttendStatus {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(schedule_candidate_id),
-      const DeepCollectionEquality().hash(start_at),
-      const DeepCollectionEquality().hash(end_at),
       const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
@@ -192,22 +152,17 @@ class _$_AttendStatus implements _AttendStatus {
   }
 }
 
-abstract class _AttendStatus implements AttendStatus {
+abstract class _AttendStatus extends AttendStatus {
   const factory _AttendStatus(
       {required final int schedule_candidate_id,
-      required final DateTime start_at,
-      required final DateTime end_at,
       required final int status}) = _$_AttendStatus;
+  const _AttendStatus._() : super._();
 
   factory _AttendStatus.fromJson(Map<String, dynamic> json) =
       _$_AttendStatus.fromJson;
 
   @override
   int get schedule_candidate_id;
-  @override
-  DateTime get start_at;
-  @override
-  DateTime get end_at;
   @override
   int get status;
   @override

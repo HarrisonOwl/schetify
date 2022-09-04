@@ -6,6 +6,7 @@ part 'generated/voter.g.dart';
 //Freezed特有の書き方なので、スニペットを用意するのが良い
 @freezed
 class Voter with _$Voter {
+  const Voter._();
   const factory Voter({
     required String user_id,
     required String username,
