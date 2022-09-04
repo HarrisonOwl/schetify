@@ -11,18 +11,13 @@ import 'package:schetify/widget/page/schedule/common/schedule_update_destination
 import 'package:schetify/widget/page/schedule/common/label/settings_label.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_update_page.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_day_update_page.dart';
-import 'package:schetify/widget/page/setting/account/change_password/change_password.dart';
-import 'package:schetify/widget/page/setting/account/change_password/enter_password.dart';
-import 'package:schetify/widget/page/setting/account/settings_account.dart';
 
-import '../provider/firebase_auth_provider.dart';
 
 class AppRouter extends ConsumerWidget {
   const AppRouter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.read(firebaseAuthProvider);
     return MaterialApp(
       title: 'Hooks Demo',
       theme: ThemeData(
@@ -37,9 +32,6 @@ class AppRouter extends ConsumerWidget {
       initialRoute: (FirebaseAuth.instance.currentUser != null) ? '/main' : '/init',
       routes: <String, WidgetBuilder> {
         '/main': (BuildContext context) => MainPage(),
-        '/settings/account': (BuildContext context) => const SettingsAccount(),
-        '/settings/account/enterPassword': (BuildContext context) => const EnterPassword(),
-        '/settings/account/changePassword': (BuildContext context) => const ChangePassword(),
         '/schedule/new': (BuildContext context) => ScheduleUpdatePage(),
         '/schedule/new/questionnaire': (BuildContext context) => Questionnaire(),
         '/schedule/new/day': (BuildContext context) => const ScheduleDayUpdatePage(),
