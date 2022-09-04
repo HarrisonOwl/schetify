@@ -1,0 +1,755 @@
+diff --git a/lib/model/entity/generated/schedule_candidate.freezed.dart b/lib/model/entity/generated/schedule_candidate.freezed.dart
+deleted file mode 100644
+index 7337a14..0000000
+--- a/lib/model/entity/generated/schedule_candidate.freezed.dart
++++ /dev/null
+@@ -1,206 +0,0 @@
+-// coverage:ignore-file
+-// GENERATED CODE - DO NOT MODIFY BY HAND
+-// ignore_for_file: type=lint
+-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+-
+-part of '../schedule_candidate.dart';
+-
+-// **************************************************************************
+-// FreezedGenerator
+-// **************************************************************************
+-
+-T _$identity<T>(T value) => value;
+-
+-final _privateConstructorUsedError = UnsupportedError(
+-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+-
+-ScheduleCandidate _$ScheduleCandidateFromJson(Map<String, dynamic> json) {
+-  return _ScheduleCandidate.fromJson(json);
+-}
+-
+-/// @nodoc
+-mixin _$ScheduleCandidate {
+-  DateTime get start_at => throw _privateConstructorUsedError;
+-  DateTime get end_at => throw _privateConstructorUsedError;
+-  @VoterListConverter()
+-  List<Voter> get voters => throw _privateConstructorUsedError;
+-
+-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+-  @JsonKey(ignore: true)
+-  $ScheduleCandidateCopyWith<ScheduleCandidate> get copyWith =>
+-      throw _privateConstructorUsedError;
+-}
+-
+-/// @nodoc
+-abstract class $ScheduleCandidateCopyWith<$Res> {
+-  factory $ScheduleCandidateCopyWith(
+-          ScheduleCandidate value, $Res Function(ScheduleCandidate) then) =
+-      _$ScheduleCandidateCopyWithImpl<$Res>;
+-  $Res call(
+-      {DateTime start_at,
+-      DateTime end_at,
+-      @VoterListConverter() List<Voter> voters});
+-}
+-
+-/// @nodoc
+-class _$ScheduleCandidateCopyWithImpl<$Res>
+-    implements $ScheduleCandidateCopyWith<$Res> {
+-  _$ScheduleCandidateCopyWithImpl(this._value, this._then);
+-
+-  final ScheduleCandidate _value;
+-  // ignore: unused_field
+-  final $Res Function(ScheduleCandidate) _then;
+-
+-  @override
+-  $Res call({
+-    Object? start_at = freezed,
+-    Object? end_at = freezed,
+-    Object? voters = freezed,
+-  }) {
+-    return _then(_value.copyWith(
+-      start_at: start_at == freezed
+-          ? _value.start_at
+-          : start_at // ignore: cast_nullable_to_non_nullable
+-              as DateTime,
+-      end_at: end_at == freezed
+-          ? _value.end_at
+-          : end_at // ignore: cast_nullable_to_non_nullable
+-              as DateTime,
+-      voters: voters == freezed
+-          ? _value.voters
+-          : voters // ignore: cast_nullable_to_non_nullable
+-              as List<Voter>,
+-    ));
+-  }
+-}
+-
+-/// @nodoc
+-abstract class _$$_ScheduleCandidateCopyWith<$Res>
+-    implements $ScheduleCandidateCopyWith<$Res> {
+-  factory _$$_ScheduleCandidateCopyWith(_$_ScheduleCandidate value,
+-          $Res Function(_$_ScheduleCandidate) then) =
+-      __$$_ScheduleCandidateCopyWithImpl<$Res>;
+-  @override
+-  $Res call(
+-      {DateTime start_at,
+-      DateTime end_at,
+-      @VoterListConverter() List<Voter> voters});
+-}
+-
+-/// @nodoc
+-class __$$_ScheduleCandidateCopyWithImpl<$Res>
+-    extends _$ScheduleCandidateCopyWithImpl<$Res>
+-    implements _$$_ScheduleCandidateCopyWith<$Res> {
+-  __$$_ScheduleCandidateCopyWithImpl(
+-      _$_ScheduleCandidate _value, $Res Function(_$_ScheduleCandidate) _then)
+-      : super(_value, (v) => _then(v as _$_ScheduleCandidate));
+-
+-  @override
+-  _$_ScheduleCandidate get _value => super._value as _$_ScheduleCandidate;
+-
+-  @override
+-  $Res call({
+-    Object? start_at = freezed,
+-    Object? end_at = freezed,
+-    Object? voters = freezed,
+-  }) {
+-    return _then(_$_ScheduleCandidate(
+-      start_at: start_at == freezed
+-          ? _value.start_at
+-          : start_at // ignore: cast_nullable_to_non_nullable
+-              as DateTime,
+-      end_at: end_at == freezed
+-          ? _value.end_at
+-          : end_at // ignore: cast_nullable_to_non_nullable
+-              as DateTime,
+-      voters: voters == freezed
+-          ? _value._voters
+-          : voters // ignore: cast_nullable_to_non_nullable
+-              as List<Voter>,
+-    ));
+-  }
+-}
+-
+-/// @nodoc
+-@JsonSerializable()
+-class _$_ScheduleCandidate implements _ScheduleCandidate {
+-  const _$_ScheduleCandidate(
+-      {required this.start_at,
+-      required this.end_at,
+-      @VoterListConverter() required final List<Voter> voters})
+-      : _voters = voters;
+-
+-  factory _$_ScheduleCandidate.fromJson(Map<String, dynamic> json) =>
+-      _$$_ScheduleCandidateFromJson(json);
+-
+-  @override
+-  final DateTime start_at;
+-  @override
+-  final DateTime end_at;
+-  final List<Voter> _voters;
+-  @override
+-  @VoterListConverter()
+-  List<Voter> get voters {
+-    // ignore: implicit_dynamic_type
+-    return EqualUnmodifiableListView(_voters);
+-  }
+-
+-  @override
+-  String toString() {
+-    return 'ScheduleCandidate(start_at: $start_at, end_at: $end_at, voters: $voters)';
+-  }
+-
+-  @override
+-  bool operator ==(dynamic other) {
+-    return identical(this, other) ||
+-        (other.runtimeType == runtimeType &&
+-            other is _$_ScheduleCandidate &&
+-            const DeepCollectionEquality().equals(other.start_at, start_at) &&
+-            const DeepCollectionEquality().equals(other.end_at, end_at) &&
+-            const DeepCollectionEquality().equals(other._voters, _voters));
+-  }
+-
+-  @JsonKey(ignore: true)
+-  @override
+-  int get hashCode => Object.hash(
+-      runtimeType,
+-      const DeepCollectionEquality().hash(start_at),
+-      const DeepCollectionEquality().hash(end_at),
+-      const DeepCollectionEquality().hash(_voters));
+-
+-  @JsonKey(ignore: true)
+-  @override
+-  _$$_ScheduleCandidateCopyWith<_$_ScheduleCandidate> get copyWith =>
+-      __$$_ScheduleCandidateCopyWithImpl<_$_ScheduleCandidate>(
+-          this, _$identity);
+-
+-  @override
+-  Map<String, dynamic> toJson() {
+-    return _$$_ScheduleCandidateToJson(
+-      this,
+-    );
+-  }
+-}
+-
+-abstract class _ScheduleCandidate implements ScheduleCandidate {
+-  const factory _ScheduleCandidate(
+-          {required final DateTime start_at,
+-          required final DateTime end_at,
+-          @VoterListConverter() required final List<Voter> voters}) =
+-      _$_ScheduleCandidate;
+-
+-  factory _ScheduleCandidate.fromJson(Map<String, dynamic> json) =
+-      _$_ScheduleCandidate.fromJson;
+-
+-  @override
+-  DateTime get start_at;
+-  @override
+-  DateTime get end_at;
+-  @override
+-  @VoterListConverter()
+-  List<Voter> get voters;
+-  @override
+-  @JsonKey(ignore: true)
+-  _$$_ScheduleCandidateCopyWith<_$_ScheduleCandidate> get copyWith =>
+-      throw _privateConstructorUsedError;
+-}
+diff --git a/lib/model/entity/generated/schedule_candidate.g.dart b/lib/model/entity/generated/schedule_candidate.g.dart
+deleted file mode 100644
+index 4187dc0..0000000
+--- a/lib/model/entity/generated/schedule_candidate.g.dart
++++ /dev/null
+@@ -1,23 +0,0 @@
+-// GENERATED CODE - DO NOT MODIFY BY HAND
+-
+-part of '../schedule_candidate.dart';
+-
+-// **************************************************************************
+-// JsonSerializableGenerator
+-// **************************************************************************
+-
+-_$_ScheduleCandidate _$$_ScheduleCandidateFromJson(Map<String, dynamic> json) =>
+-    _$_ScheduleCandidate(
+-      start_at: DateTime.parse(json['start_at'] as String),
+-      end_at: DateTime.parse(json['end_at'] as String),
+-      voters: const VoterListConverter()
+-          .fromJson(json['voters'] as List<Map<String, dynamic>>),
+-    );
+-
+-Map<String, dynamic> _$$_ScheduleCandidateToJson(
+-        _$_ScheduleCandidate instance) =>
+-    <String, dynamic>{
+-      'start_at': instance.start_at.toIso8601String(),
+-      'end_at': instance.end_at.toIso8601String(),
+-      'voters': const VoterListConverter().toJson(instance.voters),
+-    };
+diff --git a/lib/model/entity/generated/schedule_candidates.freezed.dart b/lib/model/entity/generated/schedule_candidates.freezed.dart
+deleted file mode 100644
+index 99498ef..0000000
+--- a/lib/model/entity/generated/schedule_candidates.freezed.dart
++++ /dev/null
+@@ -1,166 +0,0 @@
+-// coverage:ignore-file
+-// GENERATED CODE - DO NOT MODIFY BY HAND
+-// ignore_for_file: type=lint
+-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+-
+-part of '../schedule_candidates.dart';
+-
+-// **************************************************************************
+-// FreezedGenerator
+-// **************************************************************************
+-
+-T _$identity<T>(T value) => value;
+-
+-final _privateConstructorUsedError = UnsupportedError(
+-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+-
+-ScheduleCandidates _$ScheduleCandidatesFromJson(Map<String, dynamic> json) {
+-  return _ScheduleCandidates.fromJson(json);
+-}
+-
+-/// @nodoc
+-mixin _$ScheduleCandidates {
+-  @ScheduleCandidateListConverter()
+-  List<ScheduleCandidate> get candidates => throw _privateConstructorUsedError;
+-
+-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+-  @JsonKey(ignore: true)
+-  $ScheduleCandidatesCopyWith<ScheduleCandidates> get copyWith =>
+-      throw _privateConstructorUsedError;
+-}
+-
+-/// @nodoc
+-abstract class $ScheduleCandidatesCopyWith<$Res> {
+-  factory $ScheduleCandidatesCopyWith(
+-          ScheduleCandidates value, $Res Function(ScheduleCandidates) then) =
+-      _$ScheduleCandidatesCopyWithImpl<$Res>;
+-  $Res call(
+-      {@ScheduleCandidateListConverter() List<ScheduleCandidate> candidates});
+-}
+-
+-/// @nodoc
+-class _$ScheduleCandidatesCopyWithImpl<$Res>
+-    implements $ScheduleCandidatesCopyWith<$Res> {
+-  _$ScheduleCandidatesCopyWithImpl(this._value, this._then);
+-
+-  final ScheduleCandidates _value;
+-  // ignore: unused_field
+-  final $Res Function(ScheduleCandidates) _then;
+-
+-  @override
+-  $Res call({
+-    Object? candidates = freezed,
+-  }) {
+-    return _then(_value.copyWith(
+-      candidates: candidates == freezed
+-          ? _value.candidates
+-          : candidates // ignore: cast_nullable_to_non_nullable
+-              as List<ScheduleCandidate>,
+-    ));
+-  }
+-}
+-
+-/// @nodoc
+-abstract class _$$_ScheduleCandidatesCopyWith<$Res>
+-    implements $ScheduleCandidatesCopyWith<$Res> {
+-  factory _$$_ScheduleCandidatesCopyWith(_$_ScheduleCandidates value,
+-          $Res Function(_$_ScheduleCandidates) then) =
+-      __$$_ScheduleCandidatesCopyWithImpl<$Res>;
+-  @override
+-  $Res call(
+-      {@ScheduleCandidateListConverter() List<ScheduleCandidate> candidates});
+-}
+-
+-/// @nodoc
+-class __$$_ScheduleCandidatesCopyWithImpl<$Res>
+-    extends _$ScheduleCandidatesCopyWithImpl<$Res>
+-    implements _$$_ScheduleCandidatesCopyWith<$Res> {
+-  __$$_ScheduleCandidatesCopyWithImpl(
+-      _$_ScheduleCandidates _value, $Res Function(_$_ScheduleCandidates) _then)
+-      : super(_value, (v) => _then(v as _$_ScheduleCandidates));
+-
+-  @override
+-  _$_ScheduleCandidates get _value => super._value as _$_ScheduleCandidates;
+-
+-  @override
+-  $Res call({
+-    Object? candidates = freezed,
+-  }) {
+-    return _then(_$_ScheduleCandidates(
+-      candidates: candidates == freezed
+-          ? _value._candidates
+-          : candidates // ignore: cast_nullable_to_non_nullable
+-              as List<ScheduleCandidate>,
+-    ));
+-  }
+-}
+-
+-/// @nodoc
+-@JsonSerializable()
+-class _$_ScheduleCandidates implements _ScheduleCandidates {
+-  const _$_ScheduleCandidates(
+-      {@ScheduleCandidateListConverter()
+-          required final List<ScheduleCandidate> candidates})
+-      : _candidates = candidates;
+-
+-  factory _$_ScheduleCandidates.fromJson(Map<String, dynamic> json) =>
+-      _$$_ScheduleCandidatesFromJson(json);
+-
+-  final List<ScheduleCandidate> _candidates;
+-  @override
+-  @ScheduleCandidateListConverter()
+-  List<ScheduleCandidate> get candidates {
+-    // ignore: implicit_dynamic_type
+-    return EqualUnmodifiableListView(_candidates);
+-  }
+-
+-  @override
+-  String toString() {
+-    return 'ScheduleCandidates(candidates: $candidates)';
+-  }
+-
+-  @override
+-  bool operator ==(dynamic other) {
+-    return identical(this, other) ||
+-        (other.runtimeType == runtimeType &&
+-            other is _$_ScheduleCandidates &&
+-            const DeepCollectionEquality()
+-                .equals(other._candidates, _candidates));
+-  }
+-
+-  @JsonKey(ignore: true)
+-  @override
+-  int get hashCode => Object.hash(
+-      runtimeType, const DeepCollectionEquality().hash(_candidates));
+-
+-  @JsonKey(ignore: true)
+-  @override
+-  _$$_ScheduleCandidatesCopyWith<_$_ScheduleCandidates> get copyWith =>
+-      __$$_ScheduleCandidatesCopyWithImpl<_$_ScheduleCandidates>(
+-          this, _$identity);
+-
+-  @override
+-  Map<String, dynamic> toJson() {
+-    return _$$_ScheduleCandidatesToJson(
+-      this,
+-    );
+-  }
+-}
+-
+-abstract class _ScheduleCandidates implements ScheduleCandidates {
+-  const factory _ScheduleCandidates(
+-          {@ScheduleCandidateListConverter()
+-              required final List<ScheduleCandidate> candidates}) =
+-      _$_ScheduleCandidates;
+-
+-  factory _ScheduleCandidates.fromJson(Map<String, dynamic> json) =
+-      _$_ScheduleCandidates.fromJson;
+-
+-  @override
+-  @ScheduleCandidateListConverter()
+-  List<ScheduleCandidate> get candidates;
+-  @override
+-  @JsonKey(ignore: true)
+-  _$$_ScheduleCandidatesCopyWith<_$_ScheduleCandidates> get copyWith =>
+-      throw _privateConstructorUsedError;
+-}
+diff --git a/lib/model/entity/generated/schedule_candidates.g.dart b/lib/model/entity/generated/schedule_candidates.g.dart
+deleted file mode 100644
+index e35168b..0000000
+--- a/lib/model/entity/generated/schedule_candidates.g.dart
++++ /dev/null
+@@ -1,21 +0,0 @@
+-// GENERATED CODE - DO NOT MODIFY BY HAND
+-
+-part of '../schedule_candidates.dart';
+-
+-// **************************************************************************
+-// JsonSerializableGenerator
+-// **************************************************************************
+-
+-_$_ScheduleCandidates _$$_ScheduleCandidatesFromJson(
+-        Map<String, dynamic> json) =>
+-    _$_ScheduleCandidates(
+-      candidates: const ScheduleCandidateListConverter()
+-          .fromJson(json['candidates'] as List<Map<String, dynamic>>),
+-    );
+-
+-Map<String, dynamic> _$$_ScheduleCandidatesToJson(
+-        _$_ScheduleCandidates instance) =>
+-    <String, dynamic>{
+-      'candidates':
+-          const ScheduleCandidateListConverter().toJson(instance.candidates),
+-    };
+diff --git a/lib/model/entity/generated/voter.freezed.dart b/lib/model/entity/generated/voter.freezed.dart
+deleted file mode 100644
+index 1527e70..0000000
+--- a/lib/model/entity/generated/voter.freezed.dart
++++ /dev/null
+@@ -1,180 +0,0 @@
+-// coverage:ignore-file
+-// GENERATED CODE - DO NOT MODIFY BY HAND
+-// ignore_for_file: type=lint
+-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+-
+-part of '../voter.dart';
+-
+-// **************************************************************************
+-// FreezedGenerator
+-// **************************************************************************
+-
+-T _$identity<T>(T value) => value;
+-
+-final _privateConstructorUsedError = UnsupportedError(
+-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+-
+-Voter _$VoterFromJson(Map<String, dynamic> json) {
+-  return _Voter.fromJson(json);
+-}
+-
+-/// @nodoc
+-mixin _$Voter {
+-  String get user_id => throw _privateConstructorUsedError;
+-  String get username => throw _privateConstructorUsedError;
+-  int get status => throw _privateConstructorUsedError;
+-
+-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+-  @JsonKey(ignore: true)
+-  $VoterCopyWith<Voter> get copyWith => throw _privateConstructorUsedError;
+-}
+-
+-/// @nodoc
+-abstract class $VoterCopyWith<$Res> {
+-  factory $VoterCopyWith(Voter value, $Res Function(Voter) then) =
+-      _$VoterCopyWithImpl<$Res>;
+-  $Res call({String user_id, String username, int status});
+-}
+-
+-/// @nodoc
+-class _$VoterCopyWithImpl<$Res> implements $VoterCopyWith<$Res> {
+-  _$VoterCopyWithImpl(this._value, this._then);
+-
+-  final Voter _value;
+-  // ignore: unused_field
+-  final $Res Function(Voter) _then;
+-
+-  @override
+-  $Res call({
+-    Object? user_id = freezed,
+-    Object? username = freezed,
+-    Object? status = freezed,
+-  }) {
+-    return _then(_value.copyWith(
+-      user_id: user_id == freezed
+-          ? _value.user_id
+-          : user_id // ignore: cast_nullable_to_non_nullable
+-              as String,
+-      username: username == freezed
+-          ? _value.username
+-          : username // ignore: cast_nullable_to_non_nullable
+-              as String,
+-      status: status == freezed
+-          ? _value.status
+-          : status // ignore: cast_nullable_to_non_nullable
+-              as int,
+-    ));
+-  }
+-}
+-
+-/// @nodoc
+-abstract class _$$_VoterCopyWith<$Res> implements $VoterCopyWith<$Res> {
+-  factory _$$_VoterCopyWith(_$_Voter value, $Res Function(_$_Voter) then) =
+-      __$$_VoterCopyWithImpl<$Res>;
+-  @override
+-  $Res call({String user_id, String username, int status});
+-}
+-
+-/// @nodoc
+-class __$$_VoterCopyWithImpl<$Res> extends _$VoterCopyWithImpl<$Res>
+-    implements _$$_VoterCopyWith<$Res> {
+-  __$$_VoterCopyWithImpl(_$_Voter _value, $Res Function(_$_Voter) _then)
+-      : super(_value, (v) => _then(v as _$_Voter));
+-
+-  @override
+-  _$_Voter get _value => super._value as _$_Voter;
+-
+-  @override
+-  $Res call({
+-    Object? user_id = freezed,
+-    Object? username = freezed,
+-    Object? status = freezed,
+-  }) {
+-    return _then(_$_Voter(
+-      user_id: user_id == freezed
+-          ? _value.user_id
+-          : user_id // ignore: cast_nullable_to_non_nullable
+-              as String,
+-      username: username == freezed
+-          ? _value.username
+-          : username // ignore: cast_nullable_to_non_nullable
+-              as String,
+-      status: status == freezed
+-          ? _value.status
+-          : status // ignore: cast_nullable_to_non_nullable
+-              as int,
+-    ));
+-  }
+-}
+-
+-/// @nodoc
+-@JsonSerializable()
+-class _$_Voter implements _Voter {
+-  const _$_Voter(
+-      {required this.user_id, required this.username, required this.status});
+-
+-  factory _$_Voter.fromJson(Map<String, dynamic> json) =>
+-      _$$_VoterFromJson(json);
+-
+-  @override
+-  final String user_id;
+-  @override
+-  final String username;
+-  @override
+-  final int status;
+-
+-  @override
+-  String toString() {
+-    return 'Voter(user_id: $user_id, username: $username, status: $status)';
+-  }
+-
+-  @override
+-  bool operator ==(dynamic other) {
+-    return identical(this, other) ||
+-        (other.runtimeType == runtimeType &&
+-            other is _$_Voter &&
+-            const DeepCollectionEquality().equals(other.user_id, user_id) &&
+-            const DeepCollectionEquality().equals(other.username, username) &&
+-            const DeepCollectionEquality().equals(other.status, status));
+-  }
+-
+-  @JsonKey(ignore: true)
+-  @override
+-  int get hashCode => Object.hash(
+-      runtimeType,
+-      const DeepCollectionEquality().hash(user_id),
+-      const DeepCollectionEquality().hash(username),
+-      const DeepCollectionEquality().hash(status));
+-
+-  @JsonKey(ignore: true)
+-  @override
+-  _$$_VoterCopyWith<_$_Voter> get copyWith =>
+-      __$$_VoterCopyWithImpl<_$_Voter>(this, _$identity);
+-
+-  @override
+-  Map<String, dynamic> toJson() {
+-    return _$$_VoterToJson(
+-      this,
+-    );
+-  }
+-}
+-
+-abstract class _Voter implements Voter {
+-  const factory _Voter(
+-      {required final String user_id,
+-      required final String username,
+-      required final int status}) = _$_Voter;
+-
+-  factory _Voter.fromJson(Map<String, dynamic> json) = _$_Voter.fromJson;
+-
+-  @override
+-  String get user_id;
+-  @override
+-  String get username;
+-  @override
+-  int get status;
+-  @override
+-  @JsonKey(ignore: true)
+-  _$$_VoterCopyWith<_$_Voter> get copyWith =>
+-      throw _privateConstructorUsedError;
+-}
+diff --git a/lib/model/entity/generated/voter.g.dart b/lib/model/entity/generated/voter.g.dart
+deleted file mode 100644
+index fd0c559..0000000
+--- a/lib/model/entity/generated/voter.g.dart
++++ /dev/null
+@@ -1,19 +0,0 @@
+-// GENERATED CODE - DO NOT MODIFY BY HAND
+-
+-part of '../voter.dart';
+-
+-// **************************************************************************
+-// JsonSerializableGenerator
+-// **************************************************************************
+-
+-_$_Voter _$$_VoterFromJson(Map<String, dynamic> json) => _$_Voter(
+-      user_id: json['user_id'] as String,
+-      username: json['username'] as String,
+-      status: json['status'] as int,
+-    );
+-
+-Map<String, dynamic> _$$_VoterToJson(_$_Voter instance) => <String, dynamic>{
+-      'user_id': instance.user_id,
+-      'username': instance.username,
+-      'status': instance.status,
+-    };
+diff --git a/lib/model/entity/schedule_candidate.dart b/lib/model/entity/schedule_candidate.dart
+deleted file mode 100644
+index e1cf9fb..0000000
+--- a/lib/model/entity/schedule_candidate.dart
++++ /dev/null
+@@ -1,34 +0,0 @@
+-import 'package:freezed_annotation/freezed_annotation.dart';
+-import 'package:schetify/model/entity/voter.dart';
+-// {ファイル名}.freezed.dart　と書く
+-part 'generated/schedule_candidate.freezed.dart';
+-part 'generated/schedule_candidate.g.dart';
+-
+-//Freezed特有の書き方なので、スニペットを用意するのが良い
+-@freezed
+-class ScheduleCandidate with _$ScheduleCandidate {
+-  const factory ScheduleCandidate({
+-    required DateTime start_at,
+-    required DateTime end_at,
+-    @VoterListConverter() required List<Voter> voters,
+-  }) = _ScheduleCandidate;
+-
+-  factory ScheduleCandidate.fromJson(Map<String, Object?> json)
+-  => _$ScheduleCandidateFromJson(json);
+-}
+-
+-class VoterListConverter implements JsonConverter<List<Voter>, List<Map<String, dynamic>>> {
+-  const VoterListConverter();
+-
+-  @override
+-  List<Voter> fromJson(List<Map<String, dynamic>> json) {
+-    final ret = json.map((candidate) => Voter.fromJson(candidate)).toList();
+-    return ret;
+-  }
+-
+-  @override
+-  List<Map<String, dynamic>> toJson(List<ScheduleCandidate> json) {
+-    final ret = json.map((period) => period.toJson()).toList();
+-    return ret;
+-  }
+-}
+\ No newline at end of file
+diff --git a/lib/model/entity/schedule_candidates.dart b/lib/model/entity/schedule_candidates.dart
+deleted file mode 100644
+index 382149f..0000000
+--- a/lib/model/entity/schedule_candidates.dart
++++ /dev/null
+@@ -1,32 +0,0 @@
+-import 'package:freezed_annotation/freezed_annotation.dart';
+-import 'package:schetify/model/entity/schedule_candidate.dart';
+-// {ファイル名}.freezed.dart　と書く
+-part 'generated/schedule_candidates.freezed.dart';
+-part 'generated/schedule_candidates.g.dart';
+-
+-//Freezed特有の書き方なので、スニペットを用意するのが良い
+-@freezed
+-class ScheduleCandidates with _$ScheduleCandidates {
+-  const factory ScheduleCandidates({
+-    @ScheduleCandidateListConverter() required List<ScheduleCandidate> candidates,
+-  }) = _ScheduleCandidates;
+-
+-  factory ScheduleCandidates.fromJson(Map<String, Object?> json)
+-  => _$ScheduleCandidatesFromJson(json);
+-}
+-
+-class ScheduleCandidateListConverter implements JsonConverter<List<ScheduleCandidate>, List<Map<String, dynamic>>> {
+-  const ScheduleCandidateListConverter();
+-
+-  @override
+-  List<ScheduleCandidate> fromJson(List<Map<String, dynamic>> json) {
+-    final ret = json.map((candidate) => ScheduleCandidate.fromJson(candidate)).toList();
+-    return ret;
+-  }
+-
+-  @override
+-  List<Map<String, dynamic>> toJson(List<ScheduleCandidate> json) {
+-    final ret = json.map((scheduleCandidate) => scheduleCandidate.toJson()).toList();
+-    return ret;
+-  }
+-}
+\ No newline at end of file
+diff --git a/lib/model/entity/voter.dart b/lib/model/entity/voter.dart
+deleted file mode 100644
+index e55f248..0000000
+--- a/lib/model/entity/voter.dart
++++ /dev/null
+@@ -1,17 +0,0 @@
+-import 'package:freezed_annotation/freezed_annotation.dart';
+-// {ファイル名}.freezed.dart　と書く
+-part 'generated/voter.freezed.dart';
+-part 'generated/voter.g.dart';
+-
+-//Freezed特有の書き方なので、スニペットを用意するのが良い
+-@freezed
+-class Voter with _$Voter {
+-  const factory Voter({
+-    required String user_id,
+-    required String username,
+-    required int status, // 0...unable, 1...maybe, 2...able
+-  }) = _Voter;
+-
+-  factory Voter.fromJson(Map<String, Object?> json)
+-  => _$VoterFromJson(json);
+-}
+\ No newline at end of file
