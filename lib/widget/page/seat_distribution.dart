@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/number_of_groups.dart';
 import 'package:schetify/model/entity/user_name_list.dart';
+import 'package:schetify/provider/grouping_provider.dart';
 
 import '../../model/entity/user_name.dart';
 
@@ -11,28 +13,10 @@ import '../../model/entity/user_name.dart';
 class SeatDistribution extends HookConsumerWidget {
   SeatDistribution({Key? key}) : super(key: key);
 
-  var a = const UserNameList(userNameList: [UserName(name: "a"),UserName(name: "b"),UserName(name: "c"),UserName(name: "d"),UserName(name: "e"),UserName(name: "f")]);
-  var numberOfGroups = const NumberOfGroups(number: 3);
-
-  List<dynamic> grouping(NumberOfGroups numberOfGroups) {
-    a.userNameList.shuffle();
-
-    final List<dynamic> chunkedItems = [];
-    final chunkSize = numberOfGroups.number;
-
-    for (var i = 0; i < a.userNameList.length; i += chunkSize) {
-      final isLast = i + chunkSize >= a.userNameList.length;
-      final end = isLast ? a.userNameList.length : i + chunkSize;
-      chunkedItems.add(a.userNameList.sublist(i, end));
-    }
-
-    return chunkedItems;
-  }
-
-   List<dynamic> b = [];
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final numberOfGroups = useState(0);
+    final provider = ref.read(groupingProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text("席分け"),
@@ -41,13 +25,13 @@ class SeatDistribution extends HookConsumerWidget {
           children: [
             Expanded(
               child: ListView.separated(
-                itemCount: b.length,
+                itemCount: provider.groupedUserList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
                       Text("Group ${index}"),
-                      for (var i = 0; i < b[index].length; i++)
-                        Text(b[index][i].name),
+                      for (var i = 0; i < provider.groupedUserList[index].userNameList.length; i++)
+                        Text(provider.groupedUserList[index].userNameList[i].name),
                     ],
                   );
                 },
@@ -56,8 +40,8 @@ class SeatDistribution extends HookConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                b = grouping(numberOfGroups);
-                log(b);
+                ref.read(groupingProvider.notifier)
+                    .grouping(numberOfGroups.value);
               },
               child: const Text('シャッフル'),
             ),
@@ -70,8 +54,9 @@ class SeatDistribution extends HookConsumerWidget {
                 hintText: '人数',
                 contentPadding: EdgeInsets.all(20),
               ),
+              initialValue: numberOfGroups.value.toString(),
               onChanged: (value) {
-                numberOfGroups = NumberOfGroups(number: int.parse(value));
+                numberOfGroups.value = int.parse(value);
               },
             ),
           ],
