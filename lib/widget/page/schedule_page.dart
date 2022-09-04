@@ -31,7 +31,7 @@ class SchedulePage extends HookConsumerWidget {
         ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.of(context).pushNamed("/schedule/attendance");
+          Navigator.of(context).pushNamed("/schedule/new");
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
