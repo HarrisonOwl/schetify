@@ -20,8 +20,9 @@ ScheduleCandidates _$ScheduleCandidatesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ScheduleCandidates {
-  @ScheduleCandidateListConverter()
-  List<ScheduleCandidate> get candidates => throw _privateConstructorUsedError;
+  @SplayTreeSetConverter()
+  SplayTreeSet<ScheduleCandidate> get candidates =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $ScheduleCandidatesCopyWith<$Res> {
           ScheduleCandidates value, $Res Function(ScheduleCandidates) then) =
       _$ScheduleCandidatesCopyWithImpl<$Res>;
   $Res call(
-      {@ScheduleCandidateListConverter() List<ScheduleCandidate> candidates});
+      {@SplayTreeSetConverter() SplayTreeSet<ScheduleCandidate> candidates});
 }
 
 /// @nodoc
@@ -55,7 +56,7 @@ class _$ScheduleCandidatesCopyWithImpl<$Res>
       candidates: candidates == freezed
           ? _value.candidates
           : candidates // ignore: cast_nullable_to_non_nullable
-              as List<ScheduleCandidate>,
+              as SplayTreeSet<ScheduleCandidate>,
     ));
   }
 }
@@ -68,7 +69,7 @@ abstract class _$$_ScheduleCandidatesCopyWith<$Res>
       __$$_ScheduleCandidatesCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@ScheduleCandidateListConverter() List<ScheduleCandidate> candidates});
+      {@SplayTreeSetConverter() SplayTreeSet<ScheduleCandidate> candidates});
 }
 
 /// @nodoc
@@ -88,31 +89,26 @@ class __$$_ScheduleCandidatesCopyWithImpl<$Res>
   }) {
     return _then(_$_ScheduleCandidates(
       candidates: candidates == freezed
-          ? _value._candidates
+          ? _value.candidates
           : candidates // ignore: cast_nullable_to_non_nullable
-              as List<ScheduleCandidate>,
+              as SplayTreeSet<ScheduleCandidate>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ScheduleCandidates implements _ScheduleCandidates {
+class _$_ScheduleCandidates extends _ScheduleCandidates {
   const _$_ScheduleCandidates(
-      {@ScheduleCandidateListConverter()
-          required final List<ScheduleCandidate> candidates})
-      : _candidates = candidates;
+      {@SplayTreeSetConverter() required this.candidates})
+      : super._();
 
   factory _$_ScheduleCandidates.fromJson(Map<String, dynamic> json) =>
       _$$_ScheduleCandidatesFromJson(json);
 
-  final List<ScheduleCandidate> _candidates;
   @override
-  @ScheduleCandidateListConverter()
-  List<ScheduleCandidate> get candidates {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_candidates);
-  }
+  @SplayTreeSetConverter()
+  final SplayTreeSet<ScheduleCandidate> candidates;
 
   @override
   String toString() {
@@ -125,13 +121,13 @@ class _$_ScheduleCandidates implements _ScheduleCandidates {
         (other.runtimeType == runtimeType &&
             other is _$_ScheduleCandidates &&
             const DeepCollectionEquality()
-                .equals(other._candidates, _candidates));
+                .equals(other.candidates, candidates));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_candidates));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(candidates));
 
   @JsonKey(ignore: true)
   @override
@@ -147,18 +143,19 @@ class _$_ScheduleCandidates implements _ScheduleCandidates {
   }
 }
 
-abstract class _ScheduleCandidates implements ScheduleCandidates {
+abstract class _ScheduleCandidates extends ScheduleCandidates {
   const factory _ScheduleCandidates(
-          {@ScheduleCandidateListConverter()
-              required final List<ScheduleCandidate> candidates}) =
+          {@SplayTreeSetConverter()
+              required final SplayTreeSet<ScheduleCandidate> candidates}) =
       _$_ScheduleCandidates;
+  const _ScheduleCandidates._() : super._();
 
   factory _ScheduleCandidates.fromJson(Map<String, dynamic> json) =
       _$_ScheduleCandidates.fromJson;
 
   @override
-  @ScheduleCandidateListConverter()
-  List<ScheduleCandidate> get candidates;
+  @SplayTreeSetConverter()
+  SplayTreeSet<ScheduleCandidate> get candidates;
   @override
   @JsonKey(ignore: true)
   _$$_ScheduleCandidatesCopyWith<_$_ScheduleCandidates> get copyWith =>

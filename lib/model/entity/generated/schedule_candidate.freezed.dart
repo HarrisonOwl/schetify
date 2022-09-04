@@ -136,13 +136,14 @@ class __$$_ScheduleCandidateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ScheduleCandidate implements _ScheduleCandidate {
+class _$_ScheduleCandidate extends _ScheduleCandidate {
   const _$_ScheduleCandidate(
       {required this.id,
       required this.start_at,
       required this.end_at,
       @VoterListConverter() required final List<Voter> voters})
-      : _voters = voters;
+      : _voters = voters,
+        super._();
 
   factory _$_ScheduleCandidate.fromJson(Map<String, dynamic> json) =>
       _$$_ScheduleCandidateFromJson(json);
@@ -166,26 +167,6 @@ class _$_ScheduleCandidate implements _ScheduleCandidate {
     return 'ScheduleCandidate(id: $id, start_at: $start_at, end_at: $end_at, voters: $voters)';
   }
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ScheduleCandidate &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.start_at, start_at) &&
-            const DeepCollectionEquality().equals(other.end_at, end_at) &&
-            const DeepCollectionEquality().equals(other._voters, _voters));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(start_at),
-      const DeepCollectionEquality().hash(end_at),
-      const DeepCollectionEquality().hash(_voters));
-
   @JsonKey(ignore: true)
   @override
   _$$_ScheduleCandidateCopyWith<_$_ScheduleCandidate> get copyWith =>
@@ -200,13 +181,14 @@ class _$_ScheduleCandidate implements _ScheduleCandidate {
   }
 }
 
-abstract class _ScheduleCandidate implements ScheduleCandidate {
+abstract class _ScheduleCandidate extends ScheduleCandidate {
   const factory _ScheduleCandidate(
           {required final int id,
           required final DateTime start_at,
           required final DateTime end_at,
           @VoterListConverter() required final List<Voter> voters}) =
       _$_ScheduleCandidate;
+  const _ScheduleCandidate._() : super._();
 
   factory _ScheduleCandidate.fromJson(Map<String, dynamic> json) =
       _$_ScheduleCandidate.fromJson;

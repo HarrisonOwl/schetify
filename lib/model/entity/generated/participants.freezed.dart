@@ -21,7 +21,7 @@ Participants _$ParticipantsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Participants {
   @ParticipantListConverter()
-  List<Participant> get candidates => throw _privateConstructorUsedError;
+  List<Participant> get participants => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $ParticipantsCopyWith<$Res> {
   factory $ParticipantsCopyWith(
           Participants value, $Res Function(Participants) then) =
       _$ParticipantsCopyWithImpl<$Res>;
-  $Res call({@ParticipantListConverter() List<Participant> candidates});
+  $Res call({@ParticipantListConverter() List<Participant> participants});
 }
 
 /// @nodoc
@@ -47,12 +47,12 @@ class _$ParticipantsCopyWithImpl<$Res> implements $ParticipantsCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? candidates = freezed,
+    Object? participants = freezed,
   }) {
     return _then(_value.copyWith(
-      candidates: candidates == freezed
-          ? _value.candidates
-          : candidates // ignore: cast_nullable_to_non_nullable
+      participants: participants == freezed
+          ? _value.participants
+          : participants // ignore: cast_nullable_to_non_nullable
               as List<Participant>,
     ));
   }
@@ -65,7 +65,7 @@ abstract class _$$_ParticipantsCopyWith<$Res>
           _$_Participants value, $Res Function(_$_Participants) then) =
       __$$_ParticipantsCopyWithImpl<$Res>;
   @override
-  $Res call({@ParticipantListConverter() List<Participant> candidates});
+  $Res call({@ParticipantListConverter() List<Participant> participants});
 }
 
 /// @nodoc
@@ -81,12 +81,12 @@ class __$$_ParticipantsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? candidates = freezed,
+    Object? participants = freezed,
   }) {
     return _then(_$_Participants(
-      candidates: candidates == freezed
-          ? _value._candidates
-          : candidates // ignore: cast_nullable_to_non_nullable
+      participants: participants == freezed
+          ? _value._participants
+          : participants // ignore: cast_nullable_to_non_nullable
               as List<Participant>,
     ));
   }
@@ -96,23 +96,24 @@ class __$$_ParticipantsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Participants implements _Participants {
   const _$_Participants(
-      {@ParticipantListConverter() required final List<Participant> candidates})
-      : _candidates = candidates;
+      {@ParticipantListConverter()
+          required final List<Participant> participants})
+      : _participants = participants;
 
   factory _$_Participants.fromJson(Map<String, dynamic> json) =>
       _$$_ParticipantsFromJson(json);
 
-  final List<Participant> _candidates;
+  final List<Participant> _participants;
   @override
   @ParticipantListConverter()
-  List<Participant> get candidates {
+  List<Participant> get participants {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_candidates);
+    return EqualUnmodifiableListView(_participants);
   }
 
   @override
   String toString() {
-    return 'Participants(candidates: $candidates)';
+    return 'Participants(participants: $participants)';
   }
 
   @override
@@ -121,13 +122,13 @@ class _$_Participants implements _Participants {
         (other.runtimeType == runtimeType &&
             other is _$_Participants &&
             const DeepCollectionEquality()
-                .equals(other._candidates, _candidates));
+                .equals(other._participants, _participants));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_candidates));
+      runtimeType, const DeepCollectionEquality().hash(_participants));
 
   @JsonKey(ignore: true)
   @override
@@ -145,14 +146,14 @@ class _$_Participants implements _Participants {
 abstract class _Participants implements Participants {
   const factory _Participants(
       {@ParticipantListConverter()
-          required final List<Participant> candidates}) = _$_Participants;
+          required final List<Participant> participants}) = _$_Participants;
 
   factory _Participants.fromJson(Map<String, dynamic> json) =
       _$_Participants.fromJson;
 
   @override
   @ParticipantListConverter()
-  List<Participant> get candidates;
+  List<Participant> get participants;
   @override
   @JsonKey(ignore: true)
   _$$_ParticipantsCopyWith<_$_Participants> get copyWith =>

@@ -109,9 +109,10 @@ class __$$_VoterCopyWithImpl<$Res> extends _$VoterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Voter implements _Voter {
+class _$_Voter extends _Voter {
   const _$_Voter(
-      {required this.user_id, required this.username, required this.status});
+      {required this.user_id, required this.username, required this.status})
+      : super._();
 
   factory _$_Voter.fromJson(Map<String, dynamic> json) =>
       _$$_VoterFromJson(json);
@@ -159,11 +160,12 @@ class _$_Voter implements _Voter {
   }
 }
 
-abstract class _Voter implements Voter {
+abstract class _Voter extends Voter {
   const factory _Voter(
       {required final String user_id,
       required final String username,
       required final int status}) = _$_Voter;
+  const _Voter._() : super._();
 
   factory _Voter.fromJson(Map<String, dynamic> json) = _$_Voter.fromJson;
 

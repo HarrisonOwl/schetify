@@ -8,12 +8,12 @@ part of '../participants.dart';
 
 _$_Participants _$$_ParticipantsFromJson(Map<String, dynamic> json) =>
     _$_Participants(
-      candidates: const ParticipantListConverter()
-          .fromJson(json['candidates'] as List<Map<String, dynamic>>),
+      participants: const ParticipantListConverter()
+          .fromJson(json['participants'] as List<Map<String, dynamic>>),
     );
 
 Map<String, dynamic> _$$_ParticipantsToJson(_$_Participants instance) =>
     <String, dynamic>{
-      'candidates':
-          const ParticipantListConverter().toJson(instance.candidates),
+      'participants':
+          const ParticipantListConverter().toJson(instance.participants),
     };
