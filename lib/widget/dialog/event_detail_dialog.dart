@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/provider/event_description_provider.dart';
 
 class EventDetailDialog extends HookConsumerWidget {
 
@@ -8,23 +10,28 @@ class EventDetailDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("予定詳細"),
-      ),
-      body: Center(
+    final provider = ref.watch(eventDescriptionProvider);
+    final detailText = useState(provider.detail);
+
+    return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children:const [
-            TextField(
-              decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(30),
-                  border: OutlineInputBorder(),
-              ),
-            )
+          children: [
+            TextFormField(
+              initialValue: detailText.value,
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+                onChanged: (text){
+                  detailText.value = text;
+                }
+            ),ListTile(
+              title: const Text('保存'),
+              onTap: () {
+              ref.read(eventDescriptionProvider.notifier).changeDescription(detailText.value);
+              Navigator.of(context).pop();},
+            ),
           ],
         ),
-      ),
     );
   }
 }
