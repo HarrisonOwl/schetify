@@ -20,7 +20,7 @@ Voter _$VoterFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Voter {
-  String get user_id => throw _privateConstructorUsedError;
+  int get user_id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   int get status => throw _privateConstructorUsedError;
 
@@ -33,7 +33,7 @@ mixin _$Voter {
 abstract class $VoterCopyWith<$Res> {
   factory $VoterCopyWith(Voter value, $Res Function(Voter) then) =
       _$VoterCopyWithImpl<$Res>;
-  $Res call({String user_id, String username, int status});
+  $Res call({int user_id, String username, int status});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$VoterCopyWithImpl<$Res> implements $VoterCopyWith<$Res> {
       user_id: user_id == freezed
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -72,7 +72,7 @@ abstract class _$$_VoterCopyWith<$Res> implements $VoterCopyWith<$Res> {
   factory _$$_VoterCopyWith(_$_Voter value, $Res Function(_$_Voter) then) =
       __$$_VoterCopyWithImpl<$Res>;
   @override
-  $Res call({String user_id, String username, int status});
+  $Res call({int user_id, String username, int status});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class __$$_VoterCopyWithImpl<$Res> extends _$VoterCopyWithImpl<$Res>
       user_id: user_id == freezed
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -118,7 +118,7 @@ class _$_Voter extends _Voter {
       _$$_VoterFromJson(json);
 
   @override
-  final String user_id;
+  final int user_id;
   @override
   final String username;
   @override
@@ -162,7 +162,7 @@ class _$_Voter extends _Voter {
 
 abstract class _Voter extends Voter {
   const factory _Voter(
-      {required final String user_id,
+      {required final int user_id,
       required final String username,
       required final int status}) = _$_Voter;
   const _Voter._() : super._();
@@ -170,7 +170,7 @@ abstract class _Voter extends Voter {
   factory _Voter.fromJson(Map<String, dynamic> json) = _$_Voter.fromJson;
 
   @override
-  String get user_id;
+  int get user_id;
   @override
   String get username;
   @override

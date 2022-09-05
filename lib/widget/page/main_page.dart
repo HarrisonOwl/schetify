@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/provider/main_showing_provider.dart';
 import 'package:schetify/widget/page/chat_page.dart';
-import 'package:schetify/widget/page/schedule_page.dart';
+import 'package:schetify/widget/page/event_page.dart';
 import 'package:schetify/widget/page/setting/settings_page.dart';
 
 class MainPage extends HookConsumerWidget {
   MainPage({Key? key}) : super(key: key);
 
   final pages = [
-    const SchedulePage(),
+    const EventPage(),
     const ChatPage(),
     const SettingsPage(),
   ];

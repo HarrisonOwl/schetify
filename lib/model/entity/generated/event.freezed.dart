@@ -245,7 +245,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Event implements _Event {
+class _$_Event extends _Event {
   const _$_Event(
       {required this.id,
       required this.name,
@@ -259,7 +259,8 @@ class _$_Event implements _Event {
       required this.location_longtiude,
       required this.group_num,
       required this.total_cost,
-      required this.questionare_url});
+      required this.questionare_url})
+      : super._();
 
   factory _$_Event.fromJson(Map<String, dynamic> json) =>
       _$$_EventFromJson(json);
@@ -354,7 +355,7 @@ class _$_Event implements _Event {
   }
 }
 
-abstract class _Event implements Event {
+abstract class _Event extends Event {
   const factory _Event(
       {required final int id,
       required final String name,
@@ -369,6 +370,7 @@ abstract class _Event implements Event {
       required final int? group_num,
       required final int? total_cost,
       required final String? questionare_url}) = _$_Event;
+  const _Event._() : super._();
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 

@@ -2,12 +2,12 @@
 
 import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/event.dart';
 import 'package:schetify/model/entity/event_detail_state.dart';
-import 'package:schetify/model/entity/participants.dart';
 import 'package:schetify/model/entity/schedule_candidate.dart';
-import 'package:schetify/model/entity/schedule_candidates.dart';
+import 'package:schetify/model/repository/test_repository.dart';
 
 class EventDetailNotifier extends StateNotifier<EventDetailState> {
   EventDetailNotifier() : super(EventDetailState(
@@ -26,12 +26,24 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
           total_cost: null,
           questionare_url: null
       ),
-      scheduleCandidates: ScheduleCandidates(
-          candidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText()))
-      ),
-      participants: const Participants(participants: [])
+      scheduleCandidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText())),
+      participants: []
   )){
     init();
+  }
+
+  final TestRepository testService = TestRepository();
+
+  Future<void> getEventInformation(int id) async {
+    try{
+      await Future.delayed(const Duration(seconds: 1));
+      final event = await testService.getEvent(id);
+      final participants = await testService.getParticipants(id);
+      final candidates = await testService.getScheduleCandidates(id);
+      state = state.copyWith(event: event, participants: participants, scheduleCandidates: candidates);
+    }catch(e){
+      debugPrint(e.toString());
+    }
   }
 
   void init(){
@@ -67,7 +79,7 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
           voters: []
       ),
     ];
-    for (var c in list) { state.scheduleCandidates.candidates.add(c); }
+    for (var c in list) { state.scheduleCandidates.add(c); }
     state = state.copyWith(scheduleCandidates: state.scheduleCandidates);
   }
 }

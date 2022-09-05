@@ -7,7 +7,7 @@ part of '../voter.dart';
 // **************************************************************************
 
 _$_Voter _$$_VoterFromJson(Map<String, dynamic> json) => _$_Voter(
-      user_id: json['user_id'] as String,
+      user_id: json['user_id'] as int,
       username: json['username'] as String,
       status: json['status'] as int,
     );
