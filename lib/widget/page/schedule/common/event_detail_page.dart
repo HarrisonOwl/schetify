@@ -144,7 +144,7 @@ class EventDetailPage extends HookConsumerWidget {
                         .toList();
                     final fitnessValue = maybeVoters.length + ableVoters.length * 100;
                     // TODO 自分のユーザのロールを見るようにする
-                    final isEditor = detail.participants.firstWhereOrNull((element) => element.user_id == 1)?.label == 1;
+                    final isEditor = detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label == 1;
                     final isDecided = detail.event.getText() == candidate.getText();
                     return Container(
                       color: fitnessValue == maxFitnessValue ? Colors.lightGreenAccent : Colors.transparent,
@@ -279,20 +279,25 @@ class EventDetailPage extends HookConsumerWidget {
                           Navigator.of(context).pushNamed("/schedule/attendance");
                         },
                       ),
-                      ElevatedButton(
-                        child: Row(
-                          children: const [
-                            Icon(
-                                Icons.edit_sharp
+                      Visibility(
+                          // TODO 自分のユーザのロールを見るようにする
+                          visible: detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label == 1,
+                          child: ElevatedButton(
+                            child: Row(
+                              children: const [
+                                Icon(
+                                    Icons.edit_sharp
+                                ),
+                                Text('イベント編集')
+                              ],
                             ),
-                            Text('イベント編集')
-                          ],
-                        ),
-                        onPressed: () {
-                          // TODO event_idを渡し、それに基づく処理を行わせる
-                          Navigator.of(context).pushNamed("/schedule/new");
-                        },
+                            onPressed: () {
+                              // TODO event_idを渡し、それに基づく処理を行わせる
+                              Navigator.of(context).pushNamed("/schedule/new");
+                            },
+                          ),
                       ),
+
                     ],
                   ),
                 ),

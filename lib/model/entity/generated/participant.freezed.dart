@@ -20,7 +20,7 @@ Participant _$ParticipantFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Participant {
-  int get user_id => throw _privateConstructorUsedError;
+  String get user_id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   int get label => throw _privateConstructorUsedError;
   int get group_id => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $ParticipantCopyWith<$Res> {
   factory $ParticipantCopyWith(
           Participant value, $Res Function(Participant) then) =
       _$ParticipantCopyWithImpl<$Res>;
-  $Res call({int user_id, String username, int label, int group_id});
+  $Res call({String user_id, String username, int label, int group_id});
 }
 
 /// @nodoc
@@ -58,7 +58,7 @@ class _$ParticipantCopyWithImpl<$Res> implements $ParticipantCopyWith<$Res> {
       user_id: user_id == freezed
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,7 @@ abstract class _$$_ParticipantCopyWith<$Res>
           _$_Participant value, $Res Function(_$_Participant) then) =
       __$$_ParticipantCopyWithImpl<$Res>;
   @override
-  $Res call({int user_id, String username, int label, int group_id});
+  $Res call({String user_id, String username, int label, int group_id});
 }
 
 /// @nodoc
@@ -106,7 +106,7 @@ class __$$_ParticipantCopyWithImpl<$Res> extends _$ParticipantCopyWithImpl<$Res>
       user_id: user_id == freezed
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -136,7 +136,7 @@ class _$_Participant implements _Participant {
       _$$_ParticipantFromJson(json);
 
   @override
-  final int user_id;
+  final String user_id;
   @override
   final String username;
   @override
@@ -184,7 +184,7 @@ class _$_Participant implements _Participant {
 
 abstract class _Participant implements Participant {
   const factory _Participant(
-      {required final int user_id,
+      {required final String user_id,
       required final String username,
       required final int label,
       required final int group_id}) = _$_Participant;
@@ -193,7 +193,7 @@ abstract class _Participant implements Participant {
       _$_Participant.fromJson;
 
   @override
-  int get user_id;
+  String get user_id;
   @override
   String get username;
   @override

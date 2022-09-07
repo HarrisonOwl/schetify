@@ -8,7 +8,7 @@ part of '../participant.dart';
 
 _$_Participant _$$_ParticipantFromJson(Map<String, dynamic> json) =>
     _$_Participant(
-      user_id: json['user_id'] as int,
+      user_id: json['user_id'] as String,
       username: json['username'] as String,
       label: json['label'] as int,
       group_id: json['group_id'] as int,
