@@ -11,6 +11,7 @@ import 'package:schetify/widget/page/schedule/common/schedule_update_destination
 import 'package:schetify/widget/page/schedule/common/label/settings_label.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_update_page.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_day_update_page.dart';
+import 'package:schetify/widget/page/seat_distribution.dart';
 import 'package:schetify/widget/page/setting/account/change_password/change_password.dart';
 import 'package:schetify/widget/page/setting/account/change_password/enter_password.dart';
 import 'package:schetify/widget/page/setting/account/settings_account.dart';
@@ -45,6 +46,7 @@ class AppRouter extends ConsumerWidget {
         '/init/register': (BuildContext context) => const UserRegistrationPage(),
         '/init/login': (BuildContext context) => const LoginPage(),
         '/schedule/new/label': (BuildContext context) => const SettingsLabel(),
+        '/schedule/new/seat': (BuildContext context) => SeatDistribution(),
         '/schedule/attendance': (BuildContext context) => const AttendanceCheckPage(),
       },
     );
