@@ -28,18 +28,29 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
           questionare_url: null
       ),
       scheduleCandidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText())),
-      participants: []
+      participants: [],
+      loading: true
   ));
 
   final TestRepository testService = TestRepository();
 
+  void changeLoading(bool loading) {
+    state = state.copyWith(loading: loading);
+  }
+
   Future<void> getEventInformation(int id) async {
     try{
+      changeLoading(true);
       await Future.delayed(const Duration(seconds: 1));
       final event = await testService.getEvent(id);
       final participants = await testService.getParticipants(id);
       final candidates = await testService.getScheduleCandidates(id);
-      state = state.copyWith(event: event, participants: participants, scheduleCandidates: candidates);
+      state = state.copyWith(
+          event: event,
+          participants: participants,
+          scheduleCandidates: candidates,
+          loading: false
+      );
     }catch(e){
       debugPrint(e.toString());
     }

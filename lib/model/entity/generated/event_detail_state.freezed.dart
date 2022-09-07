@@ -20,6 +20,7 @@ mixin _$EventDetailState {
   SplayTreeSet<ScheduleCandidate> get scheduleCandidates =>
       throw _privateConstructorUsedError;
   List<Participant> get participants => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EventDetailStateCopyWith<EventDetailState> get copyWith =>
@@ -34,7 +35,8 @@ abstract class $EventDetailStateCopyWith<$Res> {
   $Res call(
       {Event event,
       SplayTreeSet<ScheduleCandidate> scheduleCandidates,
-      List<Participant> participants});
+      List<Participant> participants,
+      bool loading});
 
   $EventCopyWith<$Res> get event;
 }
@@ -53,6 +55,7 @@ class _$EventDetailStateCopyWithImpl<$Res>
     Object? event = freezed,
     Object? scheduleCandidates = freezed,
     Object? participants = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_value.copyWith(
       event: event == freezed
@@ -67,6 +70,10 @@ class _$EventDetailStateCopyWithImpl<$Res>
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
               as List<Participant>,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -88,7 +95,8 @@ abstract class _$$_EventDetailStateCopyWith<$Res>
   $Res call(
       {Event event,
       SplayTreeSet<ScheduleCandidate> scheduleCandidates,
-      List<Participant> participants});
+      List<Participant> participants,
+      bool loading});
 
   @override
   $EventCopyWith<$Res> get event;
@@ -110,6 +118,7 @@ class __$$_EventDetailStateCopyWithImpl<$Res>
     Object? event = freezed,
     Object? scheduleCandidates = freezed,
     Object? participants = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_$_EventDetailState(
       event: event == freezed
@@ -124,6 +133,10 @@ class __$$_EventDetailStateCopyWithImpl<$Res>
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
               as List<Participant>,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -134,7 +147,8 @@ class _$_EventDetailState implements _EventDetailState {
   const _$_EventDetailState(
       {required this.event,
       required this.scheduleCandidates,
-      required final List<Participant> participants})
+      required final List<Participant> participants,
+      required this.loading})
       : _participants = participants;
 
   @override
@@ -149,8 +163,11 @@ class _$_EventDetailState implements _EventDetailState {
   }
 
   @override
+  final bool loading;
+
+  @override
   String toString() {
-    return 'EventDetailState(event: $event, scheduleCandidates: $scheduleCandidates, participants: $participants)';
+    return 'EventDetailState(event: $event, scheduleCandidates: $scheduleCandidates, participants: $participants, loading: $loading)';
   }
 
   @override
@@ -162,7 +179,8 @@ class _$_EventDetailState implements _EventDetailState {
             const DeepCollectionEquality()
                 .equals(other.scheduleCandidates, scheduleCandidates) &&
             const DeepCollectionEquality()
-                .equals(other._participants, _participants));
+                .equals(other._participants, _participants) &&
+            const DeepCollectionEquality().equals(other.loading, loading));
   }
 
   @override
@@ -170,7 +188,8 @@ class _$_EventDetailState implements _EventDetailState {
       runtimeType,
       const DeepCollectionEquality().hash(event),
       const DeepCollectionEquality().hash(scheduleCandidates),
-      const DeepCollectionEquality().hash(_participants));
+      const DeepCollectionEquality().hash(_participants),
+      const DeepCollectionEquality().hash(loading));
 
   @JsonKey(ignore: true)
   @override
@@ -182,7 +201,8 @@ abstract class _EventDetailState implements EventDetailState {
   const factory _EventDetailState(
       {required final Event event,
       required final SplayTreeSet<ScheduleCandidate> scheduleCandidates,
-      required final List<Participant> participants}) = _$_EventDetailState;
+      required final List<Participant> participants,
+      required final bool loading}) = _$_EventDetailState;
 
   @override
   Event get event;
@@ -190,6 +210,8 @@ abstract class _EventDetailState implements EventDetailState {
   SplayTreeSet<ScheduleCandidate> get scheduleCandidates;
   @override
   List<Participant> get participants;
+  @override
+  bool get loading;
   @override
   @JsonKey(ignore: true)
   _$$_EventDetailStateCopyWith<_$_EventDetailState> get copyWith =>

@@ -16,13 +16,11 @@ class EventDetailPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final detail = ref.watch(eventDetailProvider);
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final loading = useState(true);
     int maxFitnessValue = -1;
 
     Future<void> updateEventInformation() async{
       await ref.read(eventDetailProvider.notifier)
           .getEventInformation(args['id']);
-      loading.value = false;
       maxFitnessValue = detail.scheduleCandidates
           .toList()
           .map((e) {
@@ -53,9 +51,9 @@ class EventDetailPage extends HookConsumerWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: loading.value ? const Text('読み込み中...') : Text(detail.event.name ?? ''),
+          title: detail.loading ? const Text('読み込み中...') : Text(detail.event.name ?? ''),
         ),
-        body: loading.value ? Container(
+        body: detail.loading ? Container(
             alignment: Alignment.center,
             child: const CircularProgressIndicator(
               color: Colors.green,
