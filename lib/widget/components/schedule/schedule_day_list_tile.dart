@@ -2,26 +2,30 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/model/entity/schedule_period.dart';
-import 'package:schetify/provider/schedule_day_provider.dart';
+import 'package:schetify/model/entity/schedule_candidate.dart';
+
+import '../../../provider/event_update_provider.dart';
 
 @immutable
 class ScheduleDayListTile extends HookConsumerWidget {
-  const ScheduleDayListTile({Key? key, required this.periodList, required this.index}) : super(key: key);
+  const ScheduleDayListTile({Key? key, required this.scheduleCandidates, required this.index, required this.eventId}) : super(key: key);
 
-  final SplayTreeSet<SchedulePeriod> periodList;
+  final SplayTreeSet<ScheduleCandidate> scheduleCandidates;
   final int index;
+  final int? eventId;
 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(eventUpdateProvider.notifier);
+
     return ListTile(
       dense: true,
-      title: Text(periodList.elementAt(index).getText()),
+      title: Text(scheduleCandidates.elementAt(index).getText()),
       trailing: IconButton(
         icon: const Icon(Icons.edit_note),
         onPressed: () async {
-          final period = periodList.elementAt(index);
+          final period = scheduleCandidates.elementAt(index);
           TimeOfDay initialStartTimeOfDay = const TimeOfDay(hour: 19, minute: 0);
           TimeOfDay initialEndTimeOfDay = const TimeOfDay(hour: 20, minute: 0);
           final startTimeOfDay = await showTimePicker(
@@ -31,9 +35,9 @@ class ScheduleDayListTile extends HookConsumerWidget {
           );
           if(startTimeOfDay != null) {
             final startTime = DateTime(
-                period.startTime.year,
-                period.startTime.month,
-                period.startTime.day,
+                period.start_at.year,
+                period.start_at.month,
+                period.start_at.day,
                 startTimeOfDay.hour,
                 startTimeOfDay.minute
             );
@@ -44,20 +48,21 @@ class ScheduleDayListTile extends HookConsumerWidget {
             );
             if(endTimeOfDay != null) {
               final endTime = DateTime(
-                  period.endTime.year,
-                  period.endTime.month,
-                  period.endTime.day,
+                  period.end_at.year,
+                  period.end_at.month,
+                  period.end_at.day,
                   endTimeOfDay.hour,
                   endTimeOfDay.minute
               );
-              final newPeriod = SchedulePeriod(
-                  startTime: startTime,
-                  endTime: endTime
+              final newPeriod = ScheduleCandidate(
+                id: null,
+                event_id: eventId,
+                start_at: startTime,
+                end_at: endTime,
+                voters: [],
               );
-              ref.read(scheduleDayProvider.notifier)
-                  .removePeriod(periodList.elementAt(index));
-              ref.read(scheduleDayProvider.notifier)
-                  .addPeriod(newPeriod);
+              notifier.removePeriod(scheduleCandidates.elementAt(index));
+              notifier.addPeriod(newPeriod);
             }
           }
         },

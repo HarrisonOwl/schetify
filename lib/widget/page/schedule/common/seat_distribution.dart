@@ -1,17 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/model/entity/number_of_groups.dart';
-import 'package:schetify/model/entity/user_name_list.dart';
 import 'package:schetify/provider/grouping_provider.dart';
-
-import '../../model/entity/user_name.dart';
 
 
 
 class SeatDistribution extends HookConsumerWidget {
-  SeatDistribution({Key? key}) : super(key: key);
+  const SeatDistribution({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +24,7 @@ class SeatDistribution extends HookConsumerWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
-                      Text("Group ${index}"),
+                      Text("Group $index"),
                       for (var i = 0; i < provider.groupedUserList[index].userNameList.length; i++)
                         Text(provider.groupedUserList[index].userNameList[i].name),
                     ],

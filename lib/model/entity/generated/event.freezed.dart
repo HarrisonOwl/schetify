@@ -29,9 +29,10 @@ mixin _$Event {
   String? get location_name => throw _privateConstructorUsedError;
   String? get location_address => throw _privateConstructorUsedError;
   double? get location_latitude => throw _privateConstructorUsedError;
-  double? get location_longtiude => throw _privateConstructorUsedError;
+  double? get location_longitude => throw _privateConstructorUsedError;
   int? get group_num => throw _privateConstructorUsedError;
-  int? get total_cost => throw _privateConstructorUsedError;
+  int? get cost_type => throw _privateConstructorUsedError;
+  int? get cost => throw _privateConstructorUsedError;
   String? get questionare_url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,9 +54,10 @@ abstract class $EventCopyWith<$Res> {
       String? location_name,
       String? location_address,
       double? location_latitude,
-      double? location_longtiude,
+      double? location_longitude,
       int? group_num,
-      int? total_cost,
+      int? cost_type,
+      int? cost,
       String? questionare_url});
 }
 
@@ -78,9 +80,10 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
     Object? location_name = freezed,
     Object? location_address = freezed,
     Object? location_latitude = freezed,
-    Object? location_longtiude = freezed,
+    Object? location_longitude = freezed,
     Object? group_num = freezed,
-    Object? total_cost = freezed,
+    Object? cost_type = freezed,
+    Object? cost = freezed,
     Object? questionare_url = freezed,
   }) {
     return _then(_value.copyWith(
@@ -120,17 +123,21 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
           ? _value.location_latitude
           : location_latitude // ignore: cast_nullable_to_non_nullable
               as double?,
-      location_longtiude: location_longtiude == freezed
-          ? _value.location_longtiude
-          : location_longtiude // ignore: cast_nullable_to_non_nullable
+      location_longitude: location_longitude == freezed
+          ? _value.location_longitude
+          : location_longitude // ignore: cast_nullable_to_non_nullable
               as double?,
       group_num: group_num == freezed
           ? _value.group_num
           : group_num // ignore: cast_nullable_to_non_nullable
               as int?,
-      total_cost: total_cost == freezed
-          ? _value.total_cost
-          : total_cost // ignore: cast_nullable_to_non_nullable
+      cost_type: cost_type == freezed
+          ? _value.cost_type
+          : cost_type // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cost: cost == freezed
+          ? _value.cost
+          : cost // ignore: cast_nullable_to_non_nullable
               as int?,
       questionare_url: questionare_url == freezed
           ? _value.questionare_url
@@ -155,9 +162,10 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       String? location_name,
       String? location_address,
       double? location_latitude,
-      double? location_longtiude,
+      double? location_longitude,
       int? group_num,
-      int? total_cost,
+      int? cost_type,
+      int? cost,
       String? questionare_url});
 }
 
@@ -181,9 +189,10 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
     Object? location_name = freezed,
     Object? location_address = freezed,
     Object? location_latitude = freezed,
-    Object? location_longtiude = freezed,
+    Object? location_longitude = freezed,
     Object? group_num = freezed,
-    Object? total_cost = freezed,
+    Object? cost_type = freezed,
+    Object? cost = freezed,
     Object? questionare_url = freezed,
   }) {
     return _then(_$_Event(
@@ -223,17 +232,21 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
           ? _value.location_latitude
           : location_latitude // ignore: cast_nullable_to_non_nullable
               as double?,
-      location_longtiude: location_longtiude == freezed
-          ? _value.location_longtiude
-          : location_longtiude // ignore: cast_nullable_to_non_nullable
+      location_longitude: location_longitude == freezed
+          ? _value.location_longitude
+          : location_longitude // ignore: cast_nullable_to_non_nullable
               as double?,
       group_num: group_num == freezed
           ? _value.group_num
           : group_num // ignore: cast_nullable_to_non_nullable
               as int?,
-      total_cost: total_cost == freezed
-          ? _value.total_cost
-          : total_cost // ignore: cast_nullable_to_non_nullable
+      cost_type: cost_type == freezed
+          ? _value.cost_type
+          : cost_type // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cost: cost == freezed
+          ? _value.cost
+          : cost // ignore: cast_nullable_to_non_nullable
               as int?,
       questionare_url: questionare_url == freezed
           ? _value.questionare_url
@@ -256,9 +269,10 @@ class _$_Event extends _Event {
       required this.location_name,
       required this.location_address,
       required this.location_latitude,
-      required this.location_longtiude,
+      required this.location_longitude,
       required this.group_num,
-      required this.total_cost,
+      required this.cost_type,
+      required this.cost,
       required this.questionare_url})
       : super._();
 
@@ -284,17 +298,19 @@ class _$_Event extends _Event {
   @override
   final double? location_latitude;
   @override
-  final double? location_longtiude;
+  final double? location_longitude;
   @override
   final int? group_num;
   @override
-  final int? total_cost;
+  final int? cost_type;
+  @override
+  final int? cost;
   @override
   final String? questionare_url;
 
   @override
   String toString() {
-    return 'Event(id: $id, name: $name, description: $description, start_at: $start_at, end_at: $end_at, img_url: $img_url, location_name: $location_name, location_address: $location_address, location_latitude: $location_latitude, location_longtiude: $location_longtiude, group_num: $group_num, total_cost: $total_cost, questionare_url: $questionare_url)';
+    return 'Event(id: $id, name: $name, description: $description, start_at: $start_at, end_at: $end_at, img_url: $img_url, location_name: $location_name, location_address: $location_address, location_latitude: $location_latitude, location_longitude: $location_longitude, group_num: $group_num, cost_type: $cost_type, cost: $cost, questionare_url: $questionare_url)';
   }
 
   @override
@@ -316,10 +332,10 @@ class _$_Event extends _Event {
             const DeepCollectionEquality()
                 .equals(other.location_latitude, location_latitude) &&
             const DeepCollectionEquality()
-                .equals(other.location_longtiude, location_longtiude) &&
+                .equals(other.location_longitude, location_longitude) &&
             const DeepCollectionEquality().equals(other.group_num, group_num) &&
-            const DeepCollectionEquality()
-                .equals(other.total_cost, total_cost) &&
+            const DeepCollectionEquality().equals(other.cost_type, cost_type) &&
+            const DeepCollectionEquality().equals(other.cost, cost) &&
             const DeepCollectionEquality()
                 .equals(other.questionare_url, questionare_url));
   }
@@ -337,9 +353,10 @@ class _$_Event extends _Event {
       const DeepCollectionEquality().hash(location_name),
       const DeepCollectionEquality().hash(location_address),
       const DeepCollectionEquality().hash(location_latitude),
-      const DeepCollectionEquality().hash(location_longtiude),
+      const DeepCollectionEquality().hash(location_longitude),
       const DeepCollectionEquality().hash(group_num),
-      const DeepCollectionEquality().hash(total_cost),
+      const DeepCollectionEquality().hash(cost_type),
+      const DeepCollectionEquality().hash(cost),
       const DeepCollectionEquality().hash(questionare_url));
 
   @JsonKey(ignore: true)
@@ -366,9 +383,10 @@ abstract class _Event extends Event {
       required final String? location_name,
       required final String? location_address,
       required final double? location_latitude,
-      required final double? location_longtiude,
+      required final double? location_longitude,
       required final int? group_num,
-      required final int? total_cost,
+      required final int? cost_type,
+      required final int? cost,
       required final String? questionare_url}) = _$_Event;
   const _Event._() : super._();
 
@@ -393,11 +411,13 @@ abstract class _Event extends Event {
   @override
   double? get location_latitude;
   @override
-  double? get location_longtiude;
+  double? get location_longitude;
   @override
   int? get group_num;
   @override
-  int? get total_cost;
+  int? get cost_type;
+  @override
+  int? get cost;
   @override
   String? get questionare_url;
   @override

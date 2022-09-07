@@ -30,7 +30,7 @@ class EventPage extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.of(context).pushNamed("/schedule/new");
+          Navigator.of(context).pushNamed("/event/new");
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

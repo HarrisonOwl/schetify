@@ -11,7 +11,7 @@ _$_Participant _$$_ParticipantFromJson(Map<String, dynamic> json) =>
       user_id: json['user_id'] as String,
       username: json['username'] as String,
       label: json['label'] as int,
-      group_id: json['group_id'] as int,
+      group_id: json['group_id'] as int?,
     );
 
 Map<String, dynamic> _$$_ParticipantToJson(_$_Participant instance) =>

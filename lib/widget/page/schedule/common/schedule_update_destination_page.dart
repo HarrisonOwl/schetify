@@ -7,7 +7,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:schetify/provider/schedule_destination_provider.dart';
+
+import '../../../../provider/event_update_provider.dart';
 
 class ScheduleUpdateDestinationPage extends StatefulHookConsumerWidget {
   const ScheduleUpdateDestinationPage({Key? key}) : super(key: key);
@@ -21,19 +22,20 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
 
   @override
   Widget build(BuildContext context) {
-    final destination = ref.watch(scheduleDestinationProvider);
+    final notifier = ref.read(eventUpdateProvider.notifier);
+    final detail = ref.watch(eventUpdateProvider);
     final ValueNotifier<Set<Marker>> markers = useState(
-        destination.latitude != null && destination.longitude != null ? {
+        detail.event.location_latitude != null && detail.event.location_longitude != null ? {
           Marker(
             markerId: const MarkerId('mark'),
-            position: LatLng(destination.latitude!, destination.longitude!),
+            position: LatLng(detail.event.location_latitude!, detail.event.location_longitude!),
           )
         } : {}
     );
 
     final initialPosition = useState(
         CameraPosition(
-          target: destination.latitude != null && destination.longitude != null ? LatLng(destination.latitude!, destination.longitude!) : const LatLng(35.682947, 139.736707),
+          target: detail.event.location_latitude != null && detail.event.location_longitude != null ? LatLng(detail.event.location_latitude!, detail.event.location_longitude!) : const LatLng(35.682947, 139.736707),
           zoom: 18.0,
         )
     );
@@ -58,8 +60,8 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
       ),
     );
 
-    final ValueNotifier<String?> name = useState(destination.name);
-    final ValueNotifier<String?> address = useState(destination.address);
+    final ValueNotifier<String?> name = useState(detail.event.location_name);
+    final ValueNotifier<String?> address = useState(detail.event.location_address);
 
     Future<void> searchPlace() async {
       final backupMarkers = markers.value;
@@ -245,14 +247,19 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
                                   ScaffoldMessenger.of(context).showSnackBar(addressAlertSnackBar);
                                 }
                                 else {
-                                  ref.read(scheduleDestinationProvider.notifier)
-                                      .setName(name.value);
-                                  ref.read(scheduleDestinationProvider.notifier)
-                                      .setAddress(address.value);
-                                  ref.read(scheduleDestinationProvider.notifier)
-                                      .setLongitude(markers.value.first.position.longitude);
-                                  ref.read(scheduleDestinationProvider.notifier)
-                                      .setLatitude(markers.value.first.position.latitude);
+                                  await notifier.updateLocationInformation(
+                                      name.value!,
+                                      address.value!,
+                                      markers.value.first.position.latitude,
+                                      markers.value.first.position.longitude
+                                  ).then((status){
+                                    if(status == 200) {
+                                      Navigator.pop(context);
+                                    }
+                                    else {
+
+                                    }
+                                  });
                                 }
                               },
                             ),

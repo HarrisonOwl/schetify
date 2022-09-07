@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/model/entity/schedule_candidate.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:schetify/widget/components/schedule/schedule_day_list_view.dart';
 import 'package:schetify/widget/components/schedule/schedule_day_setting_view.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:schetify/provider/schedule_day_provider.dart';
 import 'package:schetify/provider/shared_preference_provider.dart';
-import 'package:schetify/model/entity/schedule_period.dart';
 import 'dart:collection';
+
+import '../../../../provider/event_update_provider.dart';
 class ScheduleDayUpdatePage extends StatefulHookConsumerWidget {
   const ScheduleDayUpdatePage({Key? key}) : super(key: key);
 
@@ -27,8 +29,19 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
     final provider = ref.watch(scheduleDayProvider);
     final scrollController = ItemScrollController();
     final focusedDay = useState(DateTime.now().add(const Duration(days: 1)));
-    final notifier = ref.read(scheduleDayProvider.notifier);
+    final notifier = ref.read(eventUpdateProvider.notifier);
+    final detail = ref.watch(eventUpdateProvider);
     final isOpenedScheduleCandidatesPage = useState(ref.watch(sharedPreferencesProvider).isOpenedScheduleCandidatesPage);
+
+    SnackBar alertSnackBar = SnackBar(
+      content: const Text('更新に失敗しました。'),
+      action: SnackBarAction(
+        label: '閉じる',
+        onPressed: (){
+          //閉じるが押された時行いたい処理
+        },
+      ),
+    );
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -53,7 +66,8 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
                               Text("・画面上部のカレンダーをタップすることで日程候補の追加\n"
                                   "・追加したリストを画面下部のリストで確認\n"
                                   "・リストの右側の編集アイコンを選択することで日程候補の日時を変更\n"
-                                  "・リスト要素をスワイプすることで削除したい日程候補を削除\n")
+                                  "・リスト要素をスワイプすることで削除したい日程候補を削除\n"
+                                  "・右上のアイコンをタップすると保存")
                             ],
                           ),
                         ],
@@ -88,12 +102,12 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
 
       LinkedHashMap<DateTime, List<String>> getEvents() {
         final map = <DateTime, List<String>>{};
-        for (var period in provider.periodList) {
-          if(map.containsKey(period.startTime)) {
-            map[period.startTime]?.add(period.toString());
+        for (var period in detail.scheduleCandidates) {
+          if(map.containsKey(period.start_at)) {
+            map[period.start_at]?.add(period.toString());
           }
           else {
-            map[period.startTime] = [period.toString()];
+            map[period.start_at] = [period.toString()];
           }
         }
         return LinkedHashMap<DateTime, List<String>>(
@@ -106,8 +120,8 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
         return getEvents()[day] ?? [];
       }
 
-      void scrollTo(SchedulePeriod newPeriod) {
-        var index = provider.periodList.toList().indexOf(newPeriod);
+      void scrollTo(ScheduleCandidate newPeriod) {
+        var index = detail.scheduleCandidates.toList().indexOf(newPeriod);
         scrollController.scrollTo(
             index: index,
             duration: const Duration(milliseconds: 50),
@@ -144,12 +158,15 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
                 endTimeOfDay.hour,
                 endTimeOfDay.minute
             );
-            final newPeriod = SchedulePeriod(
-                startTime: startTime,
-                endTime: endTime
+            final newPeriod = ScheduleCandidate(
+              id: null,
+              event_id: detail.event.id,
+              start_at: startTime,
+              end_at: endTime,
+              voters: [],
             );
             notifier.addPeriod(newPeriod);
-            if(provider.periodList.length > 1) {
+            if(detail.scheduleCandidates.length > 1) {
               // TODO 非同期関数でもスクロール処理が動くようにする
               // await scrollTo(newPeriod);
             }
@@ -172,12 +189,15 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
             provider.defaultEndTimeOfDay.hour,
             provider.defaultEndTimeOfDay.minute
         );
-        final newPeriod = SchedulePeriod(
-            startTime: startTime,
-            endTime: endTime
+        final newPeriod = ScheduleCandidate(
+            id: null,
+            event_id: detail.event.id,
+            start_at: startTime,
+            end_at: endTime,
+            voters: [],
         );
         notifier.addPeriod(newPeriod);
-        if(provider.periodList.length > 1) {
+        if(detail.scheduleCandidates.length > 1) {
           scrollTo(newPeriod);
         }
       }
@@ -185,6 +205,22 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
       return Scaffold(
           appBar: AppBar(
             title: const Text("日程編集"),
+            actions: [
+              IconButton(
+                  onPressed: () async {
+                    await notifier.updateScheduleCandidates()
+                        .then((status){
+                          if(status == 200) {
+                            Navigator.pop(context);
+                          }
+                          else {
+                            ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                          }
+                    });
+                  },
+                  icon: const Icon(Icons.save),
+              )
+            ],
           ),
           body: Column(
               children: <Widget>[
@@ -216,7 +252,7 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
                 ),
                 Expanded(
                   flex: provider.isSetPeriodCollectively ? 48 : 56, // 割合
-                  child: ScheduleDayListView(periodList: provider.periodList, scrollController: scrollController),
+                  child: ScheduleDayListView(scheduleCandidates: detail.scheduleCandidates, scrollController: scrollController, eventId: detail.event.id,),
                 ),
               ]
           )
