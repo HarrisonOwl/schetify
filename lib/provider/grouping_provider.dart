@@ -45,10 +45,6 @@ class GroupedUserListNotifier extends StateNotifier<GroupedUserList> {
     // return chunkedItems;
     state = state.copyWith(groupedUserList: groupedUserList);
   }
-
-  // void changeNumberOfGroups(NumberOfGroups(number: 0)) {
-  //   state = state.copyWith()
-  // }
 }
 
 final groupingProvider = StateNotifierProvider<GroupedUserListNotifier
