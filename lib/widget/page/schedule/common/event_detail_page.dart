@@ -15,6 +15,7 @@ class EventDetailPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final detail = ref.watch(eventDetailProvider);
+    final notifier = ref.read(eventDetailProvider.notifier);
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     int maxFitnessValue = -1;
 
@@ -243,8 +244,10 @@ class EventDetailPage extends HookConsumerWidget {
                                                           fontSize: 12
                                                       )
                                                   ),
-                                                  onPressed: () {
+                                                  onPressed: () async{
                                                     // TODO APIを叩いてイベントのstart_at, end_atを更新し、再度イベントを読み込むようにする
+                                                    await notifier.updateSchedule(candidate.start_at, candidate.end_at);
+                                                    await updateEventInformation();
                                                   },
                                                 ),
                                               ),

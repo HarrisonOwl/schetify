@@ -55,6 +55,15 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
       debugPrint(e.toString());
     }
   }
+
+  Future<int> updateSchedule(DateTime startAt, DateTime endAt) async{
+    final data = {
+      'start_at': startAt.toString(),
+      'end_at': endAt.toString(),
+    };
+    final status = await testService.updateEvent(data);
+    return status;
+  }
 }
 
 final eventDetailProvider = StateNotifierProvider<EventDetailNotifier
