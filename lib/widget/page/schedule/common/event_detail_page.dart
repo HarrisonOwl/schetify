@@ -46,7 +46,7 @@ class EventDetailPage extends HookConsumerWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: loading.value ? const Text('読み込み中...') : Text(detail.event.name),
+          title: loading.value ? const Text('読み込み中...') : Text(detail.event.name ?? ''),
         ),
         body: loading.value ? Container(
             alignment: Alignment.center,

@@ -20,8 +20,8 @@ Event _$EventFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Event {
-  int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get start_at => throw _privateConstructorUsedError;
   DateTime? get end_at => throw _privateConstructorUsedError;
@@ -44,8 +44,8 @@ abstract class $EventCopyWith<$Res> {
   factory $EventCopyWith(Event value, $Res Function(Event) then) =
       _$EventCopyWithImpl<$Res>;
   $Res call(
-      {int id,
-      String name,
+      {int? id,
+      String? name,
       String? description,
       DateTime? start_at,
       DateTime? end_at,
@@ -87,11 +87,11 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -146,8 +146,8 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       __$$_EventCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
-      String name,
+      {int? id,
+      String? name,
       String? description,
       DateTime? start_at,
       DateTime? end_at,
@@ -190,11 +190,11 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -266,9 +266,9 @@ class _$_Event extends _Event {
       _$$_EventFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
-  final String name;
+  final String? name;
   @override
   final String? description;
   @override
@@ -357,8 +357,8 @@ class _$_Event extends _Event {
 
 abstract class _Event extends Event {
   const factory _Event(
-      {required final int id,
-      required final String name,
+      {required final int? id,
+      required final String? name,
       required final String? description,
       required final DateTime? start_at,
       required final DateTime? end_at,
@@ -375,9 +375,9 @@ abstract class _Event extends Event {
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
-  String get name;
+  String? get name;
   @override
   String? get description;
   @override
