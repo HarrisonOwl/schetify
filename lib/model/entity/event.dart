@@ -9,8 +9,8 @@ part 'generated/event.g.dart';
 class Event with _$Event {
   const Event._();
   const factory Event({
-    required int id,
-    required String name,
+    required int? id,
+    required String? name,
     required String? description,
     required DateTime? start_at,
     required DateTime? end_at,

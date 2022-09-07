@@ -12,7 +12,7 @@ class EventListItemComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(event.name),
+      title: Text(event.name ?? ''),
       subtitle: Text(event.description ?? ''),
       leading: leading,
       onTap: () => {

@@ -7,7 +7,6 @@ import 'package:schetify/widget/page/init/login_page.dart';
 import 'package:schetify/widget/page/init/user_registration_page.dart';
 import 'package:schetify/widget/page/main_page.dart';
 import 'package:schetify/widget/page/schedule/common/attendance_check_page.dart';
-import 'package:schetify/widget/page/schedule/common/cost/splitting_the_cost.dart';
 import 'package:schetify/widget/page/schedule/common/event_detail_page.dart';
 import 'package:schetify/widget/page/schedule/common/question/question.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_update_destination_page.dart';
@@ -19,14 +18,11 @@ import 'package:schetify/widget/page/setting/account/change_password/change_pass
 import 'package:schetify/widget/page/setting/account/change_password/enter_password.dart';
 import 'package:schetify/widget/page/setting/account/settings_account.dart';
 
-import '../provider/firebase_auth_provider.dart';
-
 class AppRouter extends ConsumerWidget {
   const AppRouter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.read(firebaseAuthProvider);
     return MaterialApp(
       title: 'Hooks Demo',
       theme: ThemeData(
@@ -52,7 +48,6 @@ class AppRouter extends ConsumerWidget {
         '/init/register': (BuildContext context) => const UserRegistrationPage(),
         '/init/login': (BuildContext context) => const LoginPage(),
         '/schedule/new/label': (BuildContext context) => const SettingsLabel(),
-        '/schedule/new/cost': (BuildContext context) => const SplittingTheCost(),
         '/schedule/new/seat': (BuildContext context) => SeatDistribution(),
         '/schedule/attendance': (BuildContext context) => const AttendanceCheckPage(),
         '/event/detail': (BuildContext context) => const EventDetailPage(),
