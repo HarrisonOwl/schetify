@@ -27,9 +27,9 @@ class AttendanceCheckPage extends HookConsumerWidget {
               Expanded(
                 flex: 75, // 割合
                 child: ListView.separated(
-                  itemCount: eventDetail.scheduleCandidates.candidates.length,
+                  itemCount: eventDetail.scheduleCandidates.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final ScheduleCandidate candidate = eventDetail.scheduleCandidates.candidates.elementAt(index);
+                    final ScheduleCandidate candidate = eventDetail.scheduleCandidates.elementAt(index);
                     final AttendStatus? status = statusList.value.firstWhereOrNull((AttendStatus status) {
                       return status.schedule_candidate_id == candidate.id;
                     });

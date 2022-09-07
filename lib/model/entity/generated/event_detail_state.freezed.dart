@@ -14,18 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-EventDetailState _$EventDetailStateFromJson(Map<String, dynamic> json) {
-  return _EventDetailState.fromJson(json);
-}
-
 /// @nodoc
 mixin _$EventDetailState {
   Event get event => throw _privateConstructorUsedError;
-  ScheduleCandidates get scheduleCandidates =>
+  SplayTreeSet<ScheduleCandidate> get scheduleCandidates =>
       throw _privateConstructorUsedError;
-  Participants get participants => throw _privateConstructorUsedError;
+  List<Participant> get participants => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $EventDetailStateCopyWith<EventDetailState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -38,12 +33,10 @@ abstract class $EventDetailStateCopyWith<$Res> {
       _$EventDetailStateCopyWithImpl<$Res>;
   $Res call(
       {Event event,
-      ScheduleCandidates scheduleCandidates,
-      Participants participants});
+      SplayTreeSet<ScheduleCandidate> scheduleCandidates,
+      List<Participant> participants});
 
   $EventCopyWith<$Res> get event;
-  $ScheduleCandidatesCopyWith<$Res> get scheduleCandidates;
-  $ParticipantsCopyWith<$Res> get participants;
 }
 
 /// @nodoc
@@ -69,11 +62,11 @@ class _$EventDetailStateCopyWithImpl<$Res>
       scheduleCandidates: scheduleCandidates == freezed
           ? _value.scheduleCandidates
           : scheduleCandidates // ignore: cast_nullable_to_non_nullable
-              as ScheduleCandidates,
+              as SplayTreeSet<ScheduleCandidate>,
       participants: participants == freezed
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
-              as Participants,
+              as List<Participant>,
     ));
   }
 
@@ -81,21 +74,6 @@ class _$EventDetailStateCopyWithImpl<$Res>
   $EventCopyWith<$Res> get event {
     return $EventCopyWith<$Res>(_value.event, (value) {
       return _then(_value.copyWith(event: value));
-    });
-  }
-
-  @override
-  $ScheduleCandidatesCopyWith<$Res> get scheduleCandidates {
-    return $ScheduleCandidatesCopyWith<$Res>(_value.scheduleCandidates,
-        (value) {
-      return _then(_value.copyWith(scheduleCandidates: value));
-    });
-  }
-
-  @override
-  $ParticipantsCopyWith<$Res> get participants {
-    return $ParticipantsCopyWith<$Res>(_value.participants, (value) {
-      return _then(_value.copyWith(participants: value));
     });
   }
 }
@@ -109,15 +87,11 @@ abstract class _$$_EventDetailStateCopyWith<$Res>
   @override
   $Res call(
       {Event event,
-      ScheduleCandidates scheduleCandidates,
-      Participants participants});
+      SplayTreeSet<ScheduleCandidate> scheduleCandidates,
+      List<Participant> participants});
 
   @override
   $EventCopyWith<$Res> get event;
-  @override
-  $ScheduleCandidatesCopyWith<$Res> get scheduleCandidates;
-  @override
-  $ParticipantsCopyWith<$Res> get participants;
 }
 
 /// @nodoc
@@ -145,32 +119,34 @@ class __$$_EventDetailStateCopyWithImpl<$Res>
       scheduleCandidates: scheduleCandidates == freezed
           ? _value.scheduleCandidates
           : scheduleCandidates // ignore: cast_nullable_to_non_nullable
-              as ScheduleCandidates,
+              as SplayTreeSet<ScheduleCandidate>,
       participants: participants == freezed
-          ? _value.participants
+          ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
-              as Participants,
+              as List<Participant>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_EventDetailState implements _EventDetailState {
   const _$_EventDetailState(
       {required this.event,
       required this.scheduleCandidates,
-      required this.participants});
-
-  factory _$_EventDetailState.fromJson(Map<String, dynamic> json) =>
-      _$$_EventDetailStateFromJson(json);
+      required final List<Participant> participants})
+      : _participants = participants;
 
   @override
   final Event event;
   @override
-  final ScheduleCandidates scheduleCandidates;
+  final SplayTreeSet<ScheduleCandidate> scheduleCandidates;
+  final List<Participant> _participants;
   @override
-  final Participants participants;
+  List<Participant> get participants {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_participants);
+  }
 
   @override
   String toString() {
@@ -186,45 +162,34 @@ class _$_EventDetailState implements _EventDetailState {
             const DeepCollectionEquality()
                 .equals(other.scheduleCandidates, scheduleCandidates) &&
             const DeepCollectionEquality()
-                .equals(other.participants, participants));
+                .equals(other._participants, _participants));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(event),
       const DeepCollectionEquality().hash(scheduleCandidates),
-      const DeepCollectionEquality().hash(participants));
+      const DeepCollectionEquality().hash(_participants));
 
   @JsonKey(ignore: true)
   @override
   _$$_EventDetailStateCopyWith<_$_EventDetailState> get copyWith =>
       __$$_EventDetailStateCopyWithImpl<_$_EventDetailState>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_EventDetailStateToJson(
-      this,
-    );
-  }
 }
 
 abstract class _EventDetailState implements EventDetailState {
   const factory _EventDetailState(
       {required final Event event,
-      required final ScheduleCandidates scheduleCandidates,
-      required final Participants participants}) = _$_EventDetailState;
-
-  factory _EventDetailState.fromJson(Map<String, dynamic> json) =
-      _$_EventDetailState.fromJson;
+      required final SplayTreeSet<ScheduleCandidate> scheduleCandidates,
+      required final List<Participant> participants}) = _$_EventDetailState;
 
   @override
   Event get event;
   @override
-  ScheduleCandidates get scheduleCandidates;
+  SplayTreeSet<ScheduleCandidate> get scheduleCandidates;
   @override
-  Participants get participants;
+  List<Participant> get participants;
   @override
   @JsonKey(ignore: true)
   _$$_EventDetailStateCopyWith<_$_EventDetailState> get copyWith =>

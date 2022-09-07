@@ -7,7 +7,7 @@ part 'generated/participant.g.dart';
 @freezed
 class Participant with _$Participant {
   const factory Participant({
-    required int user_id,
+    required String user_id,
     required String username,
     required int label,
     required int group_id,
