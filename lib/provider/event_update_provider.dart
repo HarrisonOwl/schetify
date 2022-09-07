@@ -89,6 +89,19 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
     state = state.copyWith(event: event);
   }
 
+  Future<int> updateName(String? name) async{
+    final data = {
+      'name': name
+    };
+    int status;
+    if(name != null && name != '') {
+      status = await testService.updateEvent(data);
+    }
+    else {
+      status = 400;
+    }
+    return status;
+  }
 
   Future<int> updateDescription(String? description) async{
     final data = {

@@ -28,6 +28,16 @@ class ScheduleUpdatePage extends HookConsumerWidget {
     final notifier = ref.read(eventUpdateProvider.notifier);
     final detail = ref.watch(eventUpdateProvider);
 
+    SnackBar alertSnackBar = SnackBar(
+      content: const Text('更新に失敗しました。'),
+      action: SnackBarAction(
+        label: '閉じる',
+        onPressed: (){
+          //閉じるが押された時行いたい処理
+        },
+      ),
+    );
+
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Future<void>.microtask(() async {
@@ -78,7 +88,17 @@ class ScheduleUpdatePage extends HookConsumerWidget {
                   borderSide: BorderSide.none,
                 ),
               ),
-              onFieldSubmitted: print,
+              onFieldSubmitted: (value) async {
+                await notifier.updateName(value)
+                    .then((status){
+                      if(status == 200) {
+                        notifier.getEventInformation(args?['id'] ?? -1);
+                      }
+                      else {
+                        ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                      }
+                });
+              }
             ),
           ),
           Expanded(child: ListView.separated(
