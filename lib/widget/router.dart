@@ -44,7 +44,7 @@ class AppRouter extends ConsumerWidget {
         '/init': (BuildContext context) => const InitPage(),
         '/init/register': (BuildContext context) => const UserRegistrationPage(),
         '/init/login': (BuildContext context) => const LoginPage(),
-        '/schedule/new/label': (BuildContext context) => const SettingsLabel()
+        '/schedule/new/label': (BuildContext context) => const SettingsLabel(),
         '/schedule/attendance': (BuildContext context) => const AttendanceCheckPage(),
       },
     );

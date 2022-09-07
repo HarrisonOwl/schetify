@@ -12,8 +12,16 @@ class SplittingTheCostDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final provider = ref.watch(splittingTheCostProvider);
-    var money = useState(provider.money);
-    var number = useState(provider.number);
+    final number = useState(6);
+    final costType = useState(0);
+    final costPerPerson = useState(costType.value == 1 ? provider.money : null);
+    final totalCost = useState(costType.value == 0 ? provider.money : null);
+
+    void setType(int? value) {
+      if(provider.flag) {
+        costType.value = value ?? 0;
+      }
+    }
 
     return Center(
         child: Column(
@@ -26,52 +34,76 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                   .changeFlag(value),
               secondary: const Icon(Icons.lightbulb_outline),
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: '金額',
-                border: OutlineInputBorder(),
+            Padding(
+                padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Radio(
+                          value: 0,
+                          groupValue: costType.value,
+                          onChanged: setType,
+                      ),
+                      const Text("合計金額から算出")
+                    ],
+                  ),
+                  TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: '金額',
+                        border: OutlineInputBorder(),
+                      ),
+                      enabled: provider.flag && costType.value == 0,
+                      keyboardType: TextInputType.number,
+                      initialValue: (totalCost.value != null && totalCost.value!=0.0) ? totalCost.value.toString() : "",
+                      onChanged: (text){
+                        totalCost.value = double.parse(text);
+                      }
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                          value: 1,
+                          groupValue: costType.value,
+                          onChanged: setType
+                      ),
+                      const Text("一人あたりの金額を設定")
+                    ],
+                  ),
+                  TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: '金額',
+                        border: OutlineInputBorder(),
+                      ),
+                      enabled: provider.flag && costType.value == 1,
+                      keyboardType: TextInputType.number,
+                      initialValue: (costPerPerson.value != null && costPerPerson.value!=0.0) ? costPerPerson.value.toString() : "",
+                      onChanged: (text){
+                        costPerPerson.value = double.parse(text);
+                      }
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text("現在の人数: ${number.value}人 一人当たり${costType.value == 0 ? ((totalCost.value ?? 0) / number.value).ceil() : costPerPerson.value  ?? 0}"),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(10),
+                    child: OutlinedButton(
+                      child: const Text('確定'),
+                      onPressed: () {
+                        final cost = costType.value == 0 ? totalCost.value : costPerPerson.value;
+                        if(cost != null) {
+                          ref.read(splittingTheCostProvider.notifier)
+                              .changeMoney(cost);
+                        }
+
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  )
+
+                ],
               ),
-              enabled: provider.flag,
-              keyboardType: TextInputType.number,
-              initialValue: (money.value!=0.0) ? money.value.toString() : "",
-              onChanged: (text){
-                money.value = double.parse(text);
-              }
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: '人数',
-                border: OutlineInputBorder(),
-              ),
-              enabled: provider.flag,
-              keyboardType: TextInputType.number,
-              initialValue: (number.value!=0.0) ? number.value.toString() : "",
-              onChanged: (text){
-                number.value = double.parse(text);
-                },
-            ),
-            TextFormField(
-              controller: TextEditingController(
-                  text: (number.value!=0.0) ?
-                    (money.value/number.value).toString() : "",
-              ),
-              decoration: const InputDecoration(
-                hintText: '一人当たりの金額',
-                border: OutlineInputBorder(),
-              ),
-              enabled: provider.flag,
-              readOnly:true,
-            ),ListTile(
-              title: Text('確定'),
-              onTap: () {
-                ref.read(splittingTheCostProvider.notifier)
-                    .changeMoney(money.value);
-                ref.read(splittingTheCostProvider.notifier)
-                    .changeNumber(number.value);
-                ref.read(splittingTheCostProvider.notifier)
-                    .changeAverage(money.value/number.value);
-                Navigator.of(context).pop();
-              },
             ),
           ],
         ),

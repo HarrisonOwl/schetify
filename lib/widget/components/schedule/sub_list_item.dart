@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:schetify/widget/dialog/event_detail_dialog.dart';
 import 'package:schetify/widget/dialog/splitting_the_cost_dialog.dart';
 
+import '../../dialog/splitting_the_cost_dialog.dart';
+
 class SubListItem extends StatelessWidget {
   final String title;
   final Widget leading;
