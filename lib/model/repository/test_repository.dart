@@ -260,4 +260,15 @@ class TestRepository{
     const status = 200;
     return status;
   }
+
+  Future<Map<String, int>> createEvent(Map<String, String?> data) async {
+    await Future.delayed(const Duration(seconds: 1));
+    const id = 2;
+    const status = 200;
+    final set = {
+      'id': id,
+      'status': status
+    };
+    return set;
+  }
 }

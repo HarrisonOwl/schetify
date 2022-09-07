@@ -12,6 +12,16 @@ class EventCreatePage extends HookConsumerWidget {
     final notifier = ref.read(eventUpdateProvider.notifier);
     final detail = ref.watch(eventUpdateProvider);
 
+    SnackBar alertSnackBar = SnackBar(
+      content: const Text('作成に失敗しました。'),
+      action: SnackBarAction(
+        label: '閉じる',
+        onPressed: (){
+          //閉じるが押された時行いたい処理
+        },
+      ),
+    );
+
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Future<void>.microtask(() async {
@@ -80,10 +90,15 @@ class EventCreatePage extends HookConsumerWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         notifier.createEvent()
-                        .then((id) {
+                        .then((set) {
                           // APIから保存して返り値のイベントidを受け取る
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': id});
+                          if(set['status'] == 200) {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': set['id']});
+                          }
+                          else {
+                            ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                          }
                         });
                       },
                       child: const Text('作成'),

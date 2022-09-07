@@ -155,9 +155,14 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
     state = state.copyWith(loading: loading);
   }
 
-  Future<int> createEvent() async {
+  Future<Map<String, int>> createEvent() async {
     // TODO apiにnameとdescriptionを渡し返り値でイベントのidを受け取るやつを記述する。
-    return 1;
+    final data = {
+      'name': state.event.name,
+      'description': state.event.description
+    };
+    final set = testService.createEvent(data);
+    return set;
   }
 }
 
