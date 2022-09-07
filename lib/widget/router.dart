@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/widget/page/event_page.dart';
 import 'package:schetify/widget/page/init/init_page.dart';
 import 'package:schetify/widget/page/init/login_page.dart';
 import 'package:schetify/widget/page/init/user_registration_page.dart';
 import 'package:schetify/widget/page/main_page.dart';
 import 'package:schetify/widget/page/schedule/common/attendance_check_page.dart';
+import 'package:schetify/widget/page/schedule/common/event_detail_page.dart';
 import 'package:schetify/widget/page/schedule/common/question/question.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_update_destination_page.dart';
 import 'package:schetify/widget/page/schedule/common/label/settings_label.dart';
@@ -48,6 +50,8 @@ class AppRouter extends ConsumerWidget {
         '/schedule/new/label': (BuildContext context) => const SettingsLabel(),
         '/schedule/new/seat': (BuildContext context) => SeatDistribution(),
         '/schedule/attendance': (BuildContext context) => const AttendanceCheckPage(),
+        '/event/detail': (BuildContext context) => const EventDetailPage(),
+        '/event/': (BuildContext context) => const EventPage(),
       },
     );
   }

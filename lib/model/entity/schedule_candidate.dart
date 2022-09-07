@@ -34,6 +34,21 @@ class ScheduleCandidate with _$ScheduleCandidate {
     return str1 + str2;
   }
 
+  String getText2() {
+    String str1 = DateFormat('yyyy/MM/dd(E)\nHH:mm~')
+        .format(start_at)
+        .replaceAll('Sun', '日')
+        .replaceAll('Mon', '月')
+        .replaceAll('Tue', '火')
+        .replaceAll('Wed', '水')
+        .replaceAll('Thu', '木')
+        .replaceAll('Fri', '金')
+        .replaceAll('Sat', '土');
+    String str2 = DateFormat('HH:mm')
+        .format(end_at);
+    return str1 + str2;
+  }
+
   @override // <- Added
   bool operator ==(dynamic other) {
     return identical(this, other) ||
