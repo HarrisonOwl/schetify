@@ -16,7 +16,7 @@ class SeatDistribution extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final numberOfGroups = useState(0);
-    final provider = ref.read(groupingProvider);
+    final provider = ref.watch(groupingProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text("席分け"),
