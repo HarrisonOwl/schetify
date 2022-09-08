@@ -22,6 +22,7 @@ AttendanceCheckState _$AttendanceCheckStateFromJson(Map<String, dynamic> json) {
 mixin _$AttendanceCheckState {
   @AttendStatusListConverter()
   List<AttendStatus> get statusList => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,9 @@ abstract class $AttendanceCheckStateCopyWith<$Res> {
   factory $AttendanceCheckStateCopyWith(AttendanceCheckState value,
           $Res Function(AttendanceCheckState) then) =
       _$AttendanceCheckStateCopyWithImpl<$Res>;
-  $Res call({@AttendStatusListConverter() List<AttendStatus> statusList});
+  $Res call(
+      {@AttendStatusListConverter() List<AttendStatus> statusList,
+      bool loading});
 }
 
 /// @nodoc
@@ -49,12 +52,17 @@ class _$AttendanceCheckStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? statusList = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_value.copyWith(
       statusList: statusList == freezed
           ? _value.statusList
           : statusList // ignore: cast_nullable_to_non_nullable
               as List<AttendStatus>,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -66,7 +74,9 @@ abstract class _$$_AttendanceCheckStateCopyWith<$Res>
           $Res Function(_$_AttendanceCheckState) then) =
       __$$_AttendanceCheckStateCopyWithImpl<$Res>;
   @override
-  $Res call({@AttendStatusListConverter() List<AttendStatus> statusList});
+  $Res call(
+      {@AttendStatusListConverter() List<AttendStatus> statusList,
+      bool loading});
 }
 
 /// @nodoc
@@ -83,12 +93,17 @@ class __$$_AttendanceCheckStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? statusList = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_$_AttendanceCheckState(
       statusList: statusList == freezed
           ? _value._statusList
           : statusList // ignore: cast_nullable_to_non_nullable
               as List<AttendStatus>,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -98,7 +113,8 @@ class __$$_AttendanceCheckStateCopyWithImpl<$Res>
 class _$_AttendanceCheckState implements _AttendanceCheckState {
   const _$_AttendanceCheckState(
       {@AttendStatusListConverter()
-          required final List<AttendStatus> statusList})
+          required final List<AttendStatus> statusList,
+      required this.loading})
       : _statusList = statusList;
 
   factory _$_AttendanceCheckState.fromJson(Map<String, dynamic> json) =>
@@ -113,8 +129,11 @@ class _$_AttendanceCheckState implements _AttendanceCheckState {
   }
 
   @override
+  final bool loading;
+
+  @override
   String toString() {
-    return 'AttendanceCheckState(statusList: $statusList)';
+    return 'AttendanceCheckState(statusList: $statusList, loading: $loading)';
   }
 
   @override
@@ -123,13 +142,16 @@ class _$_AttendanceCheckState implements _AttendanceCheckState {
         (other.runtimeType == runtimeType &&
             other is _$_AttendanceCheckState &&
             const DeepCollectionEquality()
-                .equals(other._statusList, _statusList));
+                .equals(other._statusList, _statusList) &&
+            const DeepCollectionEquality().equals(other.loading, loading));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_statusList));
+      runtimeType,
+      const DeepCollectionEquality().hash(_statusList),
+      const DeepCollectionEquality().hash(loading));
 
   @JsonKey(ignore: true)
   @override
@@ -147,9 +169,9 @@ class _$_AttendanceCheckState implements _AttendanceCheckState {
 
 abstract class _AttendanceCheckState implements AttendanceCheckState {
   const factory _AttendanceCheckState(
-          {@AttendStatusListConverter()
-              required final List<AttendStatus> statusList}) =
-      _$_AttendanceCheckState;
+      {@AttendStatusListConverter()
+          required final List<AttendStatus> statusList,
+      required final bool loading}) = _$_AttendanceCheckState;
 
   factory _AttendanceCheckState.fromJson(Map<String, dynamic> json) =
       _$_AttendanceCheckState.fromJson;
@@ -157,6 +179,8 @@ abstract class _AttendanceCheckState implements AttendanceCheckState {
   @override
   @AttendStatusListConverter()
   List<AttendStatus> get statusList;
+  @override
+  bool get loading;
   @override
   @JsonKey(ignore: true)
   _$$_AttendanceCheckStateCopyWith<_$_AttendanceCheckState> get copyWith =>

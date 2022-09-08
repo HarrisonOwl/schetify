@@ -11,6 +11,7 @@ _$_AttendanceCheckState _$$_AttendanceCheckStateFromJson(
     _$_AttendanceCheckState(
       statusList: const AttendStatusListConverter()
           .fromJson(json['statusList'] as List<Map<String, dynamic>>),
+      loading: json['loading'] as bool,
     );
 
 Map<String, dynamic> _$$_AttendanceCheckStateToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$_AttendanceCheckStateToJson(
     <String, dynamic>{
       'statusList':
           const AttendStatusListConverter().toJson(instance.statusList),
+      'loading': instance.loading,
     };

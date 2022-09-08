@@ -3,34 +3,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/attend_status.dart';
-import 'package:schetify/provider/event_detail_provider.dart';
 import 'package:schetify/provider/attendance_check_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../model/entity/schedule_candidate.dart';
+import '../../../../provider/event_update_provider.dart';
 
 class AttendanceCheckPage extends HookConsumerWidget {
   const AttendanceCheckPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final eventDetail = ref.watch(eventDetailProvider);
+    final detail = ref.watch(eventUpdateProvider);
+    final detailNotifier = ref.read(eventUpdateProvider.notifier);
     final attendanceCheck = ref.watch(attendanceCheckProvider);
-    final statusList = useState(attendanceCheck.statusList);
+    final attendanceNotifier = ref.read(attendanceCheckProvider.notifier);
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        Future<void>.microtask(() async {
+          await detailNotifier.getEventInformation(detail.event.id ?? -1);
+          await attendanceNotifier.getStatus(detail.event.id ?? -1);
+        });
+      });
+      return null;
+    }, const []);
 
     return Scaffold(
         appBar: AppBar(
           title: const Text("出席可能日"),
         ),
-        body: Column(
+        body: detail.loading || attendanceCheck.loading ? Container(
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator(
+              color: Colors.green,
+            )
+        ) : Column(
             children: <Widget>[
               Expanded(
                 flex: 75, // 割合
                 child: ListView.separated(
-                  itemCount: eventDetail.scheduleCandidates.length,
+                  itemCount: detail.scheduleCandidates.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final ScheduleCandidate candidate = eventDetail.scheduleCandidates.elementAt(index);
-                    final AttendStatus? status = statusList.value.firstWhereOrNull((AttendStatus status) {
+                    final ScheduleCandidate candidate = detail.scheduleCandidates.elementAt(index);
+                    final AttendStatus? status = attendanceCheck.statusList.firstWhereOrNull((AttendStatus status) {
                       return status.schedule_candidate_id == candidate.id;
                     });
                     return Padding(
@@ -63,15 +79,15 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                         ),
                                         onPressed: (){
                                           if(status?.status == 2){
-                                            final newStatusList = List.of(statusList.value);
+                                            final newStatusList = List.of(attendanceCheck.statusList);
                                             newStatusList.remove(status);
-                                            statusList.value = newStatusList;
+                                            attendanceNotifier.changeStatus(newStatusList);
                                           }
                                           else {
-                                            final newStatusList = List.of(statusList.value);
+                                            final newStatusList = List.of(attendanceCheck.statusList);
                                             newStatusList.remove(status);
                                             newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id ?? -1, status: 2));
-                                            statusList.value = newStatusList;
+                                            attendanceNotifier.changeStatus(newStatusList);
                                           }
                                         },
                                       ),
@@ -90,15 +106,15 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                       ),
                                       onPressed: (){
                                         if(status?.status == 1){
-                                          final newStatusList = List.of(statusList.value);
+                                          final newStatusList = List.of(attendanceCheck.statusList);
                                           newStatusList.remove(status);
-                                          statusList.value = newStatusList;
+                                          attendanceNotifier.changeStatus(newStatusList);
                                         }
                                         else {
-                                          final newStatusList = List.of(statusList.value);
+                                          final newStatusList = List.of(attendanceCheck.statusList);
                                           newStatusList.remove(status);
                                           newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id ?? -1, status: 1));
-                                          statusList.value = newStatusList;
+                                          attendanceNotifier.changeStatus(newStatusList);
                                         }
                                       },
                                     ),
@@ -117,15 +133,15 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                       ),
                                       onPressed: (){
                                         if(status?.status == 0){
-                                          final newStatusList = List.of(statusList.value);
+                                          final newStatusList = List.of(attendanceCheck.statusList);
                                           newStatusList.remove(status);
-                                          statusList.value = newStatusList;
+                                          attendanceNotifier.changeStatus(newStatusList);
                                         }
                                         else {
-                                          final newStatusList = List.of(statusList.value);
+                                          final newStatusList = List.of(attendanceCheck.statusList);
                                           newStatusList.remove(status);
                                           newStatusList.add(AttendStatus(schedule_candidate_id: candidate.id ?? -1, status: 0));
-                                          statusList.value = newStatusList;
+                                          attendanceNotifier.changeStatus(newStatusList);
                                         }
                                       },
                                     ),
@@ -156,10 +172,13 @@ class AttendanceCheckPage extends HookConsumerWidget {
                         ),
                         ElevatedButton(
                           child: const Text('保存'),
-                          onPressed: () {
-                            ref.read(attendanceCheckProvider.notifier)
-                              .changeStatus(statusList.value);
-                            Navigator.pop(context);
+                          onPressed: () async {
+                            await attendanceNotifier.updateStatus();
+                            await detailNotifier.getEventInformation(detail.event.id ?? -1);
+                            await attendanceNotifier.getStatus(detail.event.id ?? -1)
+                              .then((status) {
+                              Navigator.pop(context);
+                            });
                           },
                         ),
                       ],

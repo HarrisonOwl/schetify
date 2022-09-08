@@ -9,6 +9,7 @@ part 'generated/attendance_check_state.g.dart';
 class AttendanceCheckState with _$AttendanceCheckState {
   const factory AttendanceCheckState({
     @AttendStatusListConverter() required List<AttendStatus> statusList,
+    required bool loading,
   }) = _AttendanceCheckState;
 
   factory AttendanceCheckState.fromJson(Map<String, Object?> json)
