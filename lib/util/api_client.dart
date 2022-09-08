@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class APIClient{
-  final API_URL = "http://192.168.0.29:8000/api/v1/";
+  final API_URL = "http://192.168.0.30:8000/api/v1/";
 
   Future<Options> getAuthHeader() async{
     final token = await FirebaseAuth.instance.currentUser?.getIdToken(true);

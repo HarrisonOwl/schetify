@@ -306,4 +306,10 @@ class TestRepository{
     const status = 200;
     return status;
   }
+
+  Future<int> createUserEvents(String id) async {
+    print("event_id: ${id}");
+    const status = 200;
+    return status;
+  }
 }
