@@ -17,16 +17,19 @@ class InitPage extends HookConsumerWidget {
             const SizedBox(height: 370),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 40),
               child: SizedBox(
-                  height: 50,
+                  height: 55,
                   width: double.infinity,
                   child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
                         primary: Colors.white,
-                      ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35),
+                        )
+                    ),
                       onPressed: () {
                         Navigator.of(context).pushNamed("/init/login");
                       },
-                      child: const Text('ログイン', style: TextStyle(color: Colors.green),)
+                      child: const Text('はじめる', style: TextStyle(color: Colors.green, fontSize: 20),)
                   )
               ),
             ),
