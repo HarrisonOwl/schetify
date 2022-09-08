@@ -32,7 +32,7 @@ class UserRegistrationPage extends HookConsumerWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const SizedBox(height: 140),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                   SizedBox(width: double.infinity, child: Text(errorMsg.value, style: const TextStyle(color: Colors.white, fontSize: 20),textAlign: TextAlign.left,),),
                   const SizedBox(height: 10),
                   TextFormField(

@@ -29,7 +29,7 @@ class LoginPage extends HookConsumerWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const SizedBox(height: 170),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                 SizedBox(width: double.infinity, child: Text(errorMsg.value, style: const TextStyle(color: Colors.white, fontSize: 20),textAlign: TextAlign.left,),),
                 const SizedBox(height: 10),
                 TextFormField(
@@ -110,7 +110,7 @@ class LoginPage extends HookConsumerWidget {
                           Navigator.of(context).pushNamedAndRemoveUntil("/main", (route) => false);
                         }, onError: (error) {
                           isRunning.value = false;
-                          errorMsg.value = "ユーザー作成に失敗しました!";
+                          errorMsg.value = "ログインに失敗しました!";
                         });
                       } ,
                       child: const Icon(
