@@ -53,55 +53,61 @@ class ScheduleUpdatePage extends HookConsumerWidget {
     }, const []);
     return Scaffold(
       appBar: AppBar(
-        title: Text("予定${args != null ? '編集' : '作成'}"),
+        bottomOpacity: 0.0,
+        elevation: 0.0,
       ),
-      body: detail.loading ? Container(
-          alignment: Alignment.center,
-          child: const CircularProgressIndicator(
-            color: Colors.green,
-          )
-      ) : Column(
-        children: [
-          Container(
-            alignment: const Alignment(0.0, 0.0),
-            height: 100,
-            child: TextFormField(
-              style: const TextStyle(
-                fontSize: 30,
-              ),
-              initialValue: detail.event.name,
-              decoration: InputDecoration(
-                hintText: '予定名',
-                contentPadding: const EdgeInsets.all(20),
-                fillColor: Colors.green[100],
-                filled: true,
-                isDense: true,
-                prefixIcon: Container(
-                  margin: const EdgeInsets.all(20),
-                  child: const Icon(
-                    Icons.event_available,
-                    size: 40,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-              onFieldSubmitted: (value) async {
-                await notifier.updateName(value)
-                    .then((status){
-                      if(status == 200) {
-                        notifier.getEventInformation(args?['id'] ?? -1);
+      body: Column(
+          children:[Container(
+              color: Colors.green,
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  child: TextFormField(
+                      style: const TextStyle(
+                        fontSize: 26,
+                        color: Colors.white,
+                      ),
+                      cursorColor: Colors.white,
+                      initialValue: detail.event.name,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(10),
+                        filled: true,
+                        fillColor: Colors.green,
+                        isDense: true,
+                        prefixIcon: Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Icon(
+                            Icons.event_available,
+                            color: Colors.white,
+                            size: 35,
+                          ),
+                        ),
+                        enabledBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white, width: 3),
+                        ),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white, width: 3),
+                        ),
+                      ),
+                      onFieldSubmitted: (value) async {
+                        await notifier.updateName(value)
+                            .then((status){
+                          if(status == 200) {
+                            notifier.getEventInformation(args?['id'] ?? -1);
+                          }
+                          else {
+                            ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                          }
+                        });
                       }
-                      else {
-                        ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
-                      }
-                });
-              }
-            ),
+                  ))
           ),
-          Expanded(child: ListView.separated(
+            detail.loading ? Container(
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: const CircularProgressIndicator(
+                  color: Colors.green,
+                )
+            ) : Expanded(child: ListView.separated(
             itemCount: util.length,
             itemBuilder: (BuildContext context, int index) {
               return SubListItem(
