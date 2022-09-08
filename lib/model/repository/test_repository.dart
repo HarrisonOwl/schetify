@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:schetify/model/entity/attend_status.dart';
 import 'package:schetify/model/entity/event.dart';
 import 'package:schetify/model/entity/test_weather.dart';
 import 'package:schetify/util/api_client.dart';
@@ -272,5 +273,41 @@ class TestRepository{
       'status': status
     };
     return set;
+  }
+
+  Future<List<AttendStatus>> getStatusList(int id) async {
+    final data = [
+      {
+        'schedule_candidate_id': 1,
+        'status': 0,
+      },
+      {
+        'schedule_candidate_id': 2,
+        'status': 1,
+      },
+      {
+        'schedule_candidate_id': 4,
+        'status': 2,
+      },
+      {
+        'schedule_candidate_id': 5,
+        'status': 2,
+      },
+    ];
+    final list = List<AttendStatus>.from(data.map((element)=> AttendStatus.fromJson(element)));
+    return list;
+  }
+
+  Future<int> updateStatus(List<AttendStatus> statusList) async {
+    final data = statusList.map((e) => e.toJson());
+    print(data);
+    const status = 200;
+    return status;
+  }
+
+  Future<int> createUserEvents(String id) async {
+    print("event_id: ${id}");
+    const status = 200;
+    return status;
   }
 }

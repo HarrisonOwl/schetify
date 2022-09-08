@@ -169,8 +169,13 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
       'name': state.event.name,
       'description': state.event.description
     };
-    final set = testService.createEvent(data);
+    final set = await testService.createEvent(data);
     return set;
+  }
+
+  Future<int> createUserEvents(String id) async {
+    final status = await testService.createUserEvents(id);
+    return status;
   }
 }
 

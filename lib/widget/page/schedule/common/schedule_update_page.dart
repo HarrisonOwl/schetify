@@ -16,7 +16,7 @@ class ScheduleUpdatePage extends HookConsumerWidget {
     ScheduleUpdatePageUtil("割り勘設定", "cost", const Icon(Icons.money)),
     ScheduleUpdatePageUtil("目的地:", "/schedule/new/destination", const Icon(Icons.room),),
     ScheduleUpdatePageUtil("アンケート設定", "/schedule/new/questionnaire", const Icon(Icons.feed)),
-    ScheduleUpdatePageUtil("シェア(URL)", "", const Icon(Icons.add_link)),
+    ScheduleUpdatePageUtil("シェア(URL)", "url", const Icon(Icons.add_link)),
   ];
 
   // tentative variable

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/widget/dialog/event_detail_dialog.dart';
 import 'package:schetify/widget/dialog/splitting_the_cost_dialog.dart';
@@ -19,6 +20,23 @@ class SubListItem extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(eventUpdateProvider.notifier);
+    final detail = ref.watch(eventUpdateProvider);
+
+    SnackBar alertSnackBar = SnackBar(
+      content: const Text("URLをクリップボードにコピーしました。"),
+      action: SnackBarAction(
+        label: '閉じる',
+        onPressed: (){
+          //閉じるが押された時行いたい処理
+        },
+      ),
+    );
+
+    Future<void> cripUrl() async {
+      final data = ClipboardData(text: "schetify://events/?id=${detail.event.id}&name=${detail.event.name}");
+      await Clipboard.setData(data)
+        .then((_) => ScaffoldMessenger.of(context).showSnackBar(alertSnackBar));
+    }
     return ListTile(
       title: Row(
         mainAxisSize: MainAxisSize.min,
@@ -47,7 +65,8 @@ class SubListItem extends HookConsumerWidget {
                 ],
               )
             )
-        }else if(route == "cost"){
+        }
+        else if(route == "cost"){
           showDialog(
               context: context,
               builder: (_) => const SimpleDialog(
@@ -57,7 +76,11 @@ class SubListItem extends HookConsumerWidget {
                 ],
               )
           )
-        }else{
+        }
+        else if(route == "url") {
+          cripUrl()
+        }
+        else{
           Navigator.of(context).pushNamed(route)
             .then((value) {
               notifier.getEventInformation(eventId!);
