@@ -39,7 +39,7 @@ class TestRepository{
   Future<List<Event>> getEvents() async {
     final data = [
       {
-        'id': 1,
+        'id': 'aaaa-aaa-aaa',
         'name': 'お疲れ様会',
         'description': 'hackUのお疲れ様会です。',
         'start_at': '2022-09-16T19:00:00.000',
@@ -85,24 +85,28 @@ class TestRepository{
   Future<List<Participant>> getParticipants(int id) async {
     final data = [
       {
+        'relation_id': 1,
         'user_id': '1',
         'username': 'tester1',
         'label': 1,
         'group_id': 1,
       },
       {
+        'relation_id': 2,
         'user_id': '2',
         'username': 'tester2',
         'label': 1,
         'group_id': 2,
       },
       {
+        'relation_id': 3,
         'user_id': '3',
         'username': 'tester3',
         'label': 1,
         'group_id': 1,
       },
       {
+        'relation_id': 4,
         'user_id': '4',
         'username': 'tester4',
         'label': 1,
