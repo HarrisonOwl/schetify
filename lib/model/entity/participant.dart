@@ -10,7 +10,7 @@ class Participant with _$Participant {
     required String user_id,
     required String username,
     required int label,
-    required int group_id,
+    required int? group_id,
   }) = _Participant;
 
   factory Participant.fromJson(Map<String, Object?> json)

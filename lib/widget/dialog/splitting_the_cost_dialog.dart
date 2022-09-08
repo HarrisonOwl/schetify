@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/provider/event_update_provider.dart';
 
 import '../../provider/splitting_the_cost_provider.dart';
 
@@ -12,16 +13,29 @@ class SplittingTheCostDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final provider = ref.watch(splittingTheCostProvider);
+    final detail = ref.watch(eventUpdateProvider);
+    final notifier = ref.read(eventUpdateProvider.notifier);
     final number = useState(6);
-    final costType = useState(0);
-    final costPerPerson = useState(costType.value == 1 ? provider.money : null);
-    final totalCost = useState(costType.value == 0 ? provider.money : null);
+    final flag = useState(detail.event.cost != null);
+    final costType = useState(detail.event.cost_type);
+    final costPerPerson = useState(costType.value == 1 ? detail.event.cost : null);
+    final totalCost = useState(costType.value == 0 ? detail.event.cost : null);
 
     void setType(int? value) {
-      if(provider.flag) {
+      if(flag.value) {
         costType.value = value ?? 0;
       }
     }
+
+    SnackBar alertSnackBar = SnackBar(
+      content: const Text('更新に失敗しました。'),
+      action: SnackBarAction(
+        label: '閉じる',
+        onPressed: (){
+          //閉じるが押された時行いたい処理
+        },
+      ),
+    );
 
     return Center(
         child: Column(
@@ -29,9 +43,10 @@ class SplittingTheCostDialog extends HookConsumerWidget {
           children:[
             SwitchListTile(
               title: const Text('割り勘設定'),
-              value: provider.flag,
-              onChanged: (value) => ref.read(splittingTheCostProvider.notifier)
-                  .changeFlag(value),
+              value: flag.value,
+              onChanged: (value) {
+                flag.value = value;
+              },
               secondary: const Icon(Icons.lightbulb_outline),
             ),
             Padding(
@@ -53,11 +68,11 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                         hintText: '金額',
                         border: OutlineInputBorder(),
                       ),
-                      enabled: provider.flag && costType.value == 0,
+                      enabled: flag.value && costType.value == 0,
                       keyboardType: TextInputType.number,
                       initialValue: (totalCost.value != null && totalCost.value!=0.0) ? totalCost.value.toString() : "",
                       onChanged: (text){
-                        totalCost.value = double.parse(text);
+                        totalCost.value = int.parse(text);
                       }
                   ),
                   Row(
@@ -75,29 +90,48 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                         hintText: '金額',
                         border: OutlineInputBorder(),
                       ),
-                      enabled: provider.flag && costType.value == 1,
+                      enabled: flag.value && costType.value == 1,
                       keyboardType: TextInputType.number,
                       initialValue: (costPerPerson.value != null && costPerPerson.value!=0.0) ? costPerPerson.value.toString() : "",
                       onChanged: (text){
-                        costPerPerson.value = double.parse(text);
+                        costPerPerson.value = int.parse(text);
                       }
                   ),
                   Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Text("現在の人数: ${number.value}人 一人当たり${costType.value == 0 ? ((totalCost.value ?? 0) / number.value).ceil() : costPerPerson.value  ?? 0}"),
+                      child: Text("現在の人数: ${detail.participants.length}人 一人当たり${costType.value == 0 ? ((totalCost.value ?? 0) / detail.participants.length).ceil() : costPerPerson.value  ?? 0}"),
                   ),
                   Padding(
                       padding: const EdgeInsets.all(10),
                     child: OutlinedButton(
                       child: const Text('確定'),
-                      onPressed: () {
-                        final cost = costType.value == 0 ? totalCost.value : costPerPerson.value;
-                        if(cost != null) {
-                          ref.read(splittingTheCostProvider.notifier)
-                              .changeMoney(cost);
+                      onPressed: () async {
+                        if(!flag.value) {
+                          notifier.updateSplittingInformation(null, costType.value ?? 0)
+                              .then((status) {
+                            if(status == 200) {
+                              Navigator.of(context).pop();
+                            }
+                            else {
+                              ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                            }
+                          });
                         }
-
-                        Navigator.of(context).pop();
+                        else {
+                          final cost = costType.value == 0 ? totalCost.value : costPerPerson.value;
+                          if(cost != null) {
+                            notifier.updateSplittingInformation(cost, costType.value ?? 0)
+                                .then((status) {
+                              if(status == 200) {
+                                Navigator.of(context).pop();
+                                notifier.getEventInformation(detail.event.id ?? -1);
+                              }
+                              else {
+                                ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                              }
+                            });
+                          }
+                        }
                       },
                     )
                   )

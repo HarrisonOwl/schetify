@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of '../event_detail_state.dart';
+part of '../event_update_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$EventDetailState {
+mixin _$EventUpdateState {
   Event get event => throw _privateConstructorUsedError;
   SplayTreeSet<ScheduleCandidate> get scheduleCandidates =>
       throw _privateConstructorUsedError;
@@ -23,15 +23,15 @@ mixin _$EventDetailState {
   bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $EventDetailStateCopyWith<EventDetailState> get copyWith =>
+  $EventUpdateStateCopyWith<EventUpdateState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $EventDetailStateCopyWith<$Res> {
-  factory $EventDetailStateCopyWith(
-          EventDetailState value, $Res Function(EventDetailState) then) =
-      _$EventDetailStateCopyWithImpl<$Res>;
+abstract class $EventUpdateStateCopyWith<$Res> {
+  factory $EventUpdateStateCopyWith(
+          EventUpdateState value, $Res Function(EventUpdateState) then) =
+      _$EventUpdateStateCopyWithImpl<$Res>;
   $Res call(
       {Event event,
       SplayTreeSet<ScheduleCandidate> scheduleCandidates,
@@ -42,13 +42,13 @@ abstract class $EventDetailStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EventDetailStateCopyWithImpl<$Res>
-    implements $EventDetailStateCopyWith<$Res> {
-  _$EventDetailStateCopyWithImpl(this._value, this._then);
+class _$EventUpdateStateCopyWithImpl<$Res>
+    implements $EventUpdateStateCopyWith<$Res> {
+  _$EventUpdateStateCopyWithImpl(this._value, this._then);
 
-  final EventDetailState _value;
+  final EventUpdateState _value;
   // ignore: unused_field
-  final $Res Function(EventDetailState) _then;
+  final $Res Function(EventUpdateState) _then;
 
   @override
   $Res call({
@@ -86,11 +86,11 @@ class _$EventDetailStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_EventDetailStateCopyWith<$Res>
-    implements $EventDetailStateCopyWith<$Res> {
-  factory _$$_EventDetailStateCopyWith(
-          _$_EventDetailState value, $Res Function(_$_EventDetailState) then) =
-      __$$_EventDetailStateCopyWithImpl<$Res>;
+abstract class _$$_EventUpdateStateCopyWith<$Res>
+    implements $EventUpdateStateCopyWith<$Res> {
+  factory _$$_EventUpdateStateCopyWith(
+          _$_EventUpdateState value, $Res Function(_$_EventUpdateState) then) =
+      __$$_EventUpdateStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Event event,
@@ -103,15 +103,15 @@ abstract class _$$_EventDetailStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EventDetailStateCopyWithImpl<$Res>
-    extends _$EventDetailStateCopyWithImpl<$Res>
-    implements _$$_EventDetailStateCopyWith<$Res> {
-  __$$_EventDetailStateCopyWithImpl(
-      _$_EventDetailState _value, $Res Function(_$_EventDetailState) _then)
-      : super(_value, (v) => _then(v as _$_EventDetailState));
+class __$$_EventUpdateStateCopyWithImpl<$Res>
+    extends _$EventUpdateStateCopyWithImpl<$Res>
+    implements _$$_EventUpdateStateCopyWith<$Res> {
+  __$$_EventUpdateStateCopyWithImpl(
+      _$_EventUpdateState _value, $Res Function(_$_EventUpdateState) _then)
+      : super(_value, (v) => _then(v as _$_EventUpdateState));
 
   @override
-  _$_EventDetailState get _value => super._value as _$_EventDetailState;
+  _$_EventUpdateState get _value => super._value as _$_EventUpdateState;
 
   @override
   $Res call({
@@ -120,7 +120,7 @@ class __$$_EventDetailStateCopyWithImpl<$Res>
     Object? participants = freezed,
     Object? loading = freezed,
   }) {
-    return _then(_$_EventDetailState(
+    return _then(_$_EventUpdateState(
       event: event == freezed
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
@@ -143,8 +143,8 @@ class __$$_EventDetailStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EventDetailState implements _EventDetailState {
-  const _$_EventDetailState(
+class _$_EventUpdateState implements _EventUpdateState {
+  const _$_EventUpdateState(
       {required this.event,
       required this.scheduleCandidates,
       required final List<Participant> participants,
@@ -167,14 +167,14 @@ class _$_EventDetailState implements _EventDetailState {
 
   @override
   String toString() {
-    return 'EventDetailState(event: $event, scheduleCandidates: $scheduleCandidates, participants: $participants, loading: $loading)';
+    return 'EventUpdateState(event: $event, scheduleCandidates: $scheduleCandidates, participants: $participants, loading: $loading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EventDetailState &&
+            other is _$_EventUpdateState &&
             const DeepCollectionEquality().equals(other.event, event) &&
             const DeepCollectionEquality()
                 .equals(other.scheduleCandidates, scheduleCandidates) &&
@@ -193,16 +193,16 @@ class _$_EventDetailState implements _EventDetailState {
 
   @JsonKey(ignore: true)
   @override
-  _$$_EventDetailStateCopyWith<_$_EventDetailState> get copyWith =>
-      __$$_EventDetailStateCopyWithImpl<_$_EventDetailState>(this, _$identity);
+  _$$_EventUpdateStateCopyWith<_$_EventUpdateState> get copyWith =>
+      __$$_EventUpdateStateCopyWithImpl<_$_EventUpdateState>(this, _$identity);
 }
 
-abstract class _EventDetailState implements EventDetailState {
-  const factory _EventDetailState(
+abstract class _EventUpdateState implements EventUpdateState {
+  const factory _EventUpdateState(
       {required final Event event,
       required final SplayTreeSet<ScheduleCandidate> scheduleCandidates,
       required final List<Participant> participants,
-      required final bool loading}) = _$_EventDetailState;
+      required final bool loading}) = _$_EventUpdateState;
 
   @override
   Event get event;
@@ -214,6 +214,6 @@ abstract class _EventDetailState implements EventDetailState {
   bool get loading;
   @override
   @JsonKey(ignore: true)
-  _$$_EventDetailStateCopyWith<_$_EventDetailState> get copyWith =>
+  _$$_EventUpdateStateCopyWith<_$_EventUpdateState> get copyWith =>
       throw _privateConstructorUsedError;
 }

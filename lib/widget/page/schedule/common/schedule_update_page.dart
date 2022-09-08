@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/entity/schedule_update_page_util.dart';
+import '../../../../provider/event_update_provider.dart';
 import '../../../components/schedule/sub_list_item.dart';
 
 class ScheduleUpdatePage extends HookConsumerWidget {
@@ -14,21 +16,51 @@ class ScheduleUpdatePage extends HookConsumerWidget {
     ScheduleUpdatePageUtil("割り勘設定", "cost", const Icon(Icons.money)),
     ScheduleUpdatePageUtil("目的地:", "/schedule/new/destination", const Icon(Icons.room),),
     ScheduleUpdatePageUtil("アンケート設定", "/schedule/new/questionnaire", const Icon(Icons.feed)),
-    ScheduleUpdatePageUtil("出席", "", const Icon(Icons.confirmation_num)),
     ScheduleUpdatePageUtil("シェア(URL)", "", const Icon(Icons.add_link)),
   ];
 
   // tentative variable
   String toggleState = "ON";
-  String address = "東京都世田谷区北沢３丁目２３−１４";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final notifier = ref.read(eventUpdateProvider.notifier);
+    final detail = ref.watch(eventUpdateProvider);
+
+    SnackBar alertSnackBar = SnackBar(
+      content: const Text('更新に失敗しました。'),
+      action: SnackBarAction(
+        label: '閉じる',
+        onPressed: (){
+          //閉じるが押された時行いたい処理
+        },
+      ),
+    );
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        Future<void>.microtask(() async {
+          if(args != null) {
+            await notifier.getEventInformation(args['id']);
+          }
+          else {
+            await notifier.initialize();
+          }
+        });
+      });
+      return null;
+    }, const []);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("予定作成&編集"),
+        title: Text("予定${args != null ? '編集' : '作成'}"),
       ),
-      body: Column(
+      body: detail.loading ? Container(
+          alignment: Alignment.center,
+          child: const CircularProgressIndicator(
+            color: Colors.green,
+          )
+      ) : Column(
         children: [
           Container(
             alignment: const Alignment(0.0, 0.0),
@@ -37,6 +69,7 @@ class ScheduleUpdatePage extends HookConsumerWidget {
               style: const TextStyle(
                 fontSize: 30,
               ),
+              initialValue: detail.event.name,
               decoration: InputDecoration(
                 hintText: '予定名',
                 contentPadding: const EdgeInsets.all(20),
@@ -55,6 +88,17 @@ class ScheduleUpdatePage extends HookConsumerWidget {
                   borderSide: BorderSide.none,
                 ),
               ),
+              onFieldSubmitted: (value) async {
+                await notifier.updateName(value)
+                    .then((status){
+                      if(status == 200) {
+                        notifier.getEventInformation(args?['id'] ?? -1);
+                      }
+                      else {
+                        ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                      }
+                });
+              }
             ),
           ),
           Expanded(child: ListView.separated(
@@ -72,7 +116,8 @@ class ScheduleUpdatePage extends HookConsumerWidget {
                 ),
                 route: util[index].routeName,
                 toggle: util[index].tileName == '出席' ? toggleState : '',
-                address: util[index].tileName == '目的地:' ? address : '',
+                address: util[index].tileName == '目的地:' ? detail.event.getLocationText() : '',
+                eventId: detail.event.id,
               );
             },
             separatorBuilder: (BuildContext context, int index) => const Divider(),

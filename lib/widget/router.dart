@@ -8,12 +8,13 @@ import 'package:schetify/widget/page/init/user_registration_page.dart';
 import 'package:schetify/widget/page/main_page.dart';
 import 'package:schetify/widget/page/schedule/common/attendance_check_page.dart';
 import 'package:schetify/widget/page/schedule/common/event_detail_page.dart';
+import 'package:schetify/widget/page/schedule/common/event_new_page.dart';
 import 'package:schetify/widget/page/schedule/common/question/question.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_update_destination_page.dart';
 import 'package:schetify/widget/page/schedule/common/label/settings_label.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_update_page.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_day_update_page.dart';
-import 'package:schetify/widget/page/seat_distribution.dart';
+import 'package:schetify/widget/page/schedule/common/seat_distribution.dart';
 import 'package:schetify/widget/page/setting/account/change_password/change_password.dart';
 import 'package:schetify/widget/page/setting/account/change_password/enter_password.dart';
 import 'package:schetify/widget/page/setting/account/settings_account.dart';
@@ -48,10 +49,11 @@ class AppRouter extends ConsumerWidget {
         '/init/register': (BuildContext context) => const UserRegistrationPage(),
         '/init/login': (BuildContext context) => const LoginPage(),
         '/schedule/new/label': (BuildContext context) => const SettingsLabel(),
-        '/schedule/new/seat': (BuildContext context) => SeatDistribution(),
+        '/schedule/new/seat': (BuildContext context) => const SeatDistribution(),
         '/schedule/attendance': (BuildContext context) => const AttendanceCheckPage(),
         '/event/detail': (BuildContext context) => const EventDetailPage(),
         '/event/': (BuildContext context) => const EventPage(),
+        '/event/new': (BuildContext context) => const EventCreatePage(),
       },
     );
   }

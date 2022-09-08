@@ -12,8 +12,8 @@ import 'package:schetify/model/repository/test_repository.dart';
 class EventDetailNotifier extends StateNotifier<EventDetailState> {
   EventDetailNotifier() : super(EventDetailState(
       event: const Event(
-          id: 1,
-          name: "test",
+          id: null,
+          name: null,
           description: null,
           start_at: null,
           end_at: null,
@@ -21,66 +21,48 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
           location_name: null,
           location_address: null,
           location_latitude: null,
-          location_longtiude: null,
+          location_longitude: null,
           group_num: null,
-          total_cost: null,
+          cost: null,
+          cost_type: null,
           questionare_url: null
       ),
       scheduleCandidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText())),
-      participants: []
-  )){
-    init();
-  }
+      participants: [],
+      loading: true
+  ));
 
   final TestRepository testService = TestRepository();
 
+  void changeLoading(bool loading) {
+    state = state.copyWith(loading: loading);
+  }
+
   Future<void> getEventInformation(int id) async {
     try{
+      changeLoading(true);
       await Future.delayed(const Duration(seconds: 1));
       final event = await testService.getEvent(id);
       final participants = await testService.getParticipants(id);
       final candidates = await testService.getScheduleCandidates(id);
-      state = state.copyWith(event: event, participants: participants, scheduleCandidates: candidates);
+      state = state.copyWith(
+          event: event,
+          participants: participants,
+          scheduleCandidates: candidates,
+          loading: false
+      );
     }catch(e){
       debugPrint(e.toString());
     }
   }
 
-  void init(){
-    List<ScheduleCandidate> list = [
-      ScheduleCandidate(
-          id: 1,
-          start_at: DateTime(2022, 9, 5, 12, 0),
-          end_at: DateTime(2022, 9, 5, 13, 0),
-          voters: []
-      ),
-      ScheduleCandidate(
-          id: 2,
-          start_at: DateTime(2022, 9, 6, 12, 0),
-          end_at: DateTime(2022, 9, 6, 13, 0),
-          voters: []
-      ),
-      ScheduleCandidate(
-          id: 3,
-          start_at: DateTime(2022, 9, 7, 12, 0),
-          end_at: DateTime(2022, 9, 7, 13, 0),
-          voters: []
-      ),
-      ScheduleCandidate(
-          id: 4,
-          start_at: DateTime(2022, 9, 8, 12, 0),
-          end_at: DateTime(2022, 9, 8, 13, 0),
-          voters: []
-      ),
-      ScheduleCandidate(
-          id: 5,
-          start_at: DateTime(2022, 9, 4, 12, 0),
-          end_at: DateTime(2022, 9, 4, 13, 0),
-          voters: []
-      ),
-    ];
-    for (var c in list) { state.scheduleCandidates.add(c); }
-    state = state.copyWith(scheduleCandidates: state.scheduleCandidates);
+  Future<int> updateSchedule(DateTime startAt, DateTime endAt) async{
+    final data = {
+      'start_at': startAt.toString(),
+      'end_at': endAt.toString(),
+    };
+    final status = await testService.updateEvent(data);
+    return status;
   }
 }
 

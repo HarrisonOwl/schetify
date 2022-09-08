@@ -15,29 +15,35 @@ class EventDetailPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final detail = ref.watch(eventDetailProvider);
+    final notifier = ref.read(eventDetailProvider.notifier);
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final loading = useState(true);
-    final maxFitnessValue = detail.scheduleCandidates
-        .toList()
-        .map((e) {
-          List<Voter> maybeVoters = e
-              .voters
-              .where((element) => element.status == 1)
-              .toList();
-          List<Voter> ableVoters = e
-              .voters
-              .where((element) => element.status == 2)
-              .toList();
-          return maybeVoters.length + ableVoters.length * 100;
-        })
-        .toList()
-        .reduce(max);
+    int maxFitnessValue = -1;
+
+    Future<void> updateEventInformation() async{
+      await ref.read(eventDetailProvider.notifier)
+          .getEventInformation(args['id']);
+      maxFitnessValue = detail.scheduleCandidates
+          .toList()
+          .map((e) {
+        List<Voter> maybeVoters = e
+            .voters
+            .where((element) => element.status == 1)
+            .toList();
+        List<Voter> ableVoters = e
+            .voters
+            .where((element) => element.status == 2)
+            .toList();
+        return maybeVoters.length + ableVoters.length * 100;
+      })
+          .toList()
+          .reduce(max);
+    }
+
+
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Future<void>.microtask(() async {
-          await ref.read(eventDetailProvider.notifier)
-              .getEventInformation(args['id']);
-          loading.value = false;
+          await updateEventInformation();
         });
       });
       return null;
@@ -46,9 +52,9 @@ class EventDetailPage extends HookConsumerWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: loading.value ? const Text('読み込み中...') : Text(detail.event.name ?? ''),
+          title: detail.loading ? const Text('読み込み中...') : Text(detail.event.name ?? ''),
         ),
-        body: loading.value ? Container(
+        body: detail.loading ? Container(
             alignment: Alignment.center,
             child: const CircularProgressIndicator(
               color: Colors.green,
@@ -144,7 +150,7 @@ class EventDetailPage extends HookConsumerWidget {
                         .toList();
                     final fitnessValue = maybeVoters.length + ableVoters.length * 100;
                     // TODO 自分のユーザのロールを見るようにする
-                    final isEditor = detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label == 1;
+                    final isEditor = (detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label ?? 0) >= 1;
                     final isDecided = detail.event.getText() == candidate.getText();
                     return Container(
                       color: fitnessValue == maxFitnessValue ? Colors.lightGreenAccent : Colors.transparent,
@@ -238,8 +244,10 @@ class EventDetailPage extends HookConsumerWidget {
                                                           fontSize: 12
                                                       )
                                                   ),
-                                                  onPressed: () {
+                                                  onPressed: () async{
                                                     // TODO APIを叩いてイベントのstart_at, end_atを更新し、再度イベントを読み込むようにする
+                                                    await notifier.updateSchedule(candidate.start_at, candidate.end_at);
+                                                    await updateEventInformation();
                                                   },
                                                 ),
                                               ),
@@ -281,7 +289,7 @@ class EventDetailPage extends HookConsumerWidget {
                       ),
                       Visibility(
                           // TODO 自分のユーザのロールを見るようにする
-                          visible: detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label == 1,
+                          visible: (detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label ?? 0) >= 1,
                           child: ElevatedButton(
                             child: Row(
                               children: const [
@@ -293,11 +301,10 @@ class EventDetailPage extends HookConsumerWidget {
                             ),
                             onPressed: () {
                               // TODO event_idを渡し、それに基づく処理を行わせる
-                              Navigator.of(context).pushNamed("/schedule/new");
+                              Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': args['id']});
                             },
                           ),
                       ),
-
                     ],
                   ),
                 ),

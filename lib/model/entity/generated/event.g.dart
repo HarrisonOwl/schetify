@@ -20,9 +20,10 @@ _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
       location_name: json['location_name'] as String?,
       location_address: json['location_address'] as String?,
       location_latitude: (json['location_latitude'] as num?)?.toDouble(),
-      location_longtiude: (json['location_longtiude'] as num?)?.toDouble(),
+      location_longitude: (json['location_longitude'] as num?)?.toDouble(),
       group_num: json['group_num'] as int?,
-      total_cost: json['total_cost'] as int?,
+      cost_type: json['cost_type'] as int?,
+      cost: json['cost'] as int?,
       questionare_url: json['questionare_url'] as String?,
     );
 
@@ -36,8 +37,9 @@ Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
       'location_name': instance.location_name,
       'location_address': instance.location_address,
       'location_latitude': instance.location_latitude,
-      'location_longtiude': instance.location_longtiude,
+      'location_longitude': instance.location_longitude,
       'group_num': instance.group_num,
-      'total_cost': instance.total_cost,
+      'cost_type': instance.cost_type,
+      'cost': instance.cost,
       'questionare_url': instance.questionare_url,
     };

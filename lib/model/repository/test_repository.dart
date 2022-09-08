@@ -29,6 +29,13 @@ class TestRepository{
     }
   }
 
+  Future<int> updateEvent(Map<String, dynamic> json) async {
+    print(json);
+    await Future.delayed(const Duration(seconds: 1));
+    const status = 200;
+    return status;
+  }
+
   Future<List<Event>> getEvents() async {
     final data = [
       {
@@ -42,7 +49,8 @@ class TestRepository{
         'location_latitude': 35.679804878221226,
         'location_longitude': 139.7369627,
         'group_num': 4,
-        'total_cost': 3,
+        'cost': 30000,
+        'cost_flag': 0
       },
       {
         'id': 2,
@@ -68,7 +76,8 @@ class TestRepository{
       'location_latitude': 35.679804878221226,
       'location_longitude': 139.7369627,
       'group_num': 2,
-      'total_cost': 3,
+      'cost': 30000,
+      'cost_type': 0
     };
     return Event.fromJson(data);
   }
@@ -244,6 +253,22 @@ class TestRepository{
     ];
     final list = List<ScheduleCandidate>.from(data.map((element)=> ScheduleCandidate.fromJson(element)));
     for (var c in list) { set.add(c); }
+    return set;
+  }
+
+  Future<int> updateScheduleCandidates(int? id, List<Map<String, dynamic>> data) async {
+    const status = 200;
+    return status;
+  }
+
+  Future<Map<String, int>> createEvent(Map<String, String?> data) async {
+    await Future.delayed(const Duration(seconds: 1));
+    const id = 2;
+    const status = 200;
+    final set = {
+      'id': id,
+      'status': status
+    };
     return set;
   }
 }
