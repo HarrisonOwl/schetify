@@ -39,7 +39,7 @@ class TestRepository{
   Future<List<Event>> getEvents() async {
     final data = [
       {
-        'id': 'aaaa-aaa-aaa',
+        'id': 1,
         'name': 'お疲れ様会',
         'description': 'hackUのお疲れ様会です。',
         'start_at': '2022-09-16T19:00:00.000',
