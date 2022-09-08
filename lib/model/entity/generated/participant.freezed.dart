@@ -20,6 +20,7 @@ Participant _$ParticipantFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Participant {
+  int get relation_id => throw _privateConstructorUsedError;
   String get user_id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   int get label => throw _privateConstructorUsedError;
@@ -36,7 +37,12 @@ abstract class $ParticipantCopyWith<$Res> {
   factory $ParticipantCopyWith(
           Participant value, $Res Function(Participant) then) =
       _$ParticipantCopyWithImpl<$Res>;
-  $Res call({String user_id, String username, int label, int? group_id});
+  $Res call(
+      {int relation_id,
+      String user_id,
+      String username,
+      int label,
+      int? group_id});
 }
 
 /// @nodoc
@@ -49,12 +55,17 @@ class _$ParticipantCopyWithImpl<$Res> implements $ParticipantCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? relation_id = freezed,
     Object? user_id = freezed,
     Object? username = freezed,
     Object? label = freezed,
     Object? group_id = freezed,
   }) {
     return _then(_value.copyWith(
+      relation_id: relation_id == freezed
+          ? _value.relation_id
+          : relation_id // ignore: cast_nullable_to_non_nullable
+              as int,
       user_id: user_id == freezed
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
@@ -82,7 +93,12 @@ abstract class _$$_ParticipantCopyWith<$Res>
           _$_Participant value, $Res Function(_$_Participant) then) =
       __$$_ParticipantCopyWithImpl<$Res>;
   @override
-  $Res call({String user_id, String username, int label, int? group_id});
+  $Res call(
+      {int relation_id,
+      String user_id,
+      String username,
+      int label,
+      int? group_id});
 }
 
 /// @nodoc
@@ -97,12 +113,17 @@ class __$$_ParticipantCopyWithImpl<$Res> extends _$ParticipantCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? relation_id = freezed,
     Object? user_id = freezed,
     Object? username = freezed,
     Object? label = freezed,
     Object? group_id = freezed,
   }) {
     return _then(_$_Participant(
+      relation_id: relation_id == freezed
+          ? _value.relation_id
+          : relation_id // ignore: cast_nullable_to_non_nullable
+              as int,
       user_id: user_id == freezed
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
@@ -127,7 +148,8 @@ class __$$_ParticipantCopyWithImpl<$Res> extends _$ParticipantCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Participant implements _Participant {
   const _$_Participant(
-      {required this.user_id,
+      {required this.relation_id,
+      required this.user_id,
       required this.username,
       required this.label,
       required this.group_id});
@@ -135,6 +157,8 @@ class _$_Participant implements _Participant {
   factory _$_Participant.fromJson(Map<String, dynamic> json) =>
       _$$_ParticipantFromJson(json);
 
+  @override
+  final int relation_id;
   @override
   final String user_id;
   @override
@@ -146,7 +170,7 @@ class _$_Participant implements _Participant {
 
   @override
   String toString() {
-    return 'Participant(user_id: $user_id, username: $username, label: $label, group_id: $group_id)';
+    return 'Participant(relation_id: $relation_id, user_id: $user_id, username: $username, label: $label, group_id: $group_id)';
   }
 
   @override
@@ -154,6 +178,8 @@ class _$_Participant implements _Participant {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Participant &&
+            const DeepCollectionEquality()
+                .equals(other.relation_id, relation_id) &&
             const DeepCollectionEquality().equals(other.user_id, user_id) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.label, label) &&
@@ -164,6 +190,7 @@ class _$_Participant implements _Participant {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(relation_id),
       const DeepCollectionEquality().hash(user_id),
       const DeepCollectionEquality().hash(username),
       const DeepCollectionEquality().hash(label),
@@ -184,7 +211,8 @@ class _$_Participant implements _Participant {
 
 abstract class _Participant implements Participant {
   const factory _Participant(
-      {required final String user_id,
+      {required final int relation_id,
+      required final String user_id,
       required final String username,
       required final int label,
       required final int? group_id}) = _$_Participant;
@@ -192,6 +220,8 @@ abstract class _Participant implements Participant {
   factory _Participant.fromJson(Map<String, dynamic> json) =
       _$_Participant.fromJson;
 
+  @override
+  int get relation_id;
   @override
   String get user_id;
   @override
