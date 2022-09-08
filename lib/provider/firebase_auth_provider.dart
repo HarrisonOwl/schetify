@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/firebase_credential.dart';
-import 'package:schetify/model/repository/user_repository.dart';
 
 final firebaseAuthProvider = StateNotifierProvider<FirebaseAuthNotifier, FirebaseCredential>((ref){
   return FirebaseAuthNotifier();
@@ -10,11 +9,9 @@ final firebaseAuthProvider = StateNotifierProvider<FirebaseAuthNotifier, Firebas
 
 class FirebaseAuthNotifier extends StateNotifier<FirebaseCredential> {
   FirebaseAuthNotifier(): super(const FirebaseCredential(credential: null));
-  final UserRepository userRepository = UserRepository();
 
-  Future<void> signUpWithEmailAndPassword(String email, String username, String password) async{
+  Future<void> signUpWithEmailAndPassword(String email, String password) async{
     final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-    await userRepository.CreateUser(username);
     state.copyWith(credential: credential);
   }
 

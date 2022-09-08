@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'enter_password_dialog.dart';
-
-class SettingsAccountDialog extends HookConsumerWidget {
-
-  const SettingsAccountDialog({Key? key}) : super(key: key);
+class SettingsAccount extends HookConsumerWidget {
+  const SettingsAccount({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -14,7 +11,8 @@ class SettingsAccountDialog extends HookConsumerWidget {
     var name = useState("hoge");
     var email = useState("hoge@hoge");
 
-    return Center(
+    return Scaffold(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -44,16 +42,7 @@ class SettingsAccountDialog extends HookConsumerWidget {
             ),
             ListTile(
               title: const Text('パスワード変更'),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (_) => const SimpleDialog(
-                    title: Text("パスワード入力"),
-                    children: <Widget>[
-                      EnterPasswordDialog()
-                    ],
-                  )
-              ); },
+              onTap: () { Navigator.of(context).pushNamed("/settings/account/enterPassword"); },
             ),
             const ListTile(
               title: Text('google account'),
@@ -70,6 +59,7 @@ class SettingsAccountDialog extends HookConsumerWidget {
             ),
           ],
         ),
-      );
+      ),
+    );
   }
 }

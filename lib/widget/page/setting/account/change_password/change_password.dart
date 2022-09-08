@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ChangePasswordDialog extends HookConsumerWidget {
-  const ChangePasswordDialog({Key? key}) : super(key: key);
+class ChangePassword extends HookConsumerWidget {
+  const ChangePassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -11,7 +11,8 @@ class ChangePasswordDialog extends HookConsumerWidget {
     var password = useState("");
     var passwordAgain = useState("");
 
-    return Center(
+    return Scaffold(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -50,6 +51,7 @@ class ChangePasswordDialog extends HookConsumerWidget {
             ),
           ],
         ),
-      );
+      ),
+    );
   }
 }

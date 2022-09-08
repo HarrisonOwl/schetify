@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'change_password_dialog.dart';
-
-class EnterPasswordDialog extends HookConsumerWidget {
-
-  const EnterPasswordDialog({Key? key}) : super(key: key);
+class EnterPassword extends HookConsumerWidget {
+  const EnterPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
     var password = useState("");
 
-    return Center(
+    return Scaffold(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -32,19 +30,11 @@ class EnterPasswordDialog extends HookConsumerWidget {
             ),
             ListTile(
               title: const Text('次へ'),
-              onTap: () => {
-                showDialog(
-                  context: context,
-                  builder: (_) => const SimpleDialog(
-                    title: Text("パスワード設定"),
-                    children: <Widget>[
-                      ChangePasswordDialog()
-                    ],
-                  )
-                )},
+              onTap: () { Navigator.of(context).pushNamed("/settings/account/changePassword");},
             ),
           ],
         ),
-      );
+      ),
+    );
   }
 }

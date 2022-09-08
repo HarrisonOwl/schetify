@@ -14,7 +14,8 @@ class SettingsUserDialog extends HookConsumerWidget {
     final settingsLabel = ref.watch(settingsLabelProvider);
     final roll = useState(settingsLabel.userList[index].label);
 
-    return Column(
+    return Center(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           SizedBox(
@@ -48,6 +49,7 @@ class SettingsUserDialog extends HookConsumerWidget {
               },
           ),
         ],
-      );
+      ),
+    );
   }
 }
