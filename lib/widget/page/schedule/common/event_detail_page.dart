@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/widget/dialog/participants_list_dialog.dart';
 import '../../../../model/entity/schedule_candidate.dart';
 import '../../../../model/entity/voter.dart';
 import '../../../../provider/event_detail_provider.dart';
@@ -92,6 +93,123 @@ class EventDetailPage extends HookConsumerWidget {
                       ),
                     )
                   ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 5.0, bottom: 5.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Icon(
+                            Icons.people,
+                            size: 20,
+                          )
+                      ),
+                    ),
+                    Expanded(
+                      flex: 50,
+                      child: Text('参加ユーザ: ${detail.participants.length}人',
+                        style: const TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff000000),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                          letterSpacing: 0.0075,
+                        ),
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.visible,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 20,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 0.0, right: 1.0),
+                        child: SizedBox(
+                          width: 100.0,
+                          child: ElevatedButton(
+                            child: const Text(
+                                '席分け',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 12
+                                )
+                            ),
+                            onPressed: () async{
+                            },
+                          ),
+                        )
+                      ),
+                    ),
+                    Expanded(
+                      flex: 20,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 0.0, right: 10.0),
+                          child: SizedBox(
+                            width: 100.0,
+                            child: ElevatedButton(
+                              child: const Text(
+                                  '一覧',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 12
+                                  )
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => const SimpleDialog(
+                                      title: Text("参加者一覧"),
+                                      children: <Widget>[
+                                        ParticipantsListDialog()
+                                      ],
+                                    )
+                                );
+                              },
+                            ),
+                          ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Visibility(
+                // TODO これをタップしたら地図が表示されるように、あと席分け、割り勘等のポップアップが出るボタンを追加する
+                visible: detail.event.cost != null,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 5.0, bottom: 5.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Icon(
+                              Icons.currency_yen,
+                              size: 20,
+                            )
+                        ),
+                      ),
+                      Expanded(
+                        flex: 90,
+                        child: Text('一人当たりの値段: ${detail.event.cost_type == 0 ? (detail.event.cost ?? 0) ~/ detail.participants.length : detail.event.cost}',
+                          style: const TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.0075,
+                          ),
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.visible,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Visibility(
