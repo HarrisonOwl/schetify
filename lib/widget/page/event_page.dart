@@ -37,13 +37,6 @@ class EventPage extends HookConsumerWidget {
           final event = data.eventList[index];
           return EventListItemComponent(
             event: event,
-            leading: ConstrainedBox(
-                constraints: const BoxConstraints(
-                    minHeight: 44,
-                    minWidth: 34,
-                    maxHeight: 64,
-                    maxWidth: 54),
-                child: const Icon(Icons.event)),
           );
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(),
