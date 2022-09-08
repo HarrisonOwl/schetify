@@ -64,7 +64,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                         hintText: '金額',
                         border: OutlineInputBorder(),
                       ),
-                      enabled: flag.value && costType.value == 0,
+                      enabled: flag.value && costType.value == 'total',
                       keyboardType: TextInputType.number,
                       initialValue: (totalCost.value != null && totalCost.value!=0.0) ? totalCost.value.toString() : "",
                       onChanged: (text){
@@ -104,27 +104,22 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                       onPressed: () async {
                         if(!flag.value) {
                           notifier.updateSplittingInformation(null, costType.value ?? 'total')
-                              .then((status) {
-                            if(status == 200) {
-                              Navigator.of(context).pop();
-                            }
-                            else {
-                              ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
-                            }
+                              .then((_) {
+                            Navigator.of(context).pop();
+                            notifier.getEventInformation(detail.event.id ?? -1);
+                          }).onError((error, stackTrace) {
+                            ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
                           });
                         }
                         else {
-                          final cost = costType.value == 0 ? totalCost.value : costPerPerson.value;
+                          final cost = costType.value == 'total' ? totalCost.value : costPerPerson.value;
                           if(cost != null) {
                             notifier.updateSplittingInformation(cost, costType.value ?? 'total')
-                                .then((status) {
-                              if(status == 200) {
-                                Navigator.of(context).pop();
-                                notifier.getEventInformation(detail.event.id ?? -1);
-                              }
-                              else {
-                                ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
-                              }
+                                .then((_) {
+                                  Navigator.of(context).pop();
+                                  notifier.getEventInformation(detail.event.id ?? -1);
+                                }).onError((error, stackTrace) {
+                              ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
                             });
                           }
                         }

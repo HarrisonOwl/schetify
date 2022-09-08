@@ -173,7 +173,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
                         ElevatedButton(
                           child: const Text('保存'),
                           onPressed: () async {
-                            await attendanceNotifier.updateStatus();
+                            await attendanceNotifier.updateStatus(detail.event.id ?? -1);
                             await detailNotifier.getEventInformation(detail.event.id ?? -1);
                             await attendanceNotifier.getStatus(detail.event.id ?? -1)
                               .then((status) {

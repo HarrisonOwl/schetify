@@ -90,13 +90,10 @@ class ScheduleUpdatePage extends HookConsumerWidget {
                       ),
                       onFieldSubmitted: (value) async {
                         await notifier.updateName(value)
-                            .then((status){
-                          if(status == 200) {
-                            notifier.getEventInformation(args?['id'] ?? -1);
-                          }
-                          else {
-                            ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
-                          }
+                            .then((_){
+                          notifier.getEventInformation(args?['id'] ?? -1);
+                        }).onError((error, stackTrace) {
+                          ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
                         });
                       }
                   ))

@@ -68,7 +68,8 @@ class EventDetailPage extends HookConsumerWidget {
                 ],
               ),
               onPressed: () {
-                Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': args['id']});
+                Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': args['id']})
+                  .then((_) async {await updateEventInformation();});
               },
             ),
           ],
@@ -91,7 +92,7 @@ class EventDetailPage extends HookConsumerWidget {
                           color: Colors.white,
                         ),
                         const SizedBox(width: 10),
-                        Text( (detail.event.name ?? '') , style: const TextStyle(color: Colors.white, fontSize: 26.0,), textAlign: TextAlign.left),
+                        Text( detail.loading ? '読み込み中...' : (detail.event.name ?? '') , style: const TextStyle(color: Colors.white, fontSize: 26.0,), textAlign: TextAlign.left),
                       ],
                     ),
                   ),
@@ -486,15 +487,15 @@ class EventDetailPage extends HookConsumerWidget {
                       ),
                       label: const Text('出欠編集'),
                       onPressed: () {
-                        // TODO event_idを渡し、それに基づく処理を行わせる
-                        Navigator.of(context).pushNamed("/schedule/attendance");
+                        Navigator.of(context).pushNamed("/schedule/attendance")
+                          .then((_) async {await updateEventInformation();});
                       },
                     )
                 ),
               ],
             ),
           ),
-        ) : SizedBox(height: 0),
+        ) : const SizedBox(height: 0),
     );
   }
 }

@@ -253,12 +253,7 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
                                       markers.value.first.position.latitude,
                                       markers.value.first.position.longitude
                                   ).then((status){
-                                    if(status == 200) {
-                                      Navigator.pop(context);
-                                    }
-                                    else {
-
-                                    }
+                                    Navigator.pop(context);
                                   });
                                 }
                               },

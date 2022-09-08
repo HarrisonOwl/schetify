@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/attend_status.dart';
 import 'package:schetify/model/entity/attendance_check_state.dart';
 
+import '../model/repository/event_repository.dart';
 import '../model/repository/test_repository.dart';
 
 class AttendanceCheckNotifier extends StateNotifier<AttendanceCheckState> {
@@ -12,6 +13,7 @@ class AttendanceCheckNotifier extends StateNotifier<AttendanceCheckState> {
   ));
 
   final TestRepository testService = TestRepository();
+  final EventRepository eventService = EventRepository();
 
   void changeStatus(List<AttendStatus> statusList) {
     state = state.copyWith(statusList: statusList);
@@ -19,8 +21,7 @@ class AttendanceCheckNotifier extends StateNotifier<AttendanceCheckState> {
 
   Future<void> getStatus(int id) async {
     try{
-      await Future.delayed(const Duration(seconds: 1));
-      final statusList = await testService.getStatusList(id);
+      final statusList = await eventService.getStatusList(id);
       state = state.copyWith(
           statusList: statusList,
           loading: false
@@ -30,9 +31,8 @@ class AttendanceCheckNotifier extends StateNotifier<AttendanceCheckState> {
     }
   }
 
-  Future<int> updateStatus() async{
-    final status = await testService.updateStatus(state.statusList);
-    return status;
+  Future<void> updateStatus(int id) async{
+    eventService.updateStatus(id, state.statusList);
   }
 }
 

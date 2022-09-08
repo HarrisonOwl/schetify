@@ -35,7 +35,6 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
       user_id: ''
   ));
 
-  final TestRepository testService = TestRepository();
   final EventRepository eventService = EventRepository();
 
   void changeLoading(bool loading) {
@@ -58,13 +57,12 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
     }
   }
 
-  Future<int> updateSchedule(DateTime startAt, DateTime endAt) async{
+  Future<void> updateSchedule(DateTime startAt, DateTime endAt) async{
     final data = {
       'start_at': startAt.toString(),
       'end_at': endAt.toString(),
     };
-    final status = await testService.updateEvent(data);
-    return status;
+    await eventService.updateEvent(state.event.id!, data);
   }
 }
 
