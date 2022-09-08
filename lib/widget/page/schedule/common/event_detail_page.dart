@@ -352,7 +352,7 @@ class EventDetailPage extends HookConsumerWidget {
                                                       flex: 30,
                                                       child: Text(candidate.getText2())
                                                   ),
-                                                  if(fitnessValue == maxFitnessValue.value && detail.event.start_at == null && detail.event.end_at == null)const Expanded(
+                                                  if(fitnessValue == maxFitnessValue.value)const Expanded(
                                                     flex: 10 ,
                                                     child: Icon(Icons.star,
                                                       color: Colors.green,),
