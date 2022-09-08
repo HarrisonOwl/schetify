@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class APIClient{
-  final API_URL = "https://api.national-holidays.jp";
+  final API_URL = "http://192.168.0.29:8000/api/v1/";
 
   Future<Options> getAuthHeader() async{
     final token = await FirebaseAuth.instance.currentUser?.getIdToken(true);
     if (FirebaseAuth.instance.currentUser == null || token == null){
-      throw Exception("Failed to login");
+      throw Exception("Failed to get auth token");
     }
     return Options(headers: {
       "Content-Type": "application/json",
@@ -24,6 +25,7 @@ class APIClient{
 
   Future<Response<dynamic>> post(String endpoint, Map<String, dynamic> jsonData, bool withAuth) async{
     final data = FormData.fromMap(jsonData);
+    debugPrint(jsonData.toString());
     final response = await Dio().post('$API_URL/$endpoint', data: data, options: withAuth ? await getAuthHeader(): Options(headers: {
       "Content-Type": "application/json",
     }));

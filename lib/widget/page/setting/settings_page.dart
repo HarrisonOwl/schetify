@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/widget/dialog/settings_account_dialog.dart';
 
 import '../../../provider/firebase_auth_provider.dart';
 
@@ -35,7 +36,16 @@ class SettingsPage extends HookConsumerWidget {
             ),
             ListTile(
               title: const Text('アカウント設定'),
-              onTap: () { Navigator.of(context).pushNamed("/settings/account"); },
+              onTap: () => {
+                showDialog(
+                  context: context,
+                  builder: (_) => const SimpleDialog(
+                    title: Text("アカウント設定"),
+                    children: <Widget>[
+                      SettingsAccountDialog()
+                    ],
+                  )
+              )},
             ),
             ListTile(
                 title: const Text('ログアウト'),
