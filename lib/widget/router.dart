@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/widget/page/event_page.dart';
 import 'package:schetify/widget/page/init/init_page.dart';
@@ -15,6 +16,7 @@ import 'package:schetify/widget/page/schedule/common/label/settings_label.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_update_page.dart';
 import 'package:schetify/widget/page/schedule/common/schedule_day_update_page.dart';
 import 'package:schetify/widget/page/schedule/common/seat_distribution.dart';
+import 'package:schetify/widget/page/setting/settings_page.dart';
 class AppRouter extends ConsumerWidget {
   const AppRouter({Key? key}) : super(key: key);
 
@@ -24,6 +26,9 @@ class AppRouter extends ConsumerWidget {
       title: 'Hooks Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
             TargetPlatform.android: ZoomPageTransitionsBuilder(),
@@ -47,6 +52,7 @@ class AppRouter extends ConsumerWidget {
         '/event/detail': (BuildContext context) => const EventDetailPage(),
         '/event/': (BuildContext context) => const EventPage(),
         '/event/new': (BuildContext context) => const EventCreatePage(),
+        '/settings': (BuildContext context) => const SettingsPage(),
       },
     );
   }

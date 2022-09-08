@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/provider/settings_label_provider.dart';
 import 'package:schetify/widget/dialog/settings_user_dialog.dart';
+
+import '../../../../../provider/event_update_provider.dart';
 
 class SettingsLabel extends HookConsumerWidget {
 
@@ -10,34 +12,27 @@ class SettingsLabel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final settingsLabel = ref.watch(settingsLabelProvider);
+    final detail = ref.watch(eventUpdateProvider);
+    final participants = useState(detail.participants);
+
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("ラベル設定"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-            SwitchListTile(
-              title: const Text('ラベル設定'),
-              value: settingsLabel.flag,
-              onChanged: (value) => ref.read(settingsLabelProvider.notifier)
-                  .changeFlag(value),
-              secondary: const Icon(Icons.lightbulb_outline),
-            ),
-            Container(
-              height: 400,
-              padding: EdgeInsets.all(4),
+      body: Container(
+              padding: const EdgeInsets.all(4),
               child: ListView.builder(
-                itemCount: settingsLabel.userList.length,
+                itemCount: participants.value.length,
                 itemBuilder: (context, index) {
                   return SizedBox(
                     height: 50,
                     child: ListTile(
-                      enabled: settingsLabel.flag,
-                      title: Text(settingsLabel.userList[index].name),
+                      title: Text(participants.value[index].username),
+                      leading: const Icon(Icons.person),
+                      trailing: Text(
+                          participants.value[index].label == 0 ? "readOnly" : 'edit',
+                          textAlign: TextAlign.right),
                       onTap: () {
                         showDialog(
                             context: context,
@@ -49,17 +44,11 @@ class SettingsLabel extends HookConsumerWidget {
                             )
                         );
                       },
-                      subtitle: Text(
-                        settingsLabel.userList[index].label,
-                        textAlign: TextAlign.right),
-                    ),
+                    )
                   );
                 },
               ),
             ),
-          ],
-        ),
-      ),
-    );
+        );
   }
 }
