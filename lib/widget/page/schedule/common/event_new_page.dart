@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/provider/event_list_provider.dart';
 import '../../../../provider/event_update_provider.dart';
 
 class EventCreatePage extends HookConsumerWidget {
@@ -12,6 +13,7 @@ class EventCreatePage extends HookConsumerWidget {
     final notifier = ref.read(eventUpdateProvider.notifier);
     final detail = ref.watch(eventUpdateProvider);
     final isRunning = useState(false);
+    final listNotifier = ref.read(eventListProvider.notifier);
 
     SnackBar alertSnackBar = SnackBar(
       content: const Text('作成に失敗しました。'),
@@ -127,16 +129,15 @@ class EventCreatePage extends HookConsumerWidget {
                     onPressed: !isRunning.value ? () {
                       isRunning.value = true;
                       notifier.createEvent()
-                          .then((set) {
-                        // APIから保存して返り値のイベントidを受け取る
-                        if(set['status'] == 200) {
+                          .then((id) {
                           Navigator.of(context).pop();
-                          Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': set['id']});
-                        }
-                        else {
-                          ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
-                          isRunning.value = false;
-                        }
+                          Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': id})
+                              .then((value) async {
+                            await listNotifier.getEvents();
+                          });
+                          }).onError((error, stackTrace) {
+                        ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                        isRunning.value = false;
                       });
                     } : null,
                     child: const Icon(

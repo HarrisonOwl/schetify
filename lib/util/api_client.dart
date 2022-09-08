@@ -40,6 +40,13 @@ class APIClient{
     return response;
   }
 
+  Future<Response<dynamic>> dynamicPut(String endpoint, dynamic jsonData, bool withAuth) async{
+    final response = await Dio().put('$API_URL/$endpoint', data: jsonData, options: withAuth ? await getAuthHeader(): Options(headers: {
+      "Content-Type": "application/json",
+    }));
+    return response;
+  }
+
   Future<Response<dynamic>> delete(String endpoint, bool withAuth) async{
     final response = await Dio().delete('$API_URL/$endpoint', options: withAuth ? await getAuthHeader(): Options(headers: {
       "Content-Type": "application/json",

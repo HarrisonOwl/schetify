@@ -10,6 +10,7 @@ import 'package:schetify/model/repository/test_repository.dart';
 
 import '../model/entity/event_update_state.dart';
 import '../model/entity/participant.dart';
+import '../model/repository/event_repository.dart';
 
 class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
   EventUpdateNotifier() : super(EventUpdateState(
@@ -27,28 +28,21 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
           group_num: null,
           cost: null,
           cost_type: null,
-          questionare_url: null
+          questionnaire_url: null
       ),
       scheduleCandidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText())),
       participants: [],
-    loading: true,
+      loading: true,
+      user_id: ''
   ));
 
-  final TestRepository testService = TestRepository();
+  final EventRepository eventService = EventRepository();
 
   Future<void> getEventInformation(int id) async {
     try{
       state = state.copyWith(loading: true);
-      await Future.delayed(const Duration(seconds: 1));
-      final event = await testService.getEvent(id);
-      final participants = await testService.getParticipants(id);
-      final candidates = await testService.getScheduleCandidates(id);
-      state = state.copyWith(
-          event: event,
-          participants: participants,
-          scheduleCandidates: candidates,
-          loading: false
-      );
+      final newState = await eventService.getEventInformation(id);
+      state = newState;
     }catch(e){
       debugPrint(e.toString());
     }
@@ -70,7 +64,7 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
               group_num: null,
               cost: null,
               cost_type: null,
-              questionare_url: null
+              questionnaire_url: null
           ),
           participants: [],
           scheduleCandidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText()))
@@ -90,56 +84,49 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
     state = state.copyWith(event: event);
   }
 
-  Future<int> updateName(String? name) async{
+  Future<void> updateName(String? name) async{
     final data = {
       'name': name
     };
-    int status;
     if(name != null && name != '') {
-      status = await testService.updateEvent(data);
+      await eventService.updateEvent(state.event.id!, data);
     }
     else {
-      status = 400;
+      throw Exception('invalid input');
     }
-    return status;
   }
 
-  Future<int> updateDescription(String? description) async{
+  Future<void> updateDescription(String? description) async{
     final data = {
       'description': description
     };
-    final status = await testService.updateEvent(data);
-    return status;
+    await eventService.updateEvent(state.event.id!, data);
   }
 
-  Future<int> updateScheduleCandidates() async{
+  Future<void> updateScheduleCandidates() async{
     final data = state.scheduleCandidates.map((e) => e.toJson()).toList();
     for (var e in data) {
       e.removeWhere((key, value) => key == 'voters');
     }
-    print(data);
-    final status = await testService.updateScheduleCandidates(state.event.id, data);
-    return status;
+    await eventService.updateScheduleCandidates(state.event.id ?? -1, data);
   }
 
-  Future<int> updateLocationInformation(String name, String address, double latitude, double longitude) async {
+  Future<void> updateLocationInformation(String name, String address, double latitude, double longitude) async {
     final data = {
       'location_address': address,
       'location_name': name,
       'location_latitude': latitude,
       'location_longitude': longitude,
     };
-    final status = await testService.updateEvent(data);
-    return status;
+    await eventService.updateEvent(state.event.id!, data);
   }
 
-  Future<int> updateSplittingInformation(int? cost, int costType) async {
+  Future<void> updateSplittingInformation(int? cost, String costType) async {
     final data = {
       'cost': cost,
       'cost_type': costType
     };
-    final status = await testService.updateEvent(data);
-    return status;
+    await eventService.updateEvent(state.event.id!, data);
   }
 
   void addPeriod(ScheduleCandidate period) {
@@ -156,26 +143,29 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
     state = state.copyWith(loading: loading);
   }
 
-  void changeUserLabel(int index, int label){
+  void changeUserLabel(int index, String label){
     final newUserState = state.participants[index].copyWith(label :label);
     List<Participant> clone = [...state.participants];
     clone[index] = newUserState;
     state = state.copyWith(participants: clone);
   }
 
-  Future<Map<String, int>> createEvent() async {
+  Future<void> updateParticipants(List<Participant> list) async {
+    await eventService.updateParticipants(state.event.id ?? -1, list);
+  }
+
+  Future<int> createEvent() async {
     // TODO apiにnameとdescriptionを渡し返り値でイベントのidを受け取るやつを記述する。
     final data = {
       'name': state.event.name,
       'description': state.event.description
     };
-    final set = await testService.createEvent(data);
-    return set;
+    final id = await eventService.createEvent(data);
+    return id;
   }
 
-  Future<int> createUserEvents(String id) async {
-    final status = await testService.createUserEvents(id);
-    return status;
+  Future<void> createUserEvents(String id) async {
+    await eventService.createUserEvents(id);
   }
 }
 

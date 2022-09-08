@@ -57,7 +57,7 @@ class EventDetailPage extends HookConsumerWidget {
           bottomOpacity: 0.0,
           elevation: 0.0,
           actions: [
-            if(!detail.loading && (detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label ?? 0) >= 1)TextButton(
+            if(!detail.loading && (detail.participants.firstWhereOrNull((element) => element.user_id == detail.user_id)?.label ?? 'readonly') != 'readonly')TextButton(
               child: Row(
                 children: const [
                   Icon(
@@ -68,7 +68,8 @@ class EventDetailPage extends HookConsumerWidget {
                 ],
               ),
               onPressed: () {
-                Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': args['id']});
+                Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': args['id']})
+                  .then((_) async {await updateEventInformation();});
               },
             ),
           ],
@@ -91,7 +92,7 @@ class EventDetailPage extends HookConsumerWidget {
                           color: Colors.white,
                         ),
                         const SizedBox(width: 10),
-                        Text( (detail.event.name ?? '') , style: const TextStyle(color: Colors.white, fontSize: 26.0,), textAlign: TextAlign.left),
+                        Text( detail.loading ? '読み込み中...' : (detail.event.name ?? '') , style: const TextStyle(color: Colors.white, fontSize: 26.0,), textAlign: TextAlign.left),
                       ],
                     ),
                   ),
@@ -250,7 +251,7 @@ class EventDetailPage extends HookConsumerWidget {
                                 ),
                                 Expanded(
                                   flex: 90,
-                                  child: Text('一人当たりの値段: ${detail.event.cost_type == 0 ? (detail.event.cost ?? 0) ~/ detail.participants.length : detail.event.cost}',
+                                  child: Text('一人当たりの値段: ${detail.event.cost_type == 'total' ? (detail.event.cost ?? 0) ~/ detail.participants.length : detail.event.cost}',
                                     style: const TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
@@ -323,7 +324,8 @@ class EventDetailPage extends HookConsumerWidget {
                                   .toList();
                               final fitnessValue = maybeVoters.length + ableVoters.length * 100;
                               // TODO 自分のユーザのロールを見るようにする
-                              final isEditor = (detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label ?? 0) >= 1;
+                              final myLabel = detail.participants.firstWhereOrNull((element) => element.user_id == detail.user_id)?.label ?? 'readonly';
+                              final isEditor = (myLabel == 'editor') || (myLabel == 'owner');
                               final isDecided = detail.event.getText() == candidate.getText();
                               return Container(
                                 color: Colors.transparent,
@@ -350,7 +352,7 @@ class EventDetailPage extends HookConsumerWidget {
                                                       flex: 30,
                                                       child: Text(candidate.getText2())
                                                   ),
-                                                  if(fitnessValue == maxFitnessValue.value && detail.event.start_at == null && detail.event.end_at == null)const Expanded(
+                                                  if(fitnessValue == maxFitnessValue.value)const Expanded(
                                                     flex: 10 ,
                                                     child: Icon(Icons.star,
                                                       color: Colors.green,),
@@ -485,15 +487,15 @@ class EventDetailPage extends HookConsumerWidget {
                       ),
                       label: const Text('出欠編集'),
                       onPressed: () {
-                        // TODO event_idを渡し、それに基づく処理を行わせる
-                        Navigator.of(context).pushNamed("/schedule/attendance");
+                        Navigator.of(context).pushNamed("/schedule/attendance")
+                          .then((_) async {await updateEventInformation();});
                       },
                     )
                 ),
               ],
             ),
           ),
-        ) : SizedBox(height: 0),
+        ) : const SizedBox(height: 0),
     );
   }
 }

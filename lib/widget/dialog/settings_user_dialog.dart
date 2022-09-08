@@ -29,25 +29,28 @@ class SettingsUserDialog extends HookConsumerWidget {
             ),
           ),
           RadioListTile(
-            title: Text('readOnly'),
-            value: 0,
+            title: const Text('readOnly'),
+            value: 'readonly',
             groupValue: gValue.value,
             onChanged: (value) {
-              gValue.value = 0;
+              gValue.value = 'readonly';
             }
           ),
           RadioListTile(
-            title: Text('edit'),
-            value: 1,
+            title: const Text('edit'),
+            value: 'editor',
             groupValue: gValue.value,
             onChanged: (value) {
-              gValue.value = 1;
+              gValue.value = 'editor';
             }
           ),OutlinedButton(
-            child:  Text('確定'),
-            onPressed: () {
-              notifier.changeUserLabel(index, gValue.value);
-              Navigator.of(context).pop();
+            child:  const Text('確定'),
+            onPressed: () async {
+              await notifier.updateParticipants([detail.participants[index].copyWith(label: gValue.value),]);
+              await notifier.getEventInformation(detail.event.id ?? -1)
+                .then((_) {
+                Navigator.of(context).pop();
+              });
               },
           ),
         ],

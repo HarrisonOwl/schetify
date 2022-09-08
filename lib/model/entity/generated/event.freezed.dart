@@ -31,9 +31,9 @@ mixin _$Event {
   double? get location_latitude => throw _privateConstructorUsedError;
   double? get location_longitude => throw _privateConstructorUsedError;
   int? get group_num => throw _privateConstructorUsedError;
-  int? get cost_type => throw _privateConstructorUsedError;
+  String? get cost_type => throw _privateConstructorUsedError;
   int? get cost => throw _privateConstructorUsedError;
-  String? get questionare_url => throw _privateConstructorUsedError;
+  String? get questionnaire_url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,9 +56,9 @@ abstract class $EventCopyWith<$Res> {
       double? location_latitude,
       double? location_longitude,
       int? group_num,
-      int? cost_type,
+      String? cost_type,
       int? cost,
-      String? questionare_url});
+      String? questionnaire_url});
 }
 
 /// @nodoc
@@ -84,7 +84,7 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
     Object? group_num = freezed,
     Object? cost_type = freezed,
     Object? cost = freezed,
-    Object? questionare_url = freezed,
+    Object? questionnaire_url = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -134,14 +134,14 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
       cost_type: cost_type == freezed
           ? _value.cost_type
           : cost_type // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as int?,
-      questionare_url: questionare_url == freezed
-          ? _value.questionare_url
-          : questionare_url // ignore: cast_nullable_to_non_nullable
+      questionnaire_url: questionnaire_url == freezed
+          ? _value.questionnaire_url
+          : questionnaire_url // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -164,9 +164,9 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       double? location_latitude,
       double? location_longitude,
       int? group_num,
-      int? cost_type,
+      String? cost_type,
       int? cost,
-      String? questionare_url});
+      String? questionnaire_url});
 }
 
 /// @nodoc
@@ -193,7 +193,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
     Object? group_num = freezed,
     Object? cost_type = freezed,
     Object? cost = freezed,
-    Object? questionare_url = freezed,
+    Object? questionnaire_url = freezed,
   }) {
     return _then(_$_Event(
       id: id == freezed
@@ -243,14 +243,14 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
       cost_type: cost_type == freezed
           ? _value.cost_type
           : cost_type // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as int?,
-      questionare_url: questionare_url == freezed
-          ? _value.questionare_url
-          : questionare_url // ignore: cast_nullable_to_non_nullable
+      questionnaire_url: questionnaire_url == freezed
+          ? _value.questionnaire_url
+          : questionnaire_url // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -273,7 +273,7 @@ class _$_Event extends _Event {
       required this.group_num,
       required this.cost_type,
       required this.cost,
-      required this.questionare_url})
+      required this.questionnaire_url})
       : super._();
 
   factory _$_Event.fromJson(Map<String, dynamic> json) =>
@@ -302,15 +302,15 @@ class _$_Event extends _Event {
   @override
   final int? group_num;
   @override
-  final int? cost_type;
+  final String? cost_type;
   @override
   final int? cost;
   @override
-  final String? questionare_url;
+  final String? questionnaire_url;
 
   @override
   String toString() {
-    return 'Event(id: $id, name: $name, description: $description, start_at: $start_at, end_at: $end_at, img_url: $img_url, location_name: $location_name, location_address: $location_address, location_latitude: $location_latitude, location_longitude: $location_longitude, group_num: $group_num, cost_type: $cost_type, cost: $cost, questionare_url: $questionare_url)';
+    return 'Event(id: $id, name: $name, description: $description, start_at: $start_at, end_at: $end_at, img_url: $img_url, location_name: $location_name, location_address: $location_address, location_latitude: $location_latitude, location_longitude: $location_longitude, group_num: $group_num, cost_type: $cost_type, cost: $cost, questionnaire_url: $questionnaire_url)';
   }
 
   @override
@@ -337,7 +337,7 @@ class _$_Event extends _Event {
             const DeepCollectionEquality().equals(other.cost_type, cost_type) &&
             const DeepCollectionEquality().equals(other.cost, cost) &&
             const DeepCollectionEquality()
-                .equals(other.questionare_url, questionare_url));
+                .equals(other.questionnaire_url, questionnaire_url));
   }
 
   @JsonKey(ignore: true)
@@ -357,7 +357,7 @@ class _$_Event extends _Event {
       const DeepCollectionEquality().hash(group_num),
       const DeepCollectionEquality().hash(cost_type),
       const DeepCollectionEquality().hash(cost),
-      const DeepCollectionEquality().hash(questionare_url));
+      const DeepCollectionEquality().hash(questionnaire_url));
 
   @JsonKey(ignore: true)
   @override
@@ -385,9 +385,9 @@ abstract class _Event extends Event {
       required final double? location_latitude,
       required final double? location_longitude,
       required final int? group_num,
-      required final int? cost_type,
+      required final String? cost_type,
       required final int? cost,
-      required final String? questionare_url}) = _$_Event;
+      required final String? questionnaire_url}) = _$_Event;
   const _Event._() : super._();
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
@@ -415,11 +415,11 @@ abstract class _Event extends Event {
   @override
   int? get group_num;
   @override
-  int? get cost_type;
+  String? get cost_type;
   @override
   int? get cost;
   @override
-  String? get questionare_url;
+  String? get questionnaire_url;
   @override
   @JsonKey(ignore: true)
   _$$_EventCopyWith<_$_Event> get copyWith =>

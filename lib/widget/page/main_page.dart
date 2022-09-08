@@ -77,12 +77,14 @@ class MainPageState extends ConsumerState<MainPage>{
                         ),
                         side: const BorderSide(),
                       ),
-                      onPressed: () {
-                        ref.read(eventUpdateProvider.notifier)
+                      onPressed: () async {
+                        await ref.read(eventUpdateProvider.notifier)
                             .createUserEvents(params['id'] ?? '');
-                        Navigator.of(context).pop();
-                        ref.read(eventListProvider.notifier)
-                            .getEvents();
+                        await ref.read(eventListProvider.notifier)
+                            .getEvents()
+                            .then((_) {
+                          Navigator.of(context).pop();
+                        });
                       },
                       child: const Text('このイベントに参加する'),
                     )

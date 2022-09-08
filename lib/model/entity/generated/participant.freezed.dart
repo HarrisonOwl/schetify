@@ -23,7 +23,7 @@ mixin _$Participant {
   int get relation_id => throw _privateConstructorUsedError;
   String get user_id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  int get label => throw _privateConstructorUsedError;
+  String get label => throw _privateConstructorUsedError;
   int? get group_id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $ParticipantCopyWith<$Res> {
       {int relation_id,
       String user_id,
       String username,
-      int label,
+      String label,
       int? group_id});
 }
 
@@ -77,7 +77,7 @@ class _$ParticipantCopyWithImpl<$Res> implements $ParticipantCopyWith<$Res> {
       label: label == freezed
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       group_id: group_id == freezed
           ? _value.group_id
           : group_id // ignore: cast_nullable_to_non_nullable
@@ -97,7 +97,7 @@ abstract class _$$_ParticipantCopyWith<$Res>
       {int relation_id,
       String user_id,
       String username,
-      int label,
+      String label,
       int? group_id});
 }
 
@@ -135,7 +135,7 @@ class __$$_ParticipantCopyWithImpl<$Res> extends _$ParticipantCopyWithImpl<$Res>
       label: label == freezed
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       group_id: group_id == freezed
           ? _value.group_id
           : group_id // ignore: cast_nullable_to_non_nullable
@@ -164,7 +164,7 @@ class _$_Participant implements _Participant {
   @override
   final String username;
   @override
-  final int label;
+  final String label;
   @override
   final int? group_id;
 
@@ -214,7 +214,7 @@ abstract class _Participant implements Participant {
       {required final int relation_id,
       required final String user_id,
       required final String username,
-      required final int label,
+      required final String label,
       required final int? group_id}) = _$_Participant;
 
   factory _Participant.fromJson(Map<String, dynamic> json) =
@@ -227,7 +227,7 @@ abstract class _Participant implements Participant {
   @override
   String get username;
   @override
-  int get label;
+  String get label;
   @override
   int? get group_id;
   @override

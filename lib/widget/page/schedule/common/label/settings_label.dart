@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/widget/dialog/settings_user_dialog.dart';
 
@@ -13,36 +12,44 @@ class SettingsLabel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final detail = ref.watch(eventUpdateProvider);
-    final participants = useState(detail.participants);
 
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("ラベル設定"),
       ),
-      body: Container(
+      body: detail.loading ? Center(
+        child: Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
+          child: const CircularProgressIndicator(
+            color: Colors.green,
+          ),
+        ),
+      ) : Container(
               padding: const EdgeInsets.all(4),
               child: ListView.builder(
-                itemCount: participants.value.length,
+                itemCount: detail.participants.length,
                 itemBuilder: (context, index) {
                   return SizedBox(
                     height: 50,
                     child: ListTile(
-                      title: Text(participants.value[index].username),
+                      title: Text(detail.participants[index].username),
                       leading: const Icon(Icons.person),
                       trailing: Text(
-                          participants.value[index].label == 0 ? "readOnly" : 'edit',
+                          detail.participants[index].label,
                           textAlign: TextAlign.right),
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) => SimpleDialog(
-                              title: const Text("ラベル設定"),
-                              children: <Widget>[
-                                SettingsUserDialog(index: index)
-                              ],
-                            )
-                        );
+                        if(detail.participants[index].label != 'owner') {
+                          showDialog(
+                              context: context,
+                              builder: (_) => SimpleDialog(
+                                title: const Text("ラベル設定"),
+                                children: <Widget>[
+                                  SettingsUserDialog(index: index)
+                                ],
+                              )
+                          );
+                        }
                       },
                     )
                   );

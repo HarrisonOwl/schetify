@@ -42,14 +42,11 @@ class EventDetailDialog extends HookConsumerWidget {
               title: const Text('保存'),
               onTap: () async {
                 await notifier.updateDescription(detailText.value)
-                    .then((status) {
-                      if(status == 200) {
-                        Navigator.of(context).pop();
-                        notifier.getEventInformation(detail.event.id ?? -1);
-                      }
-                      else {
-                        ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
-                      }
+                    .then((_) {
+                      Navigator.of(context).pop();
+                      notifier.getEventInformation(detail.event.id ?? -1);
+                    }).onError((error, stackTrace) {
+                  ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
                 });
               },
             ),

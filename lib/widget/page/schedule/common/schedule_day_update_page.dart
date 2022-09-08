@@ -209,13 +209,10 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
               IconButton(
                   onPressed: () async {
                     await notifier.updateScheduleCandidates()
-                        .then((status){
-                          if(status == 200) {
-                            Navigator.pop(context);
-                          }
-                          else {
-                            ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
-                          }
+                        .then((_){
+                          Navigator.pop(context);
+                    }).onError((error, stackTrace) {
+                      ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
                     });
                   },
                   icon: const Icon(Icons.save),

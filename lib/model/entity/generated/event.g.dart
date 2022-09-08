@@ -22,9 +22,9 @@ _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
       location_latitude: (json['location_latitude'] as num?)?.toDouble(),
       location_longitude: (json['location_longitude'] as num?)?.toDouble(),
       group_num: json['group_num'] as int?,
-      cost_type: json['cost_type'] as int?,
+      cost_type: json['cost_type'] as String?,
       cost: json['cost'] as int?,
-      questionare_url: json['questionare_url'] as String?,
+      questionnaire_url: json['questionnaire_url'] as String?,
     );
 
 Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
@@ -41,5 +41,5 @@ Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
       'group_num': instance.group_num,
       'cost_type': instance.cost_type,
       'cost': instance.cost,
-      'questionare_url': instance.questionare_url,
+      'questionnaire_url': instance.questionnaire_url,
     };
