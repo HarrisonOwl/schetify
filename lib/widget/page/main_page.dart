@@ -1,32 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/provider/main_showing_provider.dart';
-import 'package:schetify/widget/page/chat_page.dart';
-import 'package:schetify/widget/page/event_page.dart';
-import 'package:schetify/widget/page/setting/settings_page.dart';
+import '../../provider/event_list_provider.dart';
+import '../components/schedule/event_list_item.dart';
 
 class MainPage extends HookConsumerWidget {
   MainPage({Key? key}) : super(key: key);
-
-  final pages = [
-    const EventPage(),
-    const ChatPage(),
-    const SettingsPage(),
-  ];
-
-  final titles = [
-    "予定一覧",
-    "チャット",
-    "設定"
-  ];
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageType = ref.watch(mainPageShowingProvider.state);
+    final data = ref.watch(eventListProvider);
+    final notifier = ref.read(eventListProvider.notifier);
+
+    Future<void> updateEventInformation() async {
+      await notifier.getEvents();
+    }
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        Future<void>.microtask(() async {
+          await updateEventInformation();
+        });
+      });
+      return null;
+    }, const []);
     return Scaffold(
       appBar: AppBar(
-        title: Text(titles[pageType.state.index]),
+        title: Text("Schetify",style: GoogleFonts.lato(fontSize: 35, color: Colors.white, fontWeight: FontWeight.w700)),
+        bottomOpacity: 0.0,
+        elevation: 0.0,
         actions: [
+          Stack(children: [
+            IconButton(onPressed: () => {
+              Navigator.of(context).pushNamed("/settings")
+            }, icon: const Icon(Icons.settings)),
+          ],),
           Stack(children : <Widget>[
             IconButton(
               icon: const Icon(Icons.notifications),
@@ -50,16 +58,33 @@ class MainPage extends HookConsumerWidget {
           ]),
         ],
       ),
-      body: pages[pageType.state.index],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: '予定'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'チャット'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
-        ],
-        currentIndex: pageType.state.index,
-        onTap: (int index) => pageType.update((state) => MainPageType.values[index]),
-        type: BottomNavigationBarType.fixed,
+      body: Scaffold(
+        backgroundColor: Colors.green,
+        body: data.loading ? Container(
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator(
+              color: Colors.white,
+            )
+        ) : ListView.builder(
+          itemCount: data.eventList.length,
+          itemBuilder: (BuildContext context, int index) {
+            final event = data.eventList[index];
+            return EventListItemComponent(
+              event: event
+            );
+          }
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.of(context).pushNamed("/event/new")
+                .then((value) async {
+              await notifier.getEvents();
+            });
+          },
+          tooltip: 'Increment',
+          backgroundColor: Colors.lightGreen,
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
