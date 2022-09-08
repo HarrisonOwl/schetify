@@ -20,13 +20,8 @@ class SettingsLabel extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text("ラベル設定"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-            Container(
-              height: 400,
-              padding: EdgeInsets.all(4),
+      body: Container(
+              padding: const EdgeInsets.all(4),
               child: ListView.builder(
                 itemCount: participants.value.length,
                 itemBuilder: (context, index) {
@@ -34,7 +29,7 @@ class SettingsLabel extends HookConsumerWidget {
                     height: 50,
                     child: ListTile(
                       title: Text(participants.value[index].username),
-                      leading: Icon(Icons.person),
+                      leading: const Icon(Icons.person),
                       trailing: Text(
                           participants.value[index].label == 0 ? "readOnly" : 'edit',
                           textAlign: TextAlign.right),
@@ -54,9 +49,6 @@ class SettingsLabel extends HookConsumerWidget {
                 },
               ),
             ),
-          ],
-        ),
-      ),
-    );
+        );
   }
 }
