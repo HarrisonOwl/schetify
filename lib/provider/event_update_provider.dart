@@ -9,6 +9,7 @@ import 'package:schetify/model/entity/schedule_candidate.dart';
 import 'package:schetify/model/repository/test_repository.dart';
 
 import '../model/entity/event_update_state.dart';
+import '../model/entity/participant.dart';
 
 class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
   EventUpdateNotifier() : super(EventUpdateState(
@@ -153,6 +154,13 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
 
   void changeLoading(bool loading) {
     state = state.copyWith(loading: loading);
+  }
+
+  void changeUserLabel(int index, int label){
+    final newUserState = state.participants[index].copyWith(label :label);
+    List<Participant> clone = [...state.participants];
+    clone[index] = newUserState;
+    state = state.copyWith(participants: clone);
   }
 
   Future<Map<String, int>> createEvent() async {
