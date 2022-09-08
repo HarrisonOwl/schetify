@@ -3,8 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/provider/event_update_provider.dart';
 
-import '../../provider/splitting_the_cost_provider.dart';
-
 class SplittingTheCostDialog extends HookConsumerWidget {
 
   const SplittingTheCostDialog({Key? key}) : super(key: key);
@@ -12,10 +10,8 @@ class SplittingTheCostDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final provider = ref.watch(splittingTheCostProvider);
     final detail = ref.watch(eventUpdateProvider);
     final notifier = ref.read(eventUpdateProvider.notifier);
-    final number = useState(6);
     final flag = useState(detail.event.cost != null);
     final costType = useState(detail.event.cost_type);
     final costPerPerson = useState(costType.value == 1 ? detail.event.cost : null);

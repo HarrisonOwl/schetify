@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/model/entity/test_weather.dart';
 import 'package:schetify/model/repository/test_repository.dart';
 
 import '../model/entity/schedules_state.dart';

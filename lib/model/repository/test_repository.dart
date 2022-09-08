@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:dio/dio.dart';
 import 'package:schetify/model/entity/event.dart';
 import 'package:schetify/model/entity/test_weather.dart';
 import 'package:schetify/util/api_client.dart';
-import 'package:schetify/util/constants.dart';
 
 import '../entity/participant.dart';
 import '../entity/schedule_candidate.dart';

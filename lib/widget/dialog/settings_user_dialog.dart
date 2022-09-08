@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/provider/settings_label_provider.dart';
+
+import '../../provider/event_update_provider.dart';
 
 class SettingsUserDialog extends HookConsumerWidget {
 
@@ -11,8 +13,10 @@ class SettingsUserDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final settingsLabel = ref.watch(settingsLabelProvider);
-    final roll = useState(settingsLabel.userList[index].label);
+    final detail = ref.watch(eventUpdateProvider);
+    final notifier = ref.read(eventUpdateProvider.notifier);
+    final participants = useState(detail.participants);
+    final gValue = useState(detail.participants[index].label);
 
     return Center(
       child: Column(
@@ -22,29 +26,28 @@ class SettingsUserDialog extends HookConsumerWidget {
             width: 80,
             child: FittedBox(
               fit: BoxFit.fitWidth,
-              child: Text(settingsLabel.userList[index].name)
+              child: Text(participants.value[index].username)
             ),
           ),
-          DropdownButton(
-            value: roll.value,
-            items: const [
-              DropdownMenuItem(
-                value: 'readOnly',
-                child: Text('readOnly'),
-              ),
-              DropdownMenuItem(
-                value: 'edit',
-                child: Text('edit'),
-              ),
-            ],
-            onChanged: (String? value) {
-              roll.value = value!;
-            },
-          ),ListTile(
-            title: Text('確定'),
-            onTap: () {
-              ref.read(settingsLabelProvider.notifier)
-                .changeUserLabel(index, roll.value);
+          RadioListTile(
+            title: Text('readOnly'),
+            value: 0,
+            groupValue: gValue.value,
+            onChanged: (value) {
+              gValue.value = 0;
+            }
+          ),
+          RadioListTile(
+            title: Text('edit'),
+            value: 1,
+            groupValue: gValue.value,
+            onChanged: (value) {
+              gValue.value = 1;
+            }
+          ),OutlinedButton(
+            child:  Text('確定'),
+            onPressed: () {
+              notifier.changeUserLabel(index, gValue.value);
               Navigator.of(context).pop();
               },
           ),
