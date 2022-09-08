@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/widget/dialog/event_detail_dialog.dart';
+import 'package:schetify/widget/dialog/splitting_the_cost_dialog.dart';
 
-class SubListItem extends StatelessWidget {
+import '../../../provider/event_update_provider.dart';
+import '../../dialog/splitting_the_cost_dialog.dart';
+
+class SubListItem extends HookConsumerWidget {
   final String title;
   final Widget leading;
   final String route;
   final String toggle;
   final String address;
+  final int? eventId;
 
-  SubListItem({required this.title, required this.leading, required this.route, required this.toggle, required this.address});
+  const SubListItem({required this.title, required this.leading, required this.route, required this.toggle, required this.address, required this.eventId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(eventUpdateProvider.notifier);
     return ListTile(
       title: Row(
         mainAxisSize: MainAxisSize.min,
@@ -40,8 +47,21 @@ class SubListItem extends StatelessWidget {
                 ],
               )
             )
+        }else if(route == "cost"){
+          showDialog(
+              context: context,
+              builder: (_) => const SimpleDialog(
+                title: Text("割り勘設定"),
+                children: <Widget>[
+                  SplittingTheCostDialog()
+                ],
+              )
+          )
         }else{
           Navigator.of(context).pushNamed(route)
+            .then((value) {
+              notifier.getEventInformation(eventId!);
+          })
         }
       },
       // onLongPress: () => {},
