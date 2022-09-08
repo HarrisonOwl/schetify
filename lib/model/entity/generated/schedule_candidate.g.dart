@@ -12,8 +12,7 @@ _$_ScheduleCandidate _$$_ScheduleCandidateFromJson(Map<String, dynamic> json) =>
       event_id: json['event_id'] as int?,
       start_at: DateTime.parse(json['start_at'] as String),
       end_at: DateTime.parse(json['end_at'] as String),
-      voters: const VoterListConverter()
-          .fromJson(json['voters'] as List<Map<String, dynamic>>),
+      voters: const VoterListConverter().fromJson(json['voters'] as List),
     );
 
 Map<String, dynamic> _$$_ScheduleCandidateToJson(

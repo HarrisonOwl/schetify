@@ -15,5 +15,6 @@ class EventUpdateState with _$EventUpdateState {
     required SplayTreeSet<ScheduleCandidate> scheduleCandidates,
     required List<Participant> participants,
     required bool loading,
+    required String user_id,
   }) = _EventUpdateState;
 }

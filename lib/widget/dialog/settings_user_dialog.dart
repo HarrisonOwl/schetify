@@ -33,7 +33,7 @@ class SettingsUserDialog extends HookConsumerWidget {
             value: 0,
             groupValue: gValue.value,
             onChanged: (value) {
-              gValue.value = 0;
+              gValue.value = 'readonly';
             }
           ),
           RadioListTile(
@@ -41,7 +41,7 @@ class SettingsUserDialog extends HookConsumerWidget {
             value: 1,
             groupValue: gValue.value,
             onChanged: (value) {
-              gValue.value = 1;
+              gValue.value = 'editor';
             }
           ),OutlinedButton(
             child:  Text('確定'),

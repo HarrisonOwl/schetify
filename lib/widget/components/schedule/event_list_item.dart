@@ -32,11 +32,11 @@ class EventListItemComponent extends HookConsumerWidget {
         ],
       ),
       child: ListTile(
-        title: Text(event.name ?? '', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),),
+        title: Text(event.name ?? '', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if(event.description != null) Text(event.description!),
+            if(event.description != null) Text(event.description!, overflow: TextOverflow.ellipsis),
             Row(children: [
               const Icon(Icons.calendar_month_rounded),
               Text((event.start_at != null && event.end_at != null) ? '${dateFormat.format(event.start_at!)}~${dateFormat.format(event.end_at!)}' : '未定')

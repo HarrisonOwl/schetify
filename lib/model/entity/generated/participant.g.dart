@@ -11,7 +11,7 @@ _$_Participant _$$_ParticipantFromJson(Map<String, dynamic> json) =>
       relation_id: json['relation_id'] as int,
       user_id: json['user_id'] as String,
       username: json['username'] as String,
-      label: json['label'] as int,
+      label: json['label'] as String,
       group_id: json['group_id'] as int?,
     );
 

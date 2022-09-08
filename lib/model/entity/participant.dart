@@ -10,7 +10,7 @@ class Participant with _$Participant {
     required int relation_id,
     required String user_id,
     required String username,
-    required int label,
+    required String label,
     required int? group_id,
   }) = _Participant;
 

@@ -21,6 +21,7 @@ mixin _$EventUpdateState {
       throw _privateConstructorUsedError;
   List<Participant> get participants => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
+  String get user_id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EventUpdateStateCopyWith<EventUpdateState> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $EventUpdateStateCopyWith<$Res> {
       {Event event,
       SplayTreeSet<ScheduleCandidate> scheduleCandidates,
       List<Participant> participants,
-      bool loading});
+      bool loading,
+      String user_id});
 
   $EventCopyWith<$Res> get event;
 }
@@ -56,6 +58,7 @@ class _$EventUpdateStateCopyWithImpl<$Res>
     Object? scheduleCandidates = freezed,
     Object? participants = freezed,
     Object? loading = freezed,
+    Object? user_id = freezed,
   }) {
     return _then(_value.copyWith(
       event: event == freezed
@@ -74,6 +77,10 @@ class _$EventUpdateStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      user_id: user_id == freezed
+          ? _value.user_id
+          : user_id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -96,7 +103,8 @@ abstract class _$$_EventUpdateStateCopyWith<$Res>
       {Event event,
       SplayTreeSet<ScheduleCandidate> scheduleCandidates,
       List<Participant> participants,
-      bool loading});
+      bool loading,
+      String user_id});
 
   @override
   $EventCopyWith<$Res> get event;
@@ -119,6 +127,7 @@ class __$$_EventUpdateStateCopyWithImpl<$Res>
     Object? scheduleCandidates = freezed,
     Object? participants = freezed,
     Object? loading = freezed,
+    Object? user_id = freezed,
   }) {
     return _then(_$_EventUpdateState(
       event: event == freezed
@@ -137,6 +146,10 @@ class __$$_EventUpdateStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      user_id: user_id == freezed
+          ? _value.user_id
+          : user_id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -148,7 +161,8 @@ class _$_EventUpdateState implements _EventUpdateState {
       {required this.event,
       required this.scheduleCandidates,
       required final List<Participant> participants,
-      required this.loading})
+      required this.loading,
+      required this.user_id})
       : _participants = participants;
 
   @override
@@ -164,10 +178,12 @@ class _$_EventUpdateState implements _EventUpdateState {
 
   @override
   final bool loading;
+  @override
+  final String user_id;
 
   @override
   String toString() {
-    return 'EventUpdateState(event: $event, scheduleCandidates: $scheduleCandidates, participants: $participants, loading: $loading)';
+    return 'EventUpdateState(event: $event, scheduleCandidates: $scheduleCandidates, participants: $participants, loading: $loading, user_id: $user_id)';
   }
 
   @override
@@ -180,7 +196,8 @@ class _$_EventUpdateState implements _EventUpdateState {
                 .equals(other.scheduleCandidates, scheduleCandidates) &&
             const DeepCollectionEquality()
                 .equals(other._participants, _participants) &&
-            const DeepCollectionEquality().equals(other.loading, loading));
+            const DeepCollectionEquality().equals(other.loading, loading) &&
+            const DeepCollectionEquality().equals(other.user_id, user_id));
   }
 
   @override
@@ -189,7 +206,8 @@ class _$_EventUpdateState implements _EventUpdateState {
       const DeepCollectionEquality().hash(event),
       const DeepCollectionEquality().hash(scheduleCandidates),
       const DeepCollectionEquality().hash(_participants),
-      const DeepCollectionEquality().hash(loading));
+      const DeepCollectionEquality().hash(loading),
+      const DeepCollectionEquality().hash(user_id));
 
   @JsonKey(ignore: true)
   @override
@@ -202,7 +220,8 @@ abstract class _EventUpdateState implements EventUpdateState {
       {required final Event event,
       required final SplayTreeSet<ScheduleCandidate> scheduleCandidates,
       required final List<Participant> participants,
-      required final bool loading}) = _$_EventUpdateState;
+      required final bool loading,
+      required final String user_id}) = _$_EventUpdateState;
 
   @override
   Event get event;
@@ -212,6 +231,8 @@ abstract class _EventUpdateState implements EventUpdateState {
   List<Participant> get participants;
   @override
   bool get loading;
+  @override
+  String get user_id;
   @override
   @JsonKey(ignore: true)
   _$$_EventUpdateStateCopyWith<_$_EventUpdateState> get copyWith =>

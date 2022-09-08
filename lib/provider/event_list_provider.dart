@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/event_list.dart';
 import 'package:schetify/model/entity/event.dart';
+import 'package:schetify/model/repository/event_repository.dart';
 import 'package:schetify/model/repository/test_repository.dart';
 
 final eventListProvider = StateNotifierProvider<EventDataNotifier, EventList>((ref){
@@ -18,6 +19,7 @@ class EventDataNotifier extends StateNotifier<EventList> {
   }
 
   final TestRepository testService = TestRepository();
+  final EventRepository eventService = EventRepository();
 
   void changeLoading(bool loading) {
     state = state.copyWith(loading: loading);
@@ -34,7 +36,7 @@ class EventDataNotifier extends StateNotifier<EventList> {
     changeLoading(true);
     try{
       await Future.delayed(const Duration(seconds: 1));
-      final events = await testService.getEvents();
+      final events = await eventService.getEvents();
       state = EventList(loading: false, error: false, eventList: events);
     }catch(e){
       state = state.copyWith(loading: false, error: true);

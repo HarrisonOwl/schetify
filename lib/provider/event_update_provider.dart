@@ -10,6 +10,7 @@ import 'package:schetify/model/repository/test_repository.dart';
 
 import '../model/entity/event_update_state.dart';
 import '../model/entity/participant.dart';
+import '../model/repository/event_repository.dart';
 
 class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
   EventUpdateNotifier() : super(EventUpdateState(
@@ -27,28 +28,22 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
           group_num: null,
           cost: null,
           cost_type: null,
-          questionare_url: null
+          questionnaire_url: null
       ),
       scheduleCandidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText())),
       participants: [],
-    loading: true,
+      loading: true,
+      user_id: ''
   ));
 
   final TestRepository testService = TestRepository();
+  final EventRepository eventService = EventRepository();
 
   Future<void> getEventInformation(int id) async {
     try{
       state = state.copyWith(loading: true);
-      await Future.delayed(const Duration(seconds: 1));
-      final event = await testService.getEvent(id);
-      final participants = await testService.getParticipants(id);
-      final candidates = await testService.getScheduleCandidates(id);
-      state = state.copyWith(
-          event: event,
-          participants: participants,
-          scheduleCandidates: candidates,
-          loading: false
-      );
+      final newState = await eventService.getEventInformation(id);
+      state = newState;
     }catch(e){
       debugPrint(e.toString());
     }
@@ -70,7 +65,7 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
               group_num: null,
               cost: null,
               cost_type: null,
-              questionare_url: null
+              questionnaire_url: null
           ),
           participants: [],
           scheduleCandidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText()))
@@ -133,7 +128,7 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
     return status;
   }
 
-  Future<int> updateSplittingInformation(int? cost, int costType) async {
+  Future<int> updateSplittingInformation(int? cost, String costType) async {
     final data = {
       'cost': cost,
       'cost_type': costType
@@ -156,7 +151,7 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
     state = state.copyWith(loading: loading);
   }
 
-  void changeUserLabel(int index, int label){
+  void changeUserLabel(int index, String label){
     final newUserState = state.participants[index].copyWith(label :label);
     List<Participant> clone = [...state.participants];
     clone[index] = newUserState;

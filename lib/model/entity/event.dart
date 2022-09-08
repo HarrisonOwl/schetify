@@ -20,9 +20,9 @@ class Event with _$Event {
     required double? location_latitude,
     required double? location_longitude,
     required int? group_num,
-    required int? cost_type,
+    required String? cost_type,
     required int? cost,
-    required String? questionare_url,
+    required String? questionnaire_url,
   }) = _Event;
 
   String getText() {

@@ -268,7 +268,8 @@ class EventDetailPage extends HookConsumerWidget {
                         .toList();
                     final fitnessValue = maybeVoters.length + ableVoters.length * 100;
                     // TODO 自分のユーザのロールを見るようにする
-                    final isEditor = (detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label ?? 0) >= 1;
+                    final myLabel = detail.participants.firstWhereOrNull((element) => element.user_id == detail.user_id)?.label ?? 'readonly';
+                    final isEditor = (myLabel == 'editor') || (myLabel == 'owner');
                     final isDecided = detail.event.getText() == candidate.getText();
                     return Container(
                       color: fitnessValue == maxFitnessValue ? Colors.lightGreenAccent : Colors.transparent,
@@ -407,7 +408,7 @@ class EventDetailPage extends HookConsumerWidget {
                       ),
                       Visibility(
                           // TODO 自分のユーザのロールを見るようにする
-                          visible: (detail.participants.firstWhereOrNull((element) => element.user_id == '1')?.label ?? 0) >= 1,
+                          visible: ((detail.participants.firstWhereOrNull((element) => element.user_id == detail.user_id)?.label ?? 'readonly') == 'editor') || ((detail.participants.firstWhereOrNull((element) => element.user_id == detail.user_id)?.label ?? 'readonly') == 'owner'),
                           child: ElevatedButton(
                             child: Row(
                               children: const [

@@ -66,17 +66,17 @@ class ScheduleCandidate with _$ScheduleCandidate {
   );
 }
 
-class VoterListConverter implements JsonConverter<List<Voter>, List<Map<String, dynamic>>> {
+class VoterListConverter implements JsonConverter<List<Voter>, List<dynamic>> {
   const VoterListConverter();
 
   @override
-  List<Voter> fromJson(List<Map<String, dynamic>> json) {
+  List<Voter> fromJson(List<dynamic> json) {
     final ret = json.map((voter) => Voter.fromJson(voter)).toList();
     return ret;
   }
 
   @override
-  List<Map<String, dynamic>> toJson(List<Voter> json) {
+  List<dynamic> toJson(List<Voter> json) {
     final ret = json.map((voter) => voter.toJson()).toList();
     return ret;
   }

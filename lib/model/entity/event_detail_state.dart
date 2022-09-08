@@ -14,6 +14,7 @@ class EventDetailState with _$EventDetailState {
     required Event event,
     required SplayTreeSet<ScheduleCandidate> scheduleCandidates,
     required List<Participant> participants,
-    required bool loading
+    required bool loading,
+    required String user_id,
   }) = _EventDetailState;
 }

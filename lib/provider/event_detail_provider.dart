@@ -9,6 +9,8 @@ import 'package:schetify/model/entity/event_detail_state.dart';
 import 'package:schetify/model/entity/schedule_candidate.dart';
 import 'package:schetify/model/repository/test_repository.dart';
 
+import '../model/repository/event_repository.dart';
+
 class EventDetailNotifier extends StateNotifier<EventDetailState> {
   EventDetailNotifier() : super(EventDetailState(
       event: const Event(
@@ -25,14 +27,16 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
           group_num: null,
           cost: null,
           cost_type: null,
-          questionare_url: null
+          questionnaire_url: null
       ),
       scheduleCandidates: SplayTreeSet<ScheduleCandidate>((a, b) => a.getText().compareTo(b.getText())),
       participants: [],
-      loading: true
+      loading: true,
+      user_id: ''
   ));
 
   final TestRepository testService = TestRepository();
+  final EventRepository eventService = EventRepository();
 
   void changeLoading(bool loading) {
     state = state.copyWith(loading: loading);
@@ -40,16 +44,14 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
 
   Future<void> getEventInformation(int id) async {
     try{
-      changeLoading(true);
-      await Future.delayed(const Duration(seconds: 1));
-      final event = await testService.getEvent(id);
-      final participants = await testService.getParticipants(id);
-      final candidates = await testService.getScheduleCandidates(id);
+      state = state.copyWith(loading: true);
+      final newState = await eventService.getEventInformation(id);
       state = state.copyWith(
-          event: event,
-          participants: participants,
-          scheduleCandidates: candidates,
-          loading: false
+        event: newState.event,
+        participants: newState.participants,
+        scheduleCandidates: newState.scheduleCandidates,
+        loading: false,
+        user_id: newState.user_id,
       );
     }catch(e){
       debugPrint(e.toString());

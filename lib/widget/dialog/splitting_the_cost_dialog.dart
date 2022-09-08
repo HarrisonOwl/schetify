@@ -13,13 +13,13 @@ class SplittingTheCostDialog extends HookConsumerWidget {
     final detail = ref.watch(eventUpdateProvider);
     final notifier = ref.read(eventUpdateProvider.notifier);
     final flag = useState(detail.event.cost != null);
-    final costType = useState(detail.event.cost_type);
-    final costPerPerson = useState(costType.value == 1 ? detail.event.cost : null);
-    final totalCost = useState(costType.value == 0 ? detail.event.cost : null);
+    final ValueNotifier<String?> costType = useState(detail.event.cost_type);
+    final costPerPerson = useState(costType.value == 'individual' ? detail.event.cost : null);
+    final totalCost = useState(costType.value == 'total' ? detail.event.cost : null);
 
-    void setType(int? value) {
+    void setType(String? value) {
       if(flag.value) {
-        costType.value = value ?? 0;
+        costType.value = value ?? 'total';
       }
     }
 
@@ -52,7 +52,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                   Row(
                     children: [
                       Radio(
-                          value: 0,
+                          value: 'total',
                           groupValue: costType.value,
                           onChanged: setType,
                       ),
@@ -74,7 +74,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                   Row(
                     children: [
                       Radio(
-                          value: 1,
+                          value: 'individual',
                           groupValue: costType.value,
                           onChanged: setType
                       ),
@@ -86,7 +86,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                         hintText: '金額',
                         border: OutlineInputBorder(),
                       ),
-                      enabled: flag.value && costType.value == 1,
+                      enabled: flag.value && costType.value == 'individual',
                       keyboardType: TextInputType.number,
                       initialValue: (costPerPerson.value != null && costPerPerson.value!=0.0) ? costPerPerson.value.toString() : "",
                       onChanged: (text){
@@ -95,7 +95,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                   ),
                   Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Text("現在の人数: ${detail.participants.length}人 一人当たり${costType.value == 0 ? ((totalCost.value ?? 0) / detail.participants.length).ceil() : costPerPerson.value  ?? 0}"),
+                      child: Text("現在の人数: ${detail.participants.length}人 一人当たり${costType.value =='total' ? ((totalCost.value ?? 0) / detail.participants.length).ceil() : costPerPerson.value  ?? 0}"),
                   ),
                   Padding(
                       padding: const EdgeInsets.all(10),
@@ -103,7 +103,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                       child: const Text('確定'),
                       onPressed: () async {
                         if(!flag.value) {
-                          notifier.updateSplittingInformation(null, costType.value ?? 0)
+                          notifier.updateSplittingInformation(null, costType.value ?? 'total')
                               .then((status) {
                             if(status == 200) {
                               Navigator.of(context).pop();
@@ -116,7 +116,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                         else {
                           final cost = costType.value == 0 ? totalCost.value : costPerPerson.value;
                           if(cost != null) {
-                            notifier.updateSplittingInformation(cost, costType.value ?? 0)
+                            notifier.updateSplittingInformation(cost, costType.value ?? 'total')
                                 .then((status) {
                               if(status == 200) {
                                 Navigator.of(context).pop();
