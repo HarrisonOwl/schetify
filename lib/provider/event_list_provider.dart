@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/event_list.dart';
 import 'package:schetify/model/entity/event.dart';
 import 'package:schetify/model/repository/event_repository.dart';
-import 'package:schetify/model/repository/test_repository.dart';
 
 final eventListProvider = StateNotifierProvider<EventDataNotifier, EventList>((ref){
   return EventDataNotifier();
@@ -18,7 +17,6 @@ class EventDataNotifier extends StateNotifier<EventList> {
     getEvents();
   }
 
-  final TestRepository testService = TestRepository();
   final EventRepository eventService = EventRepository();
 
   void changeLoading(bool loading) {

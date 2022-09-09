@@ -4,7 +4,6 @@ import 'package:schetify/model/entity/attend_status.dart';
 import 'package:schetify/model/entity/attendance_check_state.dart';
 
 import '../model/repository/event_repository.dart';
-import '../model/repository/test_repository.dart';
 
 class AttendanceCheckNotifier extends StateNotifier<AttendanceCheckState> {
   AttendanceCheckNotifier() : super(const AttendanceCheckState(
@@ -12,7 +11,6 @@ class AttendanceCheckNotifier extends StateNotifier<AttendanceCheckState> {
       loading: true
   ));
 
-  final TestRepository testService = TestRepository();
   final EventRepository eventService = EventRepository();
 
   void changeStatus(List<AttendStatus> statusList) {
