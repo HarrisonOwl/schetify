@@ -7,6 +7,7 @@ import 'package:schetify/provider/attendance_check_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../model/entity/schedule_candidate.dart';
+import '../../../../provider/event_detail_provider.dart';
 import '../../../../provider/event_update_provider.dart';
 
 class AttendanceCheckPage extends HookConsumerWidget {
@@ -14,8 +15,8 @@ class AttendanceCheckPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final detail = ref.watch(eventUpdateProvider);
-    final detailNotifier = ref.read(eventUpdateProvider.notifier);
+    final detail = ref.watch(eventDetailProvider);
+    final detailNotifier = ref.read(eventDetailProvider.notifier);
     final attendanceCheck = ref.watch(attendanceCheckProvider);
     final attendanceNotifier = ref.read(attendanceCheckProvider.notifier);
 
