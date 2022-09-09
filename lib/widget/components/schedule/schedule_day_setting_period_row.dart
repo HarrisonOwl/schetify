@@ -20,7 +20,13 @@ class ScheduleDaySettingPeriodRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             const Text('開始時間:'),
+            const SizedBox(width: 10),
             OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(35),
+                    )
+                ),
               onPressed: () async {
                 final newTime = await showTimePicker(
                   context: context,
@@ -41,7 +47,13 @@ class ScheduleDaySettingPeriodRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             const Text('終了時間:'),
+            SizedBox(width: 10),
             OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(35),
+                    )
+                ),
               onPressed: () async {
                 final newTime = await showTimePicker(
                   context: context,

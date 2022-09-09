@@ -107,7 +107,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                       width: 70,
                       height: 40,
                       child: OutlinedButton(
-                        style: ElevatedButton.styleFrom(
+                        style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(35),
                           )

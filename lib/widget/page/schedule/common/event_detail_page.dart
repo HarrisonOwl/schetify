@@ -218,6 +218,9 @@ class EventDetailPage extends HookConsumerWidget {
                                         showDialog(
                                             context: context,
                                             builder: (_) => const SimpleDialog(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+                                              ),
                                               title: Text("参加者一覧"),
                                               children: <Widget>[
                                                 ParticipantsListDialog()

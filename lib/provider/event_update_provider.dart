@@ -167,6 +167,10 @@ class EventUpdateNotifier extends StateNotifier<EventUpdateState> {
   Future<void> createUserEvents(String id) async {
     await eventService.createUserEvents(id);
   }
+
+  Event getCurrentEvent(){
+    return state.event;
+  }
 }
 
 final eventUpdateProvider = StateNotifierProvider<EventUpdateNotifier

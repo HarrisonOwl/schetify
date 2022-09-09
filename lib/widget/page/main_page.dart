@@ -110,7 +110,6 @@ class MainPageState extends ConsumerState<MainPage>{
     }
 
     useEffect(() {
-      debugPrint();
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Future<void>.microtask(() async {
           await updateEventInformation();

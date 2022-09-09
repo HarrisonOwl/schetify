@@ -19,29 +19,25 @@ class ScheduleDayListView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(eventUpdateProvider.notifier);
-    return ScrollablePositionedList.builder(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+    return ScrollablePositionedList.separated(
       itemBuilder: (context, index) {
-        return Dismissible(
-          key: UniqueKey(),
-          onDismissed: (direction) => notifier.removePeriod(scheduleCandidates.elementAt(index)),
-          background: Container(
-            color: Colors.red,
-            child: const Icon(Icons.delete, color: Colors.white),
-          ),
-          child: Column(
-            children: [
-              Container( // SizedBoxにした方がいいというWarningが出るが、パッケージの挙動がおかしくなるのでContainerのままにした
-                height: 30,
-                child: ScheduleDayListTile(scheduleCandidates: scheduleCandidates, index: index, eventId: eventId,),
-              ),
-              const Divider()
-            ],
+        return Center(
+          child: Dismissible(
+            key: UniqueKey(),
+            onDismissed: (direction) => notifier.removePeriod(scheduleCandidates.elementAt(index)),
+            background: Container(
+              height: 40,
+              color: Colors.red,
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
+            child: ScheduleDayListTile(scheduleCandidates: scheduleCandidates, index: index, eventId: eventId,),
           ),
         );
       },
       itemScrollController: scrollController,
       itemPositionsListener: positionsListener,
-      itemCount: scheduleCandidates.length);
+      itemCount: scheduleCandidates.length,
+      separatorBuilder: (BuildContext context, int index) => const Divider(height: 1),);
+
   }
 }
