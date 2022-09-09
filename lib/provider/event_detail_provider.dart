@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/event.dart';
 import 'package:schetify/model/entity/event_detail_state.dart';
 import 'package:schetify/model/entity/schedule_candidate.dart';
-import 'package:schetify/model/repository/test_repository.dart';
 
 import '../model/repository/event_repository.dart';
 

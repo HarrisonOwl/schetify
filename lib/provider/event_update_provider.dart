@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:schetify/model/entity/event.dart';
 import 'package:schetify/model/entity/schedule_candidate.dart';
-import 'package:schetify/model/repository/test_repository.dart';
 
 import '../model/entity/event_update_state.dart';
 import '../model/entity/participant.dart';
