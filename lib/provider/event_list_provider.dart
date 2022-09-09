@@ -35,7 +35,6 @@ class EventDataNotifier extends StateNotifier<EventList> {
   Future<void> getEvents() async {
     changeLoading(true);
     try{
-      await Future.delayed(const Duration(seconds: 1));
       final events = await eventService.getEvents();
       state = EventList(loading: false, error: false, eventList: events);
     }catch(e){

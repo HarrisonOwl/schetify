@@ -74,6 +74,23 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
         mode: Mode.fullscreen, // Mode.fullscreen
         language: "ja",
         components: [Component(Component.country, "jp")],
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: const EdgeInsets.only(left:10, right:10, top: 10),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(80.0),
+            borderSide: const BorderSide(
+              color: Colors.white,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(80.0),
+            borderSide: const BorderSide(
+              color: Colors.white,
+            ),
+          ),
+        )
       );
       if(p != null) {
         final description = p.description;
