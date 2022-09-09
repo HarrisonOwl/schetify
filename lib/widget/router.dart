@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/widget/components/setting/change_password_page.dart';
+import 'package:schetify/widget/components/setting/enter_password_page.dart';
+import 'package:schetify/widget/components/setting/settings_account_page.dart';
 import 'package:schetify/widget/page/event_page.dart';
 import 'package:schetify/widget/page/init/init_page.dart';
 import 'package:schetify/widget/page/init/login_page.dart';
@@ -53,6 +56,9 @@ class AppRouter extends ConsumerWidget {
         '/event/': (BuildContext context) => const EventPage(),
         '/event/new': (BuildContext context) => const EventCreatePage(),
         '/settings': (BuildContext context) => const SettingsPage(),
+        '/settings/account': (BuildContext context) => const SettingsAccountPage(),
+        '/settings/account/password': (BuildContext context) => const EnterPasswordPage(),
+        '/settings/account/password/change': (BuildContext context) => const ChangePasswordPage(),
       },
     );
   }
