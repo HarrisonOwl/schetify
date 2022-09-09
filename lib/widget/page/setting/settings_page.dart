@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:schetify/widget/dialog/settings_account_dialog.dart';
 
 import '../../../provider/firebase_auth_provider.dart';
 
@@ -15,43 +14,86 @@ class SettingsPage extends HookConsumerWidget {
     final noticeFlag = useState(false);
 
     return Scaffold(
-      body: Center(
+      resizeToAvoidBottomInset : false,
+      appBar: AppBar(
+        bottomOpacity: 0.0,
+        elevation: 0.0,
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        color: Colors.white,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SwitchListTile(
-              title: const Text('カレンダー登録設定'),
-              value: calenderFlag.value,
-              secondary: const Icon(Icons.lightbulb_outline),
-              onChanged: (value){
-                calenderFlag.value = value;
-              }
-            ),SwitchListTile(
-                title: const Text('通知設定'),
-                value: noticeFlag.value,
-                secondary: const Icon(Icons.lightbulb_outline),
-                onChanged: (value){
-                  noticeFlag.value = value;
-                }
-            ),
-            ListTile(
-              title: const Text('アカウント設定'),
-              onTap: () => {
-                showDialog(
-                  context: context,
-                  builder: (_) => const SimpleDialog(
-                    title: Text("アカウント設定"),
-                    children: <Widget>[
-                      SettingsAccountDialog()
+            Container(
+              color: Colors.green,
+              child: Padding(padding: const EdgeInsets.all(20),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.settings,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                      SizedBox(width: 10),
+                      Text( '設定画面' , style: TextStyle(color: Colors.white, fontSize: 26.0,), textAlign: TextAlign.left),
                     ],
-                  )
-              )},
+                  ),
+                ),
+              ),
             ),
-            ListTile(
-                title: const Text('ログアウト'),
-                onTap: (){
-                  firebase.signOut().then((value) => Navigator.of(context).pushNamedAndRemoveUntil("/init", (route) => false));
-                },
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SwitchListTile(
+                      title: const Text('カレンダー登録設定'),
+                      value: calenderFlag.value,
+                      secondary: const Icon(Icons.lightbulb_outline),
+                      onChanged: (value){
+                        calenderFlag.value = value;
+                      }
+                  ),
+                  const Divider(),
+                  SwitchListTile(
+                      title: const Text('通知設定'),
+                      value: noticeFlag.value,
+                      secondary: const Icon(Icons.lightbulb_outline),
+                      onChanged: (value){
+                        noticeFlag.value = value;
+                      }
+                  ),
+                  const Divider(),
+                  ListTile(
+                    title: const Text('アカウント設定'),
+                    leading: const Icon(Icons.person),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        Icon(Icons.arrow_forward)
+                      ],
+                    ),
+                    onTap: () => {
+                      Navigator.of(context).pushNamed("/settings/account")
+                    },
+                  ),
+                  const Divider(),
+                  ListTile(
+                    title: const Text('ログアウト'),
+                    leading: const Icon(Icons.logout),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        Icon(Icons.arrow_forward)
+                      ],
+                    ),
+                    onTap: (){
+                      firebase.signOut().then((value) => Navigator.of(context).pushNamedAndRemoveUntil("/init", (route) => false));
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
