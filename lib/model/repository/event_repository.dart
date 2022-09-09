@@ -8,10 +8,22 @@ import 'package:schetify/model/entity/schedule_candidate.dart';
 
 import '../../util/api_client.dart';
 import '../entity/attend_status.dart';
+import '../entity/event_notification.dart';
 
 class EventRepository{
 
   final APIClient apiClient = APIClient();
+
+  Future<List<EventNotification>> getNotifications() async {
+    final response = await apiClient.get("notifications", true);
+    if (response.statusCode == 200) {
+      return List<EventNotification>.from(response.data.map((element)=> EventNotification.fromJson(element)));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception(response.toString());
+    }
+  }
 
   Future<List<Event>> getEvents() async {
     final response = await apiClient.get("events", true);

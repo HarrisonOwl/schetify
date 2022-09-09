@@ -132,7 +132,12 @@ class MainPageState extends ConsumerState<MainPage>{
           Stack(children : <Widget>[
             IconButton(
               icon: const Icon(Icons.notifications),
-              onPressed: () => {},
+              onPressed: () async {
+                Navigator.of(context).pushNamed("/event/notification")
+                    .then((value) async {
+                await notifier.getEvents();
+                });
+              },
             ),
             if(true) Positioned(
               top: 10,
