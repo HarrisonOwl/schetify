@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/provider/event_detail_provider.dart';
 import 'package:uni_links/uni_links.dart';
 
 import '../../provider/event_list_provider.dart';
@@ -84,6 +85,11 @@ class MainPageState extends ConsumerState<MainPage>{
                             .getEvents()
                             .then((_) {
                           Navigator.of(context).pop();
+                          Navigator.of(context).pushNamed("/event/detail", arguments: {'id': int.parse(params['id'] ?? '-1')})
+                            .then((_) {
+                            ref.read(eventDetailProvider.notifier)
+                                .getEventInformation(int.parse(params['id'] ?? '-1'));
+                          });
                         });
                       },
                       child: const Text('このイベントに参加する'),
@@ -132,7 +138,12 @@ class MainPageState extends ConsumerState<MainPage>{
           Stack(children : <Widget>[
             IconButton(
               icon: const Icon(Icons.notifications),
-              onPressed: () => {},
+              onPressed: () async {
+                Navigator.of(context).pushNamed("/event/notification")
+                    .then((value) async {
+                await notifier.getEvents();
+                });
+              },
             ),
             if(true) Positioned(
               top: 10,
