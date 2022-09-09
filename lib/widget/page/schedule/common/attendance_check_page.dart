@@ -8,7 +8,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../model/entity/schedule_candidate.dart';
 import '../../../../provider/event_detail_provider.dart';
-import '../../../../provider/event_update_provider.dart';
 
 class AttendanceCheckPage extends HookConsumerWidget {
   const AttendanceCheckPage({Key? key}) : super(key: key);
