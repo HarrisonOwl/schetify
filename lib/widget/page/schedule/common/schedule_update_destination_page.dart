@@ -74,6 +74,23 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
         mode: Mode.fullscreen, // Mode.fullscreen
         language: "ja",
         components: [Component(Component.country, "jp")],
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.green[200],
+          contentPadding: const EdgeInsets.only(left:10, right:10, top: 10),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(80.0),
+            borderSide: BorderSide(
+              color: Colors.green[200]!,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(80.0),
+            borderSide: BorderSide(
+              color: Colors.green[200]!,
+            ),
+          ),
+        )
       );
       if(p != null) {
         final description = p.description;
@@ -171,8 +188,8 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
           ),
         ] : <Widget>[
           Expanded(
-            flex: 50,
-            child: GoogleMap(
+            flex: 65,
+              child: GoogleMap(
               mapType: MapType.hybrid,
               initialCameraPosition: initialPosition.value,
               onMapCreated: (GoogleMapController controller) {
@@ -184,89 +201,132 @@ class ScheduleUpdateDestinationPageState extends ConsumerState<ScheduleUpdateDes
               zoomControlsEnabled: false,
               zoomGesturesEnabled: false,
               scrollGesturesEnabled: false
-            ),
-          ),
-          Expanded(
-            flex: 50,
-            child: Form(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: const InputDecoration(labelText: '地点名'),
-                      initialValue: name.value ?? '',
-                      onChanged: (value){ name.value = value; },
+          )),
+          Expanded(flex: 30,
+          child: Container(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0),
+              color: Colors.grey[150],
+              child: Column(
+                children: [
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text('地点名', textAlign: TextAlign.left),
+                  ),
+                  TextFormField(
+                    initialValue: name.value ?? '',
+                    onChanged: (value){ name.value = value; },
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                        borderSide: const BorderSide(
+                          color: Colors.black26,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                        borderSide: const BorderSide(
+                          color: Colors.black87,
+                        ),
+                      ),
                     ),
-                    TextFormField(
-                      decoration: const InputDecoration(labelText: '住所'),
-                      initialValue: address.value ?? '',
-                      onChanged: (value){ address.value = value; },
+                  ),
+                  SizedBox(height: 5),
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text('住所', textAlign: TextAlign.left),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(
+                          color: Colors.black26,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(
+                          color: Colors.black87,
+                        ),
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 130,
-                            child: ElevatedButton.icon(
-                              icon: const Icon(
-                                Icons.pin_drop,
-                                color: Colors.white,
-                              ),
-                              label: const Text('ピンを外す'),
-                              style: ElevatedButton.styleFrom(
+                    initialValue: address.value ?? '',
+                    onChanged: (value){ address.value = value; },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 50,
+                          width: 160,
+                          child: ElevatedButton.icon(
+                            icon: const Icon(
+                              Icons.pin_drop,
+                              color: Colors.white,
+                            ),
+                            label: const Text('ピンを外す'),
+                            style: ElevatedButton.styleFrom(
                                 primary: Colors.red,
                                 onPrimary: Colors.white,
-                              ),
-                              onPressed: () {
-                                markers.value = {};
-                              },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(35),
+                                )
                             ),
+                            onPressed: () {
+                              markers.value = {};
+                            },
                           ),
-                          SizedBox(
-                            height: 50,
-                            width: 130,
-                            child: ElevatedButton.icon(
-                              icon: const Icon(
-                                Icons.save_as,
-                                color: Colors.white,
-                              ),
-                              label: const Text('保存'),
-                              style: ElevatedButton.styleFrom(
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 160,
+                          child: ElevatedButton.icon(
+                            icon: const Icon(
+                              Icons.save_as,
+                              color: Colors.white,
+                            ),
+                            label: const Text('保存'),
+                            style: ElevatedButton.styleFrom(
                                 primary: Colors.green,
                                 onPrimary: Colors.white,
-                              ),
-                              onPressed: () async {
-                                if(name.value == null || name.value == "") {
-                                  ScaffoldMessenger.of(context).showSnackBar(nameAlertSnackBar);
-                                }
-                                else if(address.value == null || address.value == "") {
-                                  ScaffoldMessenger.of(context).showSnackBar(addressAlertSnackBar);
-                                }
-                                else {
-                                  await notifier.updateLocationInformation(
-                                      name.value!,
-                                      address.value!,
-                                      markers.value.first.position.latitude,
-                                      markers.value.first.position.longitude
-                                  ).then((status){
-                                    Navigator.pop(context);
-                                  });
-                                }
-                              },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(35),
+                                )
                             ),
+                            onPressed: () async {
+                              if(name.value == null || name.value == "") {
+                                ScaffoldMessenger.of(context).showSnackBar(nameAlertSnackBar);
+                              }
+                              else if(address.value == null || address.value == "") {
+                                ScaffoldMessenger.of(context).showSnackBar(addressAlertSnackBar);
+                              }
+                              else {
+                                await notifier.updateLocationInformation(
+                                    name.value!,
+                                    address.value!,
+                                    markers.value.first.position.latitude,
+                                    markers.value.first.position.longitude
+                                ).then((status){
+                                  Navigator.pop(context);
+                                });
+                              }
+                            },
                           ),
-                        ],
-                      ),
-                    )
-                  ],
-                )
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               )
-            ),
-          )
+          ),)
         ]
       ),
     );

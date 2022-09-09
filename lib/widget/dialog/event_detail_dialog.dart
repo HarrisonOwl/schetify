@@ -30,28 +30,47 @@ class EventDetailDialog extends HookConsumerWidget {
     }
 
     return Center(
-        child: Column(
+        child: Padding(padding: const EdgeInsets.symmetric(horizontal: 20),child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 5),
             TextFormField(
-              initialValue: detail.event.description,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
+                initialValue: detail.event.description,
+                keyboardType: TextInputType.multiline,
+                textAlignVertical: TextAlignVertical.top,
+                decoration: InputDecoration(
+                  alignLabelWithHint: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 12,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    ),
+                ),
+                maxLines: null,
                 onChanged: updateText
-            ),ListTile(
-              title: const Text('保存'),
-              onTap: () async {
+            ),
+            const SizedBox(height: 10),
+            Padding(padding: const EdgeInsets.all(5), child: SizedBox(width: 70, height: 45, child: OutlinedButton(
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35),
+                  )
+              ),
+              onPressed: () async {
                 await notifier.updateDescription(detailText.value)
                     .then((_) {
-                      Navigator.of(context).pop();
-                      notifier.getEventInformation(detail.event.id ?? -1);
-                    }).onError((error, stackTrace) {
+                  Navigator.of(context).pop();
+                  notifier.getEventInformation(detail.event.id ?? -1);
+                }).onError((error, stackTrace) {
                   ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
                 });
               },
-            ),
+              child: const Text('保存'),
+            ))),
           ],
-        ),
+        )),
     );
   }
 }

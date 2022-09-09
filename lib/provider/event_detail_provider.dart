@@ -41,6 +41,10 @@ class EventDetailNotifier extends StateNotifier<EventDetailState> {
     state = state.copyWith(loading: loading);
   }
 
+  void newEvent(Event event){
+    state = state.copyWith(loading: false, event: event);
+  }
+
   Future<void> getEventInformation(int id) async {
     try{
       state = state.copyWith(loading: true);

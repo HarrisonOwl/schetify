@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/provider/event_detail_provider.dart';
 import 'package:schetify/provider/event_list_provider.dart';
 import '../../../../provider/event_update_provider.dart';
 
@@ -11,7 +12,7 @@ class EventCreatePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = useState(true);
     final notifier = ref.read(eventUpdateProvider.notifier);
-    final detail = ref.watch(eventUpdateProvider);
+    final detail_notifier = ref.read(eventDetailProvider.notifier);
     final isRunning = useState(false);
     final listNotifier = ref.read(eventListProvider.notifier);
 
@@ -65,7 +66,6 @@ class EventCreatePage extends HookConsumerWidget {
                 alignment: const Alignment(0.0, 0.0),
                 height: 100,
                 child: TextFormField(
-                  initialValue: detail.event.name,
                   decoration: InputDecoration(
                     hintText: '予定名',
                     contentPadding: const EdgeInsets.all(20),
@@ -90,7 +90,6 @@ class EventCreatePage extends HookConsumerWidget {
               ),
               const SizedBox(height: 15),
               TextFormField(
-                initialValue: detail.event.description,
                 decoration: InputDecoration(
                   hintText: '予定説明(選択)',
                   contentPadding: const EdgeInsets.all(15),
@@ -126,10 +125,11 @@ class EventCreatePage extends HookConsumerWidget {
                           borderRadius: BorderRadius.circular(35),
                         )
                     ),
-                    onPressed: !isRunning.value ? () {
+                    onPressed: !isRunning.value ? () async {
                       isRunning.value = true;
-                      notifier.createEvent()
-                          .then((id) {
+                      await notifier.createEvent()
+                          .then((id) async {
+                            detail_notifier.newEvent(notifier.getCurrentEvent());
                           Navigator.of(context).pop();
                           Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': id})
                               .then((value) async {

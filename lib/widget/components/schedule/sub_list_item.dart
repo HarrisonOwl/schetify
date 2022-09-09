@@ -64,6 +64,9 @@ class SubListItem extends HookConsumerWidget {
             context: context,
             builder: (_) => const SimpleDialog(
               title: Text("イベント詳細"),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+              ),
                 children: <Widget>[
                   EventDetailDialog()
                 ],
@@ -74,6 +77,9 @@ class SubListItem extends HookConsumerWidget {
           showDialog(
               context: context,
               builder: (_) => const SimpleDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))
+                ),
                 title: Text("割り勘設定"),
                 children: <Widget>[
                   SplittingTheCostDialog()

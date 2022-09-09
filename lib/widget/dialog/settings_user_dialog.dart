@@ -15,21 +15,24 @@ class SettingsUserDialog extends HookConsumerWidget {
 
     final detail = ref.watch(eventUpdateProvider);
     final notifier = ref.read(eventUpdateProvider.notifier);
-    final participants = useState(detail.participants);
     final gValue = useState(detail.participants[index].label);
 
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          SizedBox(
-            width: 80,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(participants.value[index].username)
-            ),
-          ),
           RadioListTile(
-            title: const Text('readOnly'),
+            title: RichText(
+              text: TextSpan(
+                  text: '一般ユーザー',
+                  style: TextStyle(
+                      fontSize: 13.0,
+                      color: Colors.black,
+                      background: Paint()
+                        ..strokeWidth = 19.0
+                        ..color = Colors.cyanAccent
+                        ..style = PaintingStyle.stroke
+                        ..strokeJoin = StrokeJoin.round)),
+            ),
             value: 'readonly',
             groupValue: gValue.value,
             onChanged: (value) {
@@ -37,14 +40,29 @@ class SettingsUserDialog extends HookConsumerWidget {
             }
           ),
           RadioListTile(
-            title: const Text('edit'),
+            title: RichText(
+              text: TextSpan(
+                  text: '管理者',
+                  style: TextStyle(
+                      fontSize: 13.0,
+                      color: Colors.white,
+                      background: Paint()
+                        ..strokeWidth = 19.0
+                        ..color = Colors.green
+                        ..style = PaintingStyle.stroke
+                        ..strokeJoin = StrokeJoin.round)),
+            ),
             value: 'editor',
             groupValue: gValue.value,
             onChanged: (value) {
               gValue.value = 'editor';
             }
           ),OutlinedButton(
-            child:  const Text('確定'),
+            style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(35),
+                )
+            ),
             onPressed: () async {
               await notifier.updateParticipants([detail.participants[index].copyWith(label: gValue.value),]);
               await notifier.getEventInformation(detail.event.id ?? -1)
@@ -52,6 +70,7 @@ class SettingsUserDialog extends HookConsumerWidget {
                 Navigator.of(context).pop();
               });
               },
+            child:  const Text('確定'),
           ),
         ],
       );

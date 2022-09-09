@@ -57,6 +57,9 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
                       return true;
                     },
                     child: AlertDialog(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0))
+                      ),
                     title: const Text("日程候補編集方法"),
                     content: SingleChildScrollView(
                       child: ListBody(
@@ -78,7 +81,7 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
                         style: OutlinedButton.styleFrom(
                           primary: Colors.black,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(35),
                           ),
                           side: const BorderSide(),
                         ),
@@ -222,7 +225,7 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
           body: Column(
               children: <Widget>[
                 Expanded(
-                  flex: 35, // 割合
+                  flex: 22, // 割合
                   child: TableCalendar(
                       locale: 'ja_JP',
                       firstDay: DateTime.now().add(const Duration(days: 1)),
@@ -240,15 +243,17 @@ class ScheduleDayUpdatePageState extends ConsumerState<ScheduleDayUpdatePage> {
                       )
                   ),
                 ),
+                Container(width: double.infinity, height: 1, color: Colors.black12,),
                 Expanded(
-                    flex: provider.isSetPeriodCollectively ? 17 : 9, // 割合
+                    flex: provider.isSetPeriodCollectively ? 12 : 6, // 割合
                     child: Padding(
                         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                         child: ScheduleDaySettingView(provider: provider, ref: ref,)
                     )
                 ),
+                Container(width: double.infinity, height: 1, color: Colors.black12,),
                 Expanded(
-                  flex: provider.isSetPeriodCollectively ? 48 : 56, // 割合
+                  flex: provider.isSetPeriodCollectively ? 52 : 58, // 割合
                   child: ScheduleDayListView(scheduleCandidates: detail.scheduleCandidates, scrollController: scrollController, eventId: detail.event.id,),
                 ),
               ]
