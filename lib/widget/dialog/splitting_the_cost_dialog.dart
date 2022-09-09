@@ -46,7 +46,7 @@ class SplittingTheCostDialog extends HookConsumerWidget {
               secondary: const Icon(Icons.lightbulb_outline),
             ),
             Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
                   Row(
@@ -60,9 +60,11 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                     ],
                   ),
                   TextFormField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: '金額',
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(40.0),
+                        ),
                       ),
                       enabled: flag.value && costType.value == 'total',
                       keyboardType: TextInputType.number,
@@ -82,9 +84,11 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                     ],
                   ),
                   TextFormField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: '金額',
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(40.0),
+                        ),
                       ),
                       enabled: flag.value && costType.value == 'individual',
                       keyboardType: TextInputType.number,
@@ -98,32 +102,41 @@ class SplittingTheCostDialog extends HookConsumerWidget {
                       child: Text("現在の人数: ${detail.participants.length}人 一人当たり${costType.value =='total' ? ((totalCost.value ?? 0) / detail.participants.length).ceil() : costPerPerson.value  ?? 0}"),
                   ),
                   Padding(
-                      padding: const EdgeInsets.all(10),
-                    child: OutlinedButton(
-                      child: const Text('確定'),
-                      onPressed: () async {
-                        if(!flag.value) {
-                          notifier.updateSplittingInformation(null, costType.value ?? 'total')
-                              .then((_) {
-                            Navigator.of(context).pop();
-                            notifier.getEventInformation(detail.event.id ?? -1);
-                          }).onError((error, stackTrace) {
-                            ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
-                          });
-                        }
-                        else {
-                          final cost = costType.value == 'total' ? totalCost.value : costPerPerson.value;
-                          if(cost != null) {
-                            notifier.updateSplittingInformation(cost, costType.value ?? 'total')
+                      padding: const EdgeInsets.all(5),
+                    child: SizedBox(
+                      width: 70,
+                      height: 40,
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(35),
+                          )
+                        ),
+                        child: const Text('確定'),
+                        onPressed: () async {
+                          if(!flag.value) {
+                            notifier.updateSplittingInformation(null, costType.value ?? 'total')
                                 .then((_) {
-                                  Navigator.of(context).pop();
-                                  notifier.getEventInformation(detail.event.id ?? -1);
-                                }).onError((error, stackTrace) {
+                              Navigator.of(context).pop();
+                              notifier.getEventInformation(detail.event.id ?? -1);
+                            }).onError((error, stackTrace) {
                               ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
                             });
                           }
-                        }
-                      },
+                          else {
+                            final cost = costType.value == 'total' ? totalCost.value : costPerPerson.value;
+                            if(cost != null) {
+                              notifier.updateSplittingInformation(cost, costType.value ?? 'total')
+                                  .then((_) {
+                                Navigator.of(context).pop();
+                                notifier.getEventInformation(detail.event.id ?? -1);
+                              }).onError((error, stackTrace) {
+                                ScaffoldMessenger.of(context).showSnackBar(alertSnackBar);
+                              });
+                            }
+                          }
+                        },
+                      )
                     )
                   )
 

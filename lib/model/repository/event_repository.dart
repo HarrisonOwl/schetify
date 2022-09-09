@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:schetify/model/entity/event.dart';
 import 'package:schetify/model/entity/event_update_state.dart';
 import 'package:schetify/model/entity/participant.dart';
@@ -14,6 +15,7 @@ class EventRepository{
 
   Future<List<Event>> getEvents() async {
     final response = await apiClient.get("events", true);
+    debugPrint("loading...");
     if (response.statusCode == 200) {
       return List<Event>.from(response.data.map((element)=> Event.fromJson(element)));
     } else {
