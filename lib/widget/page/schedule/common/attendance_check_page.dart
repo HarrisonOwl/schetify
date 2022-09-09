@@ -30,6 +30,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
     }, const []);
 
     return Scaffold(
+      backgroundColor: Colors.green,
         appBar: AppBar(
           title: const Text("出席可能日"),
           bottomOpacity: 0.0,
@@ -38,7 +39,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
         body: detail.loading || attendanceCheck.loading ? Container(
             alignment: Alignment.center,
             child: const CircularProgressIndicator(
-              color: Colors.green,
+              color: Colors.white,
             )
         ) : Container(
             color: Colors.green,
@@ -80,7 +81,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                   child:
                                   Material(
                                     borderRadius: BorderRadius.circular(30),
-                                    elevation: 5,
+                                    elevation: 3,
                                     child: CircleAvatar(
                                       radius: 20,
                                       backgroundColor: status?.status == 2 ? Colors.green : const Color(0x2294d500),
@@ -111,8 +112,8 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                 Padding(
                                     padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0, bottom: 5.0),
                                     child:Material(
-                                      borderRadius: BorderRadius.circular(20),
-                                      elevation: 2,
+                                      borderRadius: BorderRadius.circular(30),
+                                      elevation: 3,
                                       child: CircleAvatar(
                                         radius: 20,
                                         backgroundColor: status?.status == 1 ? Colors.green : const Color(0x2294d500),
@@ -144,8 +145,8 @@ class AttendanceCheckPage extends HookConsumerWidget {
                                   padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0, bottom: 5.0),
                                   child:
                                   Material(
-                                    borderRadius: BorderRadius.circular(20),
-                                    elevation: 2,
+                                    borderRadius: BorderRadius.circular(30),
+                                    elevation: 3,
                                     child: CircleAvatar(
                                       radius: 20,
                                       backgroundColor: status?.status == 0 ? Colors.green : const Color(0x2294d500),
@@ -185,8 +186,8 @@ class AttendanceCheckPage extends HookConsumerWidget {
             ]
         )),
         bottomNavigationBar:
-        Container(
-          color: Colors.grey.withOpacity(0.1),
+        (detail.loading) ? const SizedBox(height: 0) : Container(
+          color: Colors.transparent,
           padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0, bottom: 10.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,7 +197,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
                 height: 40,
                 width: 150,
                 child: TextButton(
-                  child: const Text('登録せずに戻る'),
+                  child: const Text('登録せずに戻る', style: TextStyle(color: Colors.white)),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -206,6 +207,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
                   height: 40,
                   width: 100, child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(35),
                     )
@@ -218,7 +220,7 @@ class AttendanceCheckPage extends HookConsumerWidget {
                     Navigator.pop(context);
                   });
                 },
-                child: const Text('保存'),
+                child: const Text('保存', style: TextStyle(color: Colors.green),),
               )),
             ],
           ),

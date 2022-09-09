@@ -37,6 +37,7 @@ class EventCreatePage extends HookConsumerWidget {
     }, const []);
     return Scaffold(
       backgroundColor: Colors.green,
+        resizeToAvoidBottomInset: false,
       appBar: AppBar(
         bottomOpacity: 0.0,
         elevation: 0.0,
@@ -131,7 +132,7 @@ class EventCreatePage extends HookConsumerWidget {
                           .then((id) async {
                             detail_notifier.newEvent(notifier.getCurrentEvent());
                           Navigator.of(context).pop();
-                          Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': id})
+                          Navigator.of(context).pushNamed("/event/edit", arguments: {'id': id})
                               .then((value) async {
                             await listNotifier.getEvents();
                           });
