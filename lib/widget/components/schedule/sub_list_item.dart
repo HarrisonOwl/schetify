@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -33,7 +35,9 @@ class SubListItem extends HookConsumerWidget {
     );
 
     Future<void> cripUrl() async {
-      final data = ClipboardData(text: "schetify://events/?id=${detail.event.id}&name=${detail.event.name}");
+      const baseUrl = String.fromEnvironment('SERVER_HOST');
+      final encoded = Uri.encodeQueryComponent(base64.encode(utf8.encode("id=${detail.event.id}&name=${detail.event.name}")));
+      final data = ClipboardData(text: "${baseUrl}/links/share?sid=${encoded}");
       await Clipboard.setData(data)
         .then((_) => ScaffoldMessenger.of(context).showSnackBar(alertSnackBar));
     }

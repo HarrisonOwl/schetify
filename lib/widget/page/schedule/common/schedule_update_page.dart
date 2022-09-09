@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/entity/schedule_update_page_util.dart';
+import '../../../../provider/event_detail_provider.dart';
 import '../../../../provider/event_update_provider.dart';
 import '../../../components/schedule/sub_list_item.dart';
 
@@ -26,7 +27,8 @@ class ScheduleUpdatePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final notifier = ref.read(eventUpdateProvider.notifier);
-    final detail = ref.watch(eventUpdateProvider);
+    final edit_detail = ref.watch(eventUpdateProvider);
+    final detail = ref.watch(eventDetailProvider);
 
     SnackBar alertSnackBar = SnackBar(
       content: const Text('更新に失敗しました。'),
@@ -98,7 +100,7 @@ class ScheduleUpdatePage extends HookConsumerWidget {
                       }
                   ))
           ),
-            detail.loading ? Container(
+            edit_detail.loading ? Container(
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height * 0.6,
                 child: const CircularProgressIndicator(
@@ -119,8 +121,8 @@ class ScheduleUpdatePage extends HookConsumerWidget {
                 ),
                 route: util[index].routeName,
                 toggle: util[index].tileName == '出席' ? toggleState : '',
-                address: util[index].tileName == '目的地:' ? detail.event.getLocationText() : '',
-                eventId: detail.event.id,
+                address: util[index].tileName == '目的地:' ? edit_detail.event.getLocationText() : '',
+                eventId: edit_detail.event.id,
               );
             },
             separatorBuilder: (BuildContext context, int index) => const Divider(),
