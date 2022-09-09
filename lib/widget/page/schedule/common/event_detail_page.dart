@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:schetify/provider/grouping_provider.dart';
 import 'package:schetify/widget/dialog/participants_list_dialog.dart';
 import '../../../../model/entity/schedule_candidate.dart';
 import '../../../../model/entity/voter.dart';
@@ -19,6 +20,7 @@ class EventDetailPage extends HookConsumerWidget {
     final notifier = ref.read(eventDetailProvider.notifier);
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final maxFitnessValue = useState(-1);
+    final groupProvider = ref.read(groupingProvider.notifier);
 
     Future<void> updateEventInformation() async{
       await ref.read(eventDetailProvider.notifier)
@@ -40,6 +42,7 @@ class EventDetailPage extends HookConsumerWidget {
           .reduce(max);
     }
 
+    final hasGroup = useState(true);
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -49,6 +52,17 @@ class EventDetailPage extends HookConsumerWidget {
       });
       return null;
     }, const []);
+
+    useEffect((){
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        try{
+          groupProvider.sync(detail.participants);
+          hasGroup.value = true;
+        }catch(e){
+          hasGroup.value = false;
+        }
+      });
+    }, [detail.participants]);
 
 
     return Scaffold(
@@ -68,7 +82,7 @@ class EventDetailPage extends HookConsumerWidget {
                 ],
               ),
               onPressed: () {
-                Navigator.of(context).pushNamed("/schedule/new", arguments: {'id': args['id']})
+                Navigator.of(context).pushNamed("/event/edit", arguments: {'id': args['id']})
                   .then((_) async {await updateEventInformation();});
               },
             ),
@@ -180,10 +194,11 @@ class EventDetailPage extends HookConsumerWidget {
                                               borderRadius: BorderRadius.circular(35),
                                             )
                                         ),
-                                        onPressed: () async{
-                                        },
+                                        onPressed: (hasGroup.value) ? () async{
+                                          Navigator.pushNamed(context, '/event/seat');
+                                        } : null,
                                         child: const Text(
-                                            '席分け',
+                                            '席構成',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.normal,
                                                 fontSize: 12
