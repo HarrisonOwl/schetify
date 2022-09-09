@@ -43,48 +43,88 @@ class SettingsAccountPage extends HookConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'ユーザー名',
-                    prefixText: 'ユーザー名',
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                ListTile(
+                  title: const Text('ユーザ名変更'),
+                  leading: const Icon(Icons.person),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const <Widget>[
+                      Icon(Icons.arrow_forward)
+                    ],
                   ),
-                  textAlign: TextAlign.end,
-                  initialValue: name.value,
-                  onChanged: (text){
-                    name.value = text;
+                  onTap: () => {
+                    // TODO 名前変更用のダイアログを表示
                   },
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'メールアドレス',
-                    prefixText: 'メールアドレス',
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                const Divider(),
+                ListTile(
+                  title: const Text('メールアドレス変更'),
+                  leading: const Icon(Icons.mail),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const <Widget>[
+                      Icon(Icons.arrow_forward)
+                    ],
                   ),
-                  textAlign: TextAlign.end,
-                  initialValue: email.value,
-                  onChanged: (text){
-                    email.value = text;
+                  onTap: () => {
+                    // TODO メアド変更用のダイアログを表示
                   },
                 ),
+                const Divider(),
                 ListTile(
                   title: const Text('パスワード変更'),
+                  leading: const Icon(Icons.password),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const <Widget>[
+                      Icon(Icons.arrow_forward)
+                    ],
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, '/settings/account/password');
                   },
                 ),
-                const ListTile(
-                  title: Text('google account'),
-                ),
-                const ListTile(
-                  title: Text('facebook account'),
-                ),
-                const ListTile(
-                  title: Text('twitter account'),
-                ),
+                const Divider(),
                 ListTile(
-                  title: const Text('保存'),
-                  onTap: () { Navigator.of(context).pop(); },
+                  title: const Text('Google account'),
+                  leading: const Icon(Icons.account_box),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const <Widget>[
+                      Icon(Icons.arrow_forward)
+                    ],
+                  ),
+                  onTap: () {
+                    // TODO 設定画面へ
+                  },
+                ),
+                const Divider(),
+                ListTile(
+                  title: const Text('Facebook account'),
+                  leading: const Icon(Icons.account_box),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const <Widget>[
+                      Icon(Icons.arrow_forward)
+                    ],
+                  ),
+                  onTap: () {
+                    // TODO 設定画面へ
+                  },
+                ),
+                const Divider(),
+                ListTile(
+                  title: const Text('Twitter account'),
+                  leading: const Icon(Icons.account_box),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const <Widget>[
+                      Icon(Icons.arrow_forward)
+                    ],
+                  ),
+                  onTap: () {
+                    // TODO 設定画面へ
+                  },
                 ),
               ],
             ),

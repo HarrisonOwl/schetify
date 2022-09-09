@@ -54,7 +54,9 @@ class SettingsPage extends HookConsumerWidget {
                       onChanged: (value){
                         calenderFlag.value = value;
                       }
-                  ),SwitchListTile(
+                  ),
+                  const Divider(),
+                  SwitchListTile(
                       title: const Text('通知設定'),
                       value: noticeFlag.value,
                       secondary: const Icon(Icons.lightbulb_outline),
@@ -62,14 +64,30 @@ class SettingsPage extends HookConsumerWidget {
                         noticeFlag.value = value;
                       }
                   ),
+                  const Divider(),
                   ListTile(
                     title: const Text('アカウント設定'),
+                    leading: const Icon(Icons.person),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        Icon(Icons.arrow_forward)
+                      ],
+                    ),
                     onTap: () => {
                       Navigator.of(context).pushNamed("/settings/account")
                     },
                   ),
+                  const Divider(),
                   ListTile(
                     title: const Text('ログアウト'),
+                    leading: const Icon(Icons.logout),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        Icon(Icons.arrow_forward)
+                      ],
+                    ),
                     onTap: (){
                       firebase.signOut().then((value) => Navigator.of(context).pushNamedAndRemoveUntil("/init", (route) => false));
                     },
